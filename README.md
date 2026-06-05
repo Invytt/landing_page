@@ -36,7 +36,23 @@ public/               Static assets (images, etc.)
 
 ## Getting started
 
-Prerequisites: Node 18+ and npm.
+Prerequisites: Node 18+, npm, and [Git LFS](https://git-lfs.github.com) (the hero video `public/vid1.mp4` is stored via LFS — without it you get a text pointer instead of the file).
+
+Install Git LFS once per machine, then clone:
+
+```bash
+git lfs install
+git clone https://github.com/Invytt/landing_page.git
+```
+
+Already cloned without LFS? Pull the real files:
+
+```bash
+git lfs install
+git lfs pull
+```
+
+Install dependencies:
 
 ```bash
 npm install

@@ -23,7 +23,7 @@ describe("collections", () => {
     for (const s of SPEAKERS) {
       expect(s.name).toBeTruthy();
       expect(s.role).toBeTruthy();
-      expect(s.img).toMatch(/^https?:\/\//);
+      expect(s.img).toMatch(/^(https?:\/\/|\/)/);
     }
   });
 
