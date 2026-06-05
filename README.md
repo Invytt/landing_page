@@ -36,27 +36,14 @@ public/               Static assets (images, etc.)
 
 ## Getting started
 
-Prerequisites: Node 18+, npm, and [Git LFS](https://git-lfs.github.com) (the hero video `public/vid1.mp4` is stored via LFS — without it you get a text pointer instead of the file).
-
-Install Git LFS once per machine, then clone:
+Prerequisites: Node 18+ and npm.
 
 ```bash
-git lfs install
 git clone https://github.com/Invytt/landing_page.git
-```
-
-Already cloned without LFS? Pull the real files:
-
-```bash
-git lfs install
-git lfs pull
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
+
+> Note: the hero video `public/vid1.mp4` is a 1080p, audio-stripped, web-optimized MP4 kept under Vercel's 100 MB per-file static-asset limit. Re-encode any replacement (e.g. `ffmpeg -i in.mp4 -vf scale=1920:-2 -c:v libx264 -crf 28 -an -movflags +faststart public/vid1.mp4`) before committing.
 
 Create `.env.local`:
 
