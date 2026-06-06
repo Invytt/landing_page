@@ -50,17 +50,17 @@ export default function About() {
             three weeks of logistics.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <DraggableCardContainer className="grid grid-cols-2 gap-4">
           {CARDS.map((item) => (
-            <div
+            <DraggableCardBody
               key={item.name}
-              className="rotate-[-3deg] rounded-sm bg-white p-2 pb-4 shadow-xl even:rotate-[3deg]"
+              className="min-h-0 w-full rotate-[-3deg] rounded-sm bg-white p-2 pb-4 shadow-xl even:rotate-[3deg]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.img}
                 alt={item.name}
-                className="h-32 w-full object-cover"
+                className="pointer-events-none relative z-10 h-32 w-full object-cover"
               />
               <h3 className="mt-3 text-center font-display text-sm font-bold text-neutral-800">
                 {item.name}
@@ -68,9 +68,9 @@ export default function About() {
               <p className="text-center text-xs text-neutral-500">
                 {item.role}
               </p>
-            </div>
+            </DraggableCardBody>
           ))}
-        </div>
+        </DraggableCardContainer>
       </div>
 
       {/* lg+: original scattered, draggable photo pile with centered overlay text. */}
