@@ -16,29 +16,65 @@ const fadeUp = {
   }),
 };
 
-// Mobile (base): cards pinned to top / bottom bands so the centered text
-// stays clear. sm+ restores the original scattered desktop layout.
+// lg+ desktop: scattered pile positions for the cards.
 const POSITIONS = [
-  "absolute top-2 left-[1%] rotate-[-7deg] sm:left-[0%]",
-  "absolute top-2 left-[30%] rotate-[5deg] sm:top-[14%] sm:left-[12%]",
-  "absolute bottom-2 left-[1%] rotate-[7deg] sm:bottom-4 sm:left-[0%]",
-  "absolute bottom-2 left-[30%] rotate-[5deg] sm:top-2 sm:bottom-auto sm:left-[66%]",
-  "absolute top-2 right-[1%] rotate-[8deg] sm:top-[14%] sm:right-[0%]",
-  "absolute bottom-2 right-[1%] rotate-[6deg] sm:bottom-4 sm:right-[14%]",
+  "absolute top-2 left-[0%] rotate-[-7deg]",
+  "absolute top-[14%] left-[12%] rotate-[5deg]",
+  "absolute bottom-4 left-[0%] rotate-[7deg]",
+  "absolute top-2 left-[66%] rotate-[5deg]",
+  "absolute top-[14%] right-[0%] rotate-[8deg]",
+  "absolute bottom-4 right-[14%] rotate-[6deg]",
 ];
 
-// Smaller cards on mobile so they fit the bands; full size from sm+.
-const CARD_SIZE = "w-40 min-h-0 p-3 sm:w-80 sm:min-h-96 sm:p-6";
-
-const CARDS = SPEAKERS.slice(0, POSITIONS.length).map((s, i) => ({
-  ...s,
-  className: POSITIONS[i],
-}));
+const CARDS = SPEAKERS.slice(0, POSITIONS.length);
 
 export default function About() {
   return (
     <section id="about" data-nav-light className="border-t border-black/10">
-      <DraggableCardContainer className="relative flex min-h-screen w-full items-center justify-center overflow-clip">
+      {/* Mobile: static heading + 2-col card grid. */}
+      <div className="px-6 py-16 lg:hidden">
+        <div className="mb-8 text-center">
+          <div className="mb-5 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-black/15" />
+            <p className="text-sm uppercase tracking-[0.2em] text-black/40">
+              Who it&apos;s for
+            </p>
+            <span className="h-px w-8 bg-black/15" />
+          </div>
+          <h2 className="font-display text-4xl font-bold leading-tight tracking-tight text-black/80">
+            Built for the everyday host.
+          </h2>
+          <p className="mt-4 text-base text-black/40">
+            From a birthday dinner for fifteen to Diwali for thirty — Invytt is
+            for everyone who loves bringing their world together, minus the
+            three weeks of logistics.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {CARDS.map((item) => (
+            <div
+              key={item.name}
+              className="rotate-[-3deg] rounded-sm bg-white p-2 pb-4 shadow-xl even:rotate-[3deg]"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.img}
+                alt={item.name}
+                className="h-32 w-full object-cover"
+              />
+              <h3 className="mt-3 text-center font-display text-sm font-bold text-neutral-800">
+                {item.name}
+              </h3>
+              <p className="text-center text-xs text-neutral-500">
+                {item.role}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* lg+: original scattered, draggable photo pile with centered overlay text. */}
+      <DraggableCardContainer className="relative hidden min-h-screen w-full items-center justify-center overflow-clip lg:flex">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -48,13 +84,13 @@ export default function About() {
           <motion.div
             custom={0}
             variants={fadeUp}
-            className="mb-6 flex items-center justify-center gap-3 sm:gap-4"
+            className="mb-6 flex items-center justify-center gap-4"
           >
-            <span className="h-px w-8 bg-black/15 sm:w-12" />
-            <p className="text-sm uppercase tracking-[0.2em] text-black/40 sm:text-base">
+            <span className="h-px w-12 bg-black/15" />
+            <p className="text-base uppercase tracking-[0.2em] text-black/40">
               Who it&apos;s for
             </p>
-            <span className="h-px w-8 bg-black/15 sm:w-12" />
+            <span className="h-px w-12 bg-black/15" />
           </motion.div>
           <motion.h2
             custom={1}
@@ -69,27 +105,25 @@ export default function About() {
             className="mt-6 text-lg text-black/40"
           >
             Drag the hosts around. From a birthday dinner for fifteen to Diwali
-            for thirty — Invytt is for everyone who loves bringing their world
+            for thirty, Invytt is for everyone who loves bringing their world
             together, minus the three weeks of logistics.
           </motion.p>
         </motion.div>
-        {CARDS.map((item) => (
+        {CARDS.map((item, i) => (
           <DraggableCardBody
             key={item.name}
-            className={`${item.className} ${CARD_SIZE}`}
+            className={`${POSITIONS[i]} w-80 min-h-96 p-6`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item.img}
               alt={item.name}
-              className="pointer-events-none relative z-10 h-32 w-32 object-cover sm:h-80 sm:w-80"
+              className="pointer-events-none relative z-10 h-80 w-80 object-cover"
             />
-            <h3 className="mt-2 text-center font-display text-base font-bold text-neutral-300 sm:mt-4 sm:text-xl">
+            <h3 className="mt-4 text-center font-display text-xl font-bold text-neutral-300">
               {item.name}
             </h3>
-            <p className="text-center text-xs text-neutral-500 sm:text-sm">
-              {item.role}
-            </p>
+            <p className="text-center text-sm text-neutral-500">{item.role}</p>
           </DraggableCardBody>
         ))}
       </DraggableCardContainer>

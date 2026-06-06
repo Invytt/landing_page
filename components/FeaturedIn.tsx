@@ -9,6 +9,83 @@ import {
 import { Reveal } from "@/components/Reveal";
 import { ScrollRevealText } from "@/components/ScrollRevealText";
 
+type Feature = {
+  Icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  desc: string;
+  bg: string;
+  dark: boolean; // dark bg → light text
+  big?: boolean; // hero tile — larger title on desktop bento
+  area: string; // md bento placement
+};
+
+const FEATURES: Feature[] = [
+  {
+    Icon: Users,
+    title: "Guest RSVP Management",
+    desc: "Invites, guestlists, +1s, WhatsApp RSVPs, reminders, and cost-splitting all in one dashboard.",
+    bg: "#9b8cdb",
+    dark: true,
+    big: true,
+    area: "md:col-span-3 md:col-start-1 md:row-span-2 md:row-start-1",
+  },
+  {
+    Icon: Sparkles,
+    title: "Smart Inventory Management",
+    desc: "AI sizes food, drink, and supplies to your guest count with contributions and cost estimates.",
+    bg: "#221c3a",
+    dark: true,
+    big: true,
+    area: "md:col-span-3 md:col-start-4 md:row-span-2 md:row-start-1",
+  },
+  {
+    Icon: MailOpen,
+    title: "Invitation Design & Templates",
+    desc: "Beautiful, customisable invites that feel personal ready in minutes.",
+    bg: "#f3b53f",
+    dark: false,
+    area: "md:col-span-2 md:col-start-1 md:row-span-2 md:row-start-3",
+  },
+  {
+    Icon: Store,
+    title: "Vendor Marketplace",
+    desc: "Discover and book caterers, decorators, photographers, DJs, and more with verified reviews.",
+    bg: "#e2703a",
+    dark: true,
+    area: "md:col-span-2 md:col-start-3 md:row-span-2 md:row-start-3",
+  },
+  {
+    Icon: ClipboardList,
+    title: "Party Planning Management",
+    desc: "Tasks, timelines, and budgets in one hub co-plan with co-hosts.",
+    bg: "#fff7e9",
+    dark: false,
+    area: "md:col-span-2 md:col-start-5 md:row-span-2 md:row-start-3",
+  },
+];
+
+function FeatureBody({ f }: { f: Feature }) {
+  const fg = f.dark ? "text-white" : "text-black";
+  const sub = f.dark ? "text-white/80" : "text-black/65";
+  return (
+    <>
+      <f.Icon
+        className={`size-7 ${fg} transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110`}
+      />
+      <div>
+        <h3
+          className={`font-display font-medium leading-snug ${fg} text-xl ${
+            f.big ? "lg:text-3xl" : "lg:text-2xl"
+          }`}
+        >
+          {f.title}
+        </h3>
+        <p className={`mt-2 text-sm leading-relaxed ${sub}`}>{f.desc}</p>
+      </div>
+    </>
+  );
+}
+
 export default function FeaturedIn() {
   return (
     <section
@@ -27,82 +104,40 @@ export default function FeaturedIn() {
         />
         <Reveal>
           <p className="mt-4 hidden max-w-2xl text-base text-white/60 sm:mt-6 sm:block sm:text-lg">
-            Every part of the hosting journey — from the moment you decide to
-            throw something to the moment the last guest leaves — in a single
+            Every part of the hosting journey from the moment you decide to
+            throw something to the moment the last guest leaves in a single
             mobile-first experience.
           </p>
         </Reveal>
       </div>
 
-      <div className="mx-auto grid w-full max-w-7xl auto-rows-auto grid-cols-2 gap-3 sm:auto-rows-[minmax(15rem,1fr)] sm:gap-5 md:grid-cols-6 md:grid-rows-4">
-        {/* Guest RSVP Management — hero tile */}
-        <div className="group flex min-h-[7.5rem] flex-col justify-between rounded-3xl sm:min-h-0 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 bg-[#9b8cdb] p-4 text-white sm:p-7 md:p-8 md:col-span-3 md:col-start-1 md:row-span-2 md:row-start-1">
-          <Users className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110" />
-          <div>
-            <h3 className="font-display text-lg font-medium leading-snug sm:text-2xl md:text-3xl">
-              Guest RSVP Management
-            </h3>
-            <p className="mt-2 max-w-md text-xs leading-snug sm:mt-3 sm:text-sm sm:leading-relaxed text-white/85">
-              Invites, guestlists, +1s, WhatsApp RSVPs, reminders, and
-              cost-splitting — all in one dashboard.
-            </p>
+      {/* mobile: horizontal swipe carousel (same pattern as how-it-works) */}
+      <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+        {FEATURES.map((f) => (
+          <div
+            key={f.title}
+            className="group flex w-[78%] shrink-0 snap-center flex-col gap-3 rounded-2xl p-6 shadow-sm"
+            style={{ backgroundColor: f.bg }}
+          >
+            <FeatureBody f={f} />
           </div>
-        </div>
+        ))}
+      </div>
+      <p className="mt-3 text-center text-[11px] uppercase tracking-widest text-white/30 lg:hidden">
+        swipe ✦
+      </p>
 
-        {/* Smart Inventory — AI */}
-        <div className="group flex min-h-[7.5rem] flex-col justify-between rounded-3xl sm:min-h-0 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 bg-[#221c3a] p-4 text-white sm:p-7 md:p-8 md:col-span-3 md:col-start-4 md:row-span-2 md:row-start-1">
-          <Sparkles className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110" />
-          <div>
-            <h3 className="font-display text-lg font-medium leading-snug sm:text-2xl md:text-3xl">
-              Smart Inventory Management
-            </h3>
-            <p className="mt-2 max-w-md text-xs leading-snug sm:mt-3 sm:text-sm sm:leading-relaxed text-white/75">
-              AI sizes food, drink, and supplies to your guest count — with
-              contributions and cost estimates.
-            </p>
+      {/* md+: bento grid */}
+      <div className="mx-auto hidden w-full max-w-7xl auto-rows-[minmax(15rem,1fr)] grid-cols-6 grid-rows-4 gap-5 lg:grid">
+        {FEATURES.map((f) => (
+          <div
+            key={f.title}
+            className={`group flex flex-col justify-between rounded-3xl p-8 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 ${f.area}`}
+            style={{ backgroundColor: f.bg }}
+          >
+            <FeatureBody f={f} />
           </div>
-        </div>
-
-        {/* Invitation Design */}
-        <div className="group flex min-h-[7.5rem] flex-col justify-between rounded-3xl sm:min-h-0 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 bg-[#f3b53f] p-4 text-black sm:p-7 md:p-8 md:col-span-2 md:col-start-1 md:row-span-2 md:row-start-3">
-          <MailOpen className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110" />
-          <div>
-            <h3 className="font-display text-lg font-medium leading-snug sm:text-xl md:text-2xl">
-              Invitation Design &amp; Templates
-            </h3>
-            <p className="mt-2 text-xs leading-snug sm:mt-3 sm:text-sm sm:leading-relaxed text-black/70">
-              Beautiful, customisable invites that feel personal — ready in
-              minutes.
-            </p>
-          </div>
-        </div>
-
-        {/* Vendor Marketplace */}
-        <div className="group flex min-h-[7.5rem] flex-col justify-between rounded-3xl sm:min-h-0 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 bg-[#e2703a] p-4 text-white sm:p-7 md:p-8 md:col-span-2 md:col-start-3 md:row-span-2 md:row-start-3">
-          <Store className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110" />
-          <div>
-            <h3 className="font-display text-lg font-medium leading-snug sm:text-xl md:text-2xl">
-              Vendor Marketplace
-            </h3>
-            <p className="mt-2 text-xs leading-snug sm:mt-3 sm:text-sm sm:leading-relaxed text-white/85">
-              Discover and book caterers, decorators, photographers, DJs, and
-              more — with verified reviews.
-            </p>
-          </div>
-        </div>
-
-        {/* Party Planning */}
-        <div className="group flex min-h-[7.5rem] flex-col justify-between rounded-3xl sm:min-h-0 transition duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/30 bg-[#fff7e9] p-4 text-black sm:p-7 md:p-8 col-span-2 sm:col-span-1 md:col-span-2 md:col-start-5 md:row-span-2 md:row-start-3">
-          <ClipboardList className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110" />
-          <div>
-            <h3 className="font-display text-lg font-medium leading-snug sm:text-xl md:text-2xl">
-              Party Planning Management
-            </h3>
-            <p className="mt-2 text-xs leading-snug sm:mt-3 sm:text-sm sm:leading-relaxed text-black/60">
-              Tasks, timelines, and budgets in one hub — co-plan with co-hosts.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
 
       <Reveal className="mx-auto mt-6 w-full max-w-7xl sm:mt-10">

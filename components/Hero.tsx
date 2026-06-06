@@ -20,7 +20,7 @@ export default function Hero() {
 
       {/* centered hero copy */}
       <div className="relative z-30 flex flex-1 flex-col items-center justify-end gap-5 px-6 pb-28 text-center sm:gap-6 sm:pb-44">
-        <h1 className="reveal flex flex-col items-center justify-center gap-x-2 gap-y-1 font-display sm:flex-row sm:flex-wrap">
+        <h1 className="reveal flex flex-col items-center justify-center gap-x-2 gap-y-1 font-display lg:flex-row lg:flex-wrap">
           <LayoutTextFlip
             text="Host the"
             words={["birthday", "housewarming", "special day", ]}
@@ -32,7 +32,7 @@ export default function Hero() {
           style={{ animationDelay: "0.15s" }}
         >
           Invites, RSVPs, AI inventory planning, a vendor marketplace, and
-          cost-splitting — all in one app. You bring the people, Invytt brings
+          cost-splitting all in one app. You bring the people, Invytt brings
           the rest.
         </p>
 

@@ -15,7 +15,7 @@ const fadeUp = {
 export default function HowItWorks() {
   return (
     <section className="border-t border-black/10 flex min-h-screen flex-col justify-center bg-bg px-5 py-16 text-black sm:py-24">
-      <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-2 lg:items-start">
+      <div className="mx-auto w-full max-w-7xl">
         <div>
           <motion.div
             initial="hidden"
@@ -42,7 +42,7 @@ export default function HowItWorks() {
               className="mt-5 max-w-xl text-base text-black/70 sm:mt-6 sm:text-lg"
             >
               Create your event, invite your people, then let Invytt size the
-              supplies, split the cost, and book the vendors — without leaving
+              supplies, split the cost, and book the vendors without leaving
               the app.
             </motion.p>
           </motion.div>
@@ -51,13 +51,6 @@ export default function HowItWorks() {
             <ExpandableSteps />
           </div>
         </div>
-
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/app.avif"
-          alt="INVYTT app"
-          className="mx-auto h-auto w-full max-w-lg object-contain lg:mt-24"
-        />
       </div>
     </section>
   );

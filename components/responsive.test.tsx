@@ -49,33 +49,38 @@ function expectResponsive(cls: string, base: RegExp, variant: RegExp) {
 }
 
 describe("responsive layout", () => {
-  it("Hero heading stacks on mobile, inlines on sm+", () => {
+  it("Hero heading stacks on mobile/tablet, inlines on lg+", () => {
     const { container } = render(<Hero />);
     const h1 = container.querySelector("h1")!;
-    expectResponsive(h1.className, /flex-col/, /sm:flex-row/);
+    expectResponsive(h1.className, /flex-col/, /lg:flex-row/);
   });
 
-  it("FeaturedIn bento is mobile-first 2-col, full grid on md+", () => {
+  it("FeaturedIn is a swipe carousel on mobile/tablet, bento grid on lg+", () => {
     const { container } = render(<FeaturedIn />);
     expect(container.querySelector("section")!.className).toMatch(
       /min-h-screen/,
     );
-    const grid = container.querySelector(".grid")!;
-    expectResponsive(grid.className, /grid-cols-2/, /md:grid-cols-6/);
+    // mobile + tablet: horizontal snap carousel, hidden from lg up
+    const carousel = container.querySelector(".overflow-x-auto")!;
+    expect(carousel.className).toMatch(/snap-x/);
+    expect(carousel.className).toMatch(/lg:hidden/);
+    // lg+: bento grid (hidden below lg, 6-col grid from lg up)
+    expect(container.innerHTML).toMatch(/hidden[^"]*lg:grid/);
+    expect(container.innerHTML).toMatch(/grid-cols-6/);
   });
 
-  it("FAQ uses a single column on mobile and two on md+", () => {
+  it("FAQ uses a single column on mobile/tablet and two on lg+", () => {
     const { container } = render(<FaqSection />);
     const grid = container.querySelector(".grid")!;
-    expect(grid.className).toMatch(/md:grid-cols-/);
+    expect(grid.className).toMatch(/lg:grid-cols-/);
   });
 
-  it("Footer collapses link columns on mobile, expands on md+", () => {
+  it("Footer collapses link columns on mobile/tablet, expands on lg+", () => {
     const { container } = render(<Footer />);
     const grid = container.querySelector(".grid")!;
-    expectResponsive(grid.className, /grid-cols-2/, /md:grid-cols-/);
-    // brand block spans full width on mobile
-    expect(container.innerHTML).toMatch(/col-span-2 md:col-span-1/);
+    expectResponsive(grid.className, /grid-cols-2/, /lg:grid-cols-/);
+    // brand block spans full width below lg
+    expect(container.innerHTML).toMatch(/col-span-2 lg:col-span-1/);
   });
 
   it("Partners problem section fills the viewport and chips wrap", () => {
@@ -86,23 +91,27 @@ describe("responsive layout", () => {
     expect(container.innerHTML).toMatch(/flex-wrap/);
   });
 
-  it("About cards shrink on mobile and the heading stays non-blocking", () => {
+  it("About uses a static grid on mobile/tablet and the draggable pile on lg+", () => {
     const { container } = render(<About />);
     const cards = Array.from(container.querySelectorAll("div")).map(
       (d) => d.className,
     );
+    // mobile + tablet: static 2-col grid, hidden from lg up
+    expect(cards.some((c) => c.includes("grid-cols-2"))).toBe(true);
+    expect(cards.some((c) => c.includes("lg:hidden"))).toBe(true);
+    // lg+: scattered pile hidden below lg, flex from lg up
     expect(
-      cards.some((c) => c.includes("w-40") && c.includes("sm:w-80")),
+      cards.some((c) => c.includes("hidden") && c.includes("lg:flex")),
     ).toBe(true);
-    // text overlay must let pointer events through to draggable cards
+    // desktop overlay text must let pointer events through to draggable cards
     expect(container.innerHTML).toMatch(/pointer-events-none/);
   });
 
-  it("How-it-works steps: carousel on mobile, ReactFlow on md+", () => {
+  it("How-it-works steps: stack on mobile/tablet, ReactFlow on lg+", () => {
     const { container } = render(<ExpandableSteps />);
-    // mobile-only carousel
-    expect(container.innerHTML).toMatch(/md:hidden/);
+    // mobile + tablet stack
+    expect(container.innerHTML).toMatch(/lg:hidden/);
     // desktop-only canvas wrapper
-    expect(container.innerHTML).toMatch(/hidden[^"]*md:block/);
+    expect(container.innerHTML).toMatch(/hidden[^"]*lg:block/);
   });
 });

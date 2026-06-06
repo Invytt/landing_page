@@ -1,3 +1,18 @@
+export const COMPANY = {
+  legalName: "Invytt Technology Private Limited",
+  email: "events@invytt.com",
+  year: "2026",
+};
+
+export const LEGAL = [
+  { slug: "privacy-policy", label: "Privacy Policy" },
+  { slug: "terms", label: "Terms and Conditions" },
+  { slug: "eula", label: "End-User License Agreement" },
+  { slug: "payment-policy", label: "Payment Policy" },
+  { slug: "refund-policy", label: "Refund Policy" },
+  { slug: "host-settlement", label: "Host Settlement Terms and Conditions" },
+];
+
 export const EVENT = {
   name: "Invytt",
   tagline: "The all-in-one platform for hosting events.",
@@ -38,18 +53,18 @@ export const FAQ = [
   },
   {
     q: "Do my guests need to download the app to RSVP?",
-    a: "No. Share one link, or let guests RSVP directly over WhatsApp — no app required.",
+    a: "No. Share one link, or let guests RSVP directly over WhatsApp no app required.",
   },
   {
     q: "How does the AI inventory estimator work?",
-    a: "It scales food, drink, and supply quantities to your confirmed guest count, then gives per-item cost estimates so you stay on budget.",
+    a: "It scales food, drink, and supply quantities to your confirmed guest count, then gives per item cost estimates so you stay on budget.",
   },
   {
     q: "Can I split costs with my guests?",
-    a: "Yes. Collect contributions and split costs among guests right inside the event — no more midnight UPI requests.",
+    a: "Yes. Collect contributions and split costs among guests right inside the event no more midnight UPI requests.",
   },
   {
     q: "What kind of vendors can I book?",
-    a: "Caterers, decorators, photographers, bartenders, DJs, and more — with profiles, pricing, availability, and verified reviews.",
+    a: "Caterers, decorators, photographers, bartenders, DJs, and more with profiles, pricing, availability, and verified reviews.",
   }
 ];

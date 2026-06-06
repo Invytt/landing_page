@@ -32,14 +32,28 @@ const STEPS: StepData[] = [
   {
     n: "2",
     title: "Invite & coordinate",
-    desc: "Share one link, track RSVPs (even over WhatsApp), manage +1s, and split costs.",
+    desc: "Share one link, track RSVPs (even over WhatsApp), and manage +1s.",
     bg: "#f3b53f",
   },
   {
     n: "3",
-    title: "Plan & book",
-    desc: "Let AI size your supply list, assign who brings what, and book vetted vendors.",
+    title: "Plan your supplies",
+    desc: "Let AI size your food, drink, and supply list to your final guest count, and assign who brings what.",
     bg: "#e2703a",
+    dark: true,
+  },
+  {
+    n: "4",
+    title: "Book your vendors",
+    desc: "Browse vetted caterers, decorators, photographers, and DJs book and pay in-app.",
+    bg: "#221c3a",
+    dark: true,
+  },
+  {
+    n: "5",
+    title: "Split the bill",
+    desc: "Collect contributions and split costs with guests no more midnight UPI requests.",
+    bg: "#546B41",
     dark: true,
   },
 ];
@@ -65,7 +79,7 @@ function StepCardContent({ data }: { data: StepData }) {
 function StepNode({ data }: { data: StepData }) {
   return (
     <div
-      className="w-72 cursor-grab rounded-2xl p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg active:cursor-grabbing"
+      className="w-80 cursor-grab rounded-2xl p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg active:cursor-grabbing"
       style={{ backgroundColor: data.bg }}
     >
       <Handle
@@ -85,10 +99,21 @@ function StepNode({ data }: { data: StepData }) {
 
 const nodeTypes = { step: StepNode };
 
+// Spread the 5 cards across the canvas (top-left → bottom → top-mid → bottom →
+// top-right zigzag) so the initial fitView frames them edge-to-edge instead of
+// clustering them in the centre.
+const NODE_POS = [
+  { x: 0, y: 0 },
+  { x: 215, y: 300 },
+  { x: 430, y: 0 },
+  { x: 645, y: 300 },
+  { x: 860, y: 0 },
+];
+
 const initialNodes: Node[] = STEPS.map((s, i) => ({
   id: String(i + 1),
   type: "step",
-  position: { x: (i % 2) * 240, y: i * 150 },
+  position: NODE_POS[i] ?? { x: (i % 2) * 240, y: i * 150 },
   data: s,
 }));
 
@@ -107,24 +132,21 @@ export default function ExpandableSteps() {
 
   return (
     <>
-      {/* mobile: swipeable carousel — no canvas, no scroll trap */}
-      <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden">
+      {/* mobile: vertical stack — no canvas, no horizontal scroll */}
+      <div className="flex flex-col gap-4 lg:hidden">
         {STEPS.map((s) => (
           <div
             key={s.n}
-            className="w-[78%] shrink-0 snap-center rounded-2xl p-6 shadow-sm"
+            className="rounded-2xl p-6 shadow-sm"
             style={{ backgroundColor: s.bg }}
           >
             <StepCardContent data={s} />
           </div>
         ))}
       </div>
-      <p className="mt-3 text-center text-[11px] uppercase tracking-widest text-black/30 md:hidden">
-        swipe ✦
-      </p>
 
       {/* desktop: interactive draggable flow */}
-      <div className="relative hidden h-[36rem] w-full overflow-hidden rounded-3xl border border-black/10 bg-black/[0.02] md:block">
+      <div className="relative hidden h-[36rem] w-full overflow-hidden rounded-3xl border border-black/10 bg-black/[0.02] lg:block">
         <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -132,7 +154,7 @@ export default function ExpandableSteps() {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
-        fitViewOptions={{ padding: 0.15, maxZoom: 1.4 }}
+        fitViewOptions={{ padding: 0.08, maxZoom: 1.4 }}
         minZoom={0.4}
         maxZoom={1.6}
         nodesConnectable={false}

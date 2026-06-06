@@ -19,7 +19,7 @@ export default function Partners() {
       <Reveal>
         <p className="mx-auto mt-5 max-w-2xl text-base text-white/60 sm:mt-6 sm:text-lg">
           Planning an event means juggling ten different tools that don&apos;t
-          talk to each other — and the host ends up doing the most work and
+          talk to each other and the host ends up doing the most work and
           enjoying it the least. Invytt replaces all of it.
         </p>
       </Reveal>

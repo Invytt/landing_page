@@ -147,7 +147,7 @@ export default function Nav() {
         {/* desktop links */}
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-10 text-base font-bold md:flex"
+          className="hidden items-center gap-10 text-base font-bold lg:flex"
         >
           {LINKS.map((l) => {
             const isActive = activeId === l.href.slice(1);
@@ -183,7 +183,7 @@ export default function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          className="md:hidden rounded-md p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+          className="lg:hidden rounded-md p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
         >
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
@@ -199,7 +199,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-0 z-40 flex flex-col bg-[#0a0a0a] text-white md:hidden"
+            className="fixed inset-0 top-0 z-40 flex flex-col bg-[#0a0a0a] text-white lg:hidden"
           >
             <motion.nav
               aria-label="Mobile"

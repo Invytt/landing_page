@@ -8,7 +8,7 @@ export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="faq" className="border-t border-white/10 flex min-h-screen flex-col justify-center bg-[#1a1a1a] px-5 py-16 text-white sm:py-24">
-      <div className="mx-auto grid max-w-7xl gap-8 sm:gap-12 md:grid-cols-[1fr_1.4fr]">
+      <div className="mx-auto grid max-w-7xl gap-8 sm:gap-12 lg:grid-cols-[1fr_1.4fr]">
         <Reveal>
           <p className="mb-4 text-sm uppercase tracking-[0.2em] text-accent sm:mb-6">
             Questions?
