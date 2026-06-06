@@ -44,8 +44,8 @@ export default function About() {
           <h2 className="font-display text-4xl font-bold leading-tight tracking-tight text-black/80">
             Built for the everyday host.
           </h2>
-          <p className="mt-4 text-base text-black/40">
-            From a birthday dinner for fifteen to Diwali for thirty — Invytt is
+          <p className="mt-4 text-base text-black/60">
+            From a birthday dinner for fifteen to Diwali for thirty Invytt is
             for everyone who loves bringing their world together, minus the
             three weeks of logistics.
           </p>
@@ -102,9 +102,9 @@ export default function About() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            className="mt-6 text-lg text-black/40"
+            className="mt-6 text-lg text-black/60"
           >
-            Drag the hosts around. From a birthday dinner for fifteen to Diwali
+            From a birthday dinner for fifteen to Diwali
             for thirty, Invytt is for everyone who loves bringing their world
             together, minus the three weeks of logistics.
           </motion.p>

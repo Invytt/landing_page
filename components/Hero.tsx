@@ -1,6 +1,6 @@
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -47,6 +47,15 @@ export default function Hero() {
           <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
         </Button>
       </div>
+
+      {/* scroll cue */}
+      <a
+        href="#problem"
+        aria-label="Scroll to see more"
+        className="absolute inset-x-0 bottom-6 z-30 mx-auto flex w-fit animate-bounce text-white/70 transition hover:text-white"
+      >
+        <ChevronDown className="size-8" />
+      </a>
     </section>
   );
 }
