@@ -22,7 +22,7 @@ export default function Hero() {
       <div className="relative z-30 flex flex-1 flex-col items-center justify-end gap-5 px-6 pb-28 text-center sm:gap-6 sm:pb-44">
         <h1 className="reveal flex flex-col items-center justify-center gap-x-2 gap-y-1 font-display lg:flex-row lg:flex-wrap">
           <LayoutTextFlip
-            text="Host the"
+            text="Host your"
             words={["birthday", "housewarming", "special day", ]}
           />
         </h1>
