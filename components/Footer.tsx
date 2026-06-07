@@ -1,7 +1,15 @@
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
-import { COMPANY, LEGAL } from "@/app/data";
+import { COMPANY } from "@/app/data";
 
 type IconProps = { className?: string };
+
+const NAV = [
+  { label: "Features", href: "#features" },
+  { label: "Who it's for", href: "#about" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Get early access", href: "#tickets" },
+];
 
 const Instagram = ({ className }: IconProps) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
@@ -58,14 +66,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* legal column */}
+        {/* navigation column */}
         <div>
-          <p className="text-base font-semibold text-white/40">Legal</p>
+          <p className="text-base font-semibold text-white/40">Navigate</p>
           <ul className="mt-4 flex flex-col gap-3 text-base">
-            {LEGAL.map(({ slug, label }) => (
-              <li key={slug}>
+            {NAV.map(({ label, href }) => (
+              <li key={href}>
                 <a
-                  href={`/legal/${slug}`}
+                  href={href}
                   className="text-white transition hover:text-accent"
                 >
                   {label}

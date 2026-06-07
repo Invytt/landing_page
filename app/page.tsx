@@ -22,7 +22,7 @@ export default function Home() {
         {/* stacked panels: platform pins, how-it-works slides up and covers it.
             xs phones: panels fall back to normal flow (no sticky stack). */}
         <div className="relative">
-          <div className="sticky top-0 max-[359.98px]:static">
+          <div id="features" className="sticky top-0 max-[359.98px]:static">
             <FeaturedIn />
           </div>
           <div

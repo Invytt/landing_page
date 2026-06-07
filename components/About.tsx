@@ -18,12 +18,12 @@ const fadeUp = {
 
 // lg+ desktop: scattered pile positions for the cards.
 const POSITIONS = [
-  "absolute top-2 left-[0%] rotate-[-7deg]",
-  "absolute top-[14%] left-[12%] rotate-[5deg]",
-  "absolute bottom-4 left-[0%] rotate-[7deg]",
-  "absolute top-2 left-[66%] rotate-[5deg]",
-  "absolute top-[14%] right-[0%] rotate-[8deg]",
-  "absolute bottom-4 right-[14%] rotate-[6deg]",
+  "absolute top-1 left-[0%] rotate-[9deg]",
+  "absolute top-[20%] left-[5%] rotate-[-12deg]",
+  "absolute bottom-6 left-[2%] rotate-[6deg]",
+  "absolute top-1 right-[0%] rotate-[-9deg]",
+  "absolute top-[20%] right-[5%] rotate-[12deg]",
+  "absolute bottom-6 right-[2%] rotate-[-6deg]",
 ];
 
 const CARDS = SPEAKERS.slice(0, POSITIONS.length);
@@ -45,9 +45,9 @@ export default function About() {
             Built for the everyday host.
           </h2>
           <p className="mt-4 text-base text-black/60">
-            From a birthday dinner for fifteen to Diwali for thirty Invytt is
-            for everyone who loves bringing their world together, minus the
-            three weeks of logistics.
+            A birthday party for fifteen or Diwali for thirty if you love bringing
+            people together, Invytt handles the chaos so you can actually enjoy
+            your own party.
           </p>
         </div>
         <DraggableCardContainer className="grid grid-cols-2 gap-4">
@@ -104,9 +104,9 @@ export default function About() {
             variants={fadeUp}
             className="mt-6 text-lg text-black/60"
           >
-            From a birthday dinner for fifteen to Diwali
-            for thirty, Invytt is for everyone who loves bringing their world
-            together, minus the three weeks of logistics.
+            A birthday party for fifteen or Diwali for thirty if you love bringing
+            people together, Invytt handles the chaos so you can actually enjoy
+            your own party.
           </motion.p>
         </motion.div>
         {CARDS.map((item, i) => (

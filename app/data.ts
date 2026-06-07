@@ -4,15 +4,6 @@ export const COMPANY = {
   year: "2026",
 };
 
-export const LEGAL = [
-  { slug: "privacy-policy", label: "Privacy Policy" },
-  { slug: "terms", label: "Terms and Conditions" },
-  { slug: "eula", label: "End-User License Agreement" },
-  { slug: "payment-policy", label: "Payment Policy" },
-  { slug: "refund-policy", label: "Refund Policy" },
-  { slug: "host-settlement", label: "Host Settlement Terms and Conditions" },
-];
-
 export const EVENT = {
   name: "Invytt",
   tagline: "The all-in-one platform for hosting events.",
@@ -43,7 +34,7 @@ export const SPEAKERS: Speaker[] = [
   { name: "The Sharmas", role: "Rooftop Diwali for The Sharmas", img: "/img3.png" },
   { name: "The Crew", role: "Friday game night", img: "/img4.png" },
   { name: "Riya & Karan", role: "Anniversary dinner for two", img: "/img5.png" },
-  { name: "Priya", role: "Godh bharai blessings", img: "/img6.png" },
+  { name: "Priya", role: "Baby shower event", img: "/img6.png" },
 ];
 
 export const FAQ = [
