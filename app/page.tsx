@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <Marquee />
       <Nav />
-      <main className="relative -mt-[68px]">
+      <main className="relative -mt-[112px]">
         <Hero />
         <div id="problem">
           <Partners />

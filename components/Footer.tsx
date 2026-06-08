@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { COMPANY } from "@/app/data";
 
@@ -33,9 +34,13 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-[1.4fr_1.2fr]">
         {/* brand */}
         <div className="col-span-2 lg:col-span-1">
-          <div className="font-display text-4xl font-extrabold tracking-tight">
-            invytt
-          </div>
+          <Image
+            src="/logo.png"
+            alt="Invytt"
+            width={1024}
+            height={1024}
+            className="-my-10 -ml-3.5 h-32 w-32"
+          />
           <p className="mt-3 font-display text-lg font-semibold text-accent sm:text-xl">
             The all-in-one platform for hosting events.
           </p>

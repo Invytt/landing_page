@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
@@ -120,13 +121,13 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`sticky top-9 z-50 transition-transform duration-300 motion-reduce:transition-none ${
+        className={`sticky top-8 z-50 transition-transform duration-300 motion-reduce:transition-none ${
           hidden ? "translate-y-[-150%]" : "translate-y-0"
         }`}
       >
       <div
         className={`flex w-full items-center justify-between px-8 transition-all duration-300 motion-reduce:transition-none md:px-12 ${
-          scrolled ? "py-3" : "py-4"
+          scrolled ? "py-5" : "py-6"
         } ${
           open
             ? "bg-[#0a0a0a]"
@@ -139,9 +140,17 @@ export default function Nav() {
       >
         <a
           href="#"
-          className="font-display text-2xl font-extrabold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+          aria-label="Invytt home"
+          className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
         >
-          INVYTT
+          <Image
+            src="/logo.png"
+            alt="Invytt"
+            width={1024}
+            height={1024}
+            priority
+            className="-my-10 -ml-4 h-36 w-36"
+          />
         </a>
 
         {/* desktop links */}
