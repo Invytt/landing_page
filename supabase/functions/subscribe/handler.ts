@@ -19,9 +19,20 @@ export interface Db {
   insert(email: string): Promise<{ error?: { code?: string } | null }>;
 }
 
+// Sends the welcome email to a brand-new subscriber. Network/secrets live in
+// the implementation (index.ts); the handler only depends on this interface so
+// it stays pure and unit-testable.
+export interface Mailer {
+  sendWelcome(email: string): Promise<void>;
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export async function handleSubscribe(req: Request, db: Db): Promise<Response> {
+export async function handleSubscribe(
+  req: Request,
+  db: Db,
+  mailer?: Mailer,
+): Promise<Response> {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
@@ -70,6 +81,16 @@ export async function handleSubscribe(req: Request, db: Db): Promise<Response> {
       });
     }
     return json(500, { error: "Failed to subscribe. Please try again." });
+  }
+
+  // New subscriber confirmed — fire the welcome email. Never let an email
+  // failure break the subscription: log and still return 201.
+  if (mailer) {
+    try {
+      await mailer.sendWelcome(clean);
+    } catch (e) {
+      console.error("welcome email failed", e);
+    }
   }
 
   return json(201, {

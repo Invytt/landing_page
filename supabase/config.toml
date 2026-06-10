@@ -9,3 +9,10 @@ entrypoint = "./functions/subscribe/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/subscribe/*.html" ]
+
+[functions.send-waitlist-emails]
+enabled = true
+# No Supabase JWT — the worker authenticates the cron caller via the
+# x-cron-secret header (CRON_SECRET). Must deploy with --no-verify-jwt.
+verify_jwt = false
+entrypoint = "./functions/send-waitlist-emails/index.ts"

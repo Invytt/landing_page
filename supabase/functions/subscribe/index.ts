@@ -11,7 +11,7 @@ const supabase = createClient(
 const db: Db = {
   async findByEmail(email) {
     const { data, error } = await supabase
-      .from("User")
+      .from("waitlist_signups")
       .select("id")
       .eq("email", email)
       .maybeSingle();
@@ -19,8 +19,13 @@ const db: Db = {
     return data;
   },
   async insert(email) {
-    return await supabase.from("User").insert({ email });
+    return await supabase.from("waitlist_signups").insert({ email });
   },
 };
 
+// Signup is insert-only: it returns 201 immediately and never blocks on email.
+// The welcome email is sent asynchronously by the scheduled worker
+// (supabase/functions/send-waitlist-emails) draining waitlist_signups where
+// email_sent_at IS NULL. This keeps the signup path fast under concurrent
+// load and makes delivery durable + retryable.
 serve((req: Request) => handleSubscribe(req, db));

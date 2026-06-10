@@ -1,6 +1,6 @@
 // Deno test: `deno test supabase/functions/subscribe/handler_test.ts`
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import { handleSubscribe, type Db } from "./handler.ts";
+import { handleSubscribe, type Db, type Mailer } from "./handler.ts";
 
 const post = (body: unknown) =>
   new Request("http://x/subscribe", {
@@ -81,4 +81,51 @@ Deno.test("lookup throws -> 500", async () => {
   };
   const res = await handleSubscribe(post({ email: "a@b.com" }), db);
   assertEquals(res.status, 500);
+});
+
+Deno.test("new signup -> welcome email sent once with normalised email", async () => {
+  const db: Db = {
+    findByEmail: () => Promise.resolve(null),
+    insert: () => Promise.resolve({}),
+  };
+  const sent: string[] = [];
+  const mailer: Mailer = {
+    sendWelcome: (e) => {
+      sent.push(e);
+      return Promise.resolve();
+    },
+  };
+  const res = await handleSubscribe(post({ email: "New@Example.com " }), db, mailer);
+  assertEquals(res.status, 201);
+  assertEquals(sent, ["new@example.com"]);
+});
+
+Deno.test("duplicate -> no welcome email", async () => {
+  const db: Db = {
+    findByEmail: () => Promise.resolve({ id: "1" }),
+    insert: () => Promise.resolve({}),
+  };
+  let called = false;
+  const mailer: Mailer = {
+    sendWelcome: () => {
+      called = true;
+      return Promise.resolve();
+    },
+  };
+  const res = await handleSubscribe(post({ email: "a@b.com" }), db, mailer);
+  assertEquals(res.status, 409);
+  assertEquals(called, false);
+});
+
+Deno.test("email failure does not break signup -> still 201", async () => {
+  const db: Db = {
+    findByEmail: () => Promise.resolve(null),
+    insert: () => Promise.resolve({}),
+  };
+  const mailer: Mailer = {
+    sendWelcome: () => Promise.reject(new Error("autosend down")),
+  };
+  const res = await handleSubscribe(post({ email: "a@b.com" }), db, mailer);
+  assertEquals(res.status, 201);
+  assertEquals((await res.json()).success, true);
 });
