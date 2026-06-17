@@ -43,7 +43,7 @@ export default function Hero() {
           className="reveal h-12 gap-2 rounded-full bg-white px-9 text-base font-semibold text-black shadow-lg shadow-black/20 transition-all hover:bg-black hover:text-white hover:shadow-black/40"
           style={{ animationDelay: "0.3s" }}
         >
-          Get early access
+          Join the waitlist today
           <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
         </Button>
       </div>
