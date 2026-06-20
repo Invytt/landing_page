@@ -7,12 +7,12 @@ import {
   type Signup,
 } from "./handler.ts";
 
-// 2026-06-10 12:00 UTC -> launch is 2026-07-11T09:00+05:30 (03:30 UTC)
+// 2026-06-10 12:00 UTC -> launch is 2026-08-01T09:00+05:30 (03:30 UTC)
 const NOW = new Date("2026-06-10T12:00:00Z").getTime();
 
 Deno.test("daysUntilLaunch counts whole days, clamped at zero", () => {
-  assertEquals(daysUntilLaunch(NOW), "30");
-  const afterLaunch = new Date("2026-08-01T00:00:00Z").getTime();
+  assertEquals(daysUntilLaunch(NOW), "51");
+  const afterLaunch = new Date("2026-08-02T00:00:00Z").getTime();
   assertEquals(daysUntilLaunch(afterLaunch), "0");
 });
 
@@ -27,7 +27,7 @@ Deno.test("buildBulkBody puts shared vars top-level, emails per recipient", () =
   assertEquals(body.templateId, "tmpl_1");
   assertEquals(body.dynamicData, {
     firstName: "there",
-    daysLeft: "30",
+    daysLeft: "51",
     launchDate: LAUNCH_DATE_LABEL,
   });
   assertEquals(body.recipients, [

@@ -36,16 +36,35 @@ export default function Hero() {
           the rest.
         </p>
 
-        <Button
-          render={<a href="#tickets" />}
-          nativeButton={false}
-          size="lg"
-          className="reveal h-12 gap-2 rounded-full bg-white px-9 text-base font-semibold text-black shadow-lg shadow-black/20 transition-all hover:bg-black hover:text-white hover:shadow-black/40"
-          style={{ animationDelay: "0.3s" }}
-        >
-          Join the waitlist today
-          <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
-        </Button>
+        <div className="flex flex-col items-center gap-3 sm:flex-row">
+          <Button
+            render={<a href="#tickets" />}
+            nativeButton={false}
+            size="lg"
+            className="reveal h-12 gap-2 rounded-full bg-white px-9 text-base font-semibold text-black shadow-lg shadow-black/20 transition-all hover:bg-black hover:text-white hover:shadow-black/40"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Join the waitlist today
+            <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
+          </Button>
+
+          <Button
+            render={
+              <a
+                href="https://events.invytt.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+            nativeButton={false}
+            size="lg"
+            className="reveal h-12 gap-2 rounded-full bg-black px-9 text-base font-semibold text-white shadow-lg shadow-black/20 transition-all hover:bg-white hover:text-black hover:shadow-black/40"
+            style={{ animationDelay: "0.45s" }}
+          >
+            Explore early event program
+            <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
+          </Button>
+        </div>
       </div>
 
       {/* scroll cue */}
