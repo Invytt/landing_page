@@ -59,7 +59,9 @@ export default function About() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.img}
-                alt={item.name}
+                alt={item.role}
+                loading="lazy"
+                decoding="async"
                 className="pointer-events-none relative z-10 h-32 w-full object-cover"
               />
               <h3 className="mt-3 text-center font-display text-sm font-bold text-neutral-800">
@@ -117,7 +119,9 @@ export default function About() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={item.img}
-              alt={item.name}
+              alt={item.role}
+              loading="lazy"
+              decoding="async"
               className="pointer-events-none relative z-10 h-80 w-80 object-cover"
             />
             <h3 className="mt-4 text-center font-display text-xl font-bold text-neutral-300">

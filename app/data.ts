@@ -29,12 +29,12 @@ export const MARQUEE = [
 export type Speaker = { name: string; role: string; img: string };
 
 export const SPEAKERS: Speaker[] = [
-  { name: "Sakshi", role: "Birthday bash for Sakshi", img: "/img1.png" },
-  { name: "The Mehtas", role: "Housewarming for The Mehtas", img: "/img2.png" },
-  { name: "The Sharmas", role: "Rooftop Diwali for The Sharmas", img: "/img3.png" },
-  { name: "The Crew", role: "Friday game night", img: "/img4.png" },
-  { name: "Riya & Karan", role: "Anniversary dinner for two", img: "/img5.png" },
-  { name: "Priya", role: "Baby shower event", img: "/img6.png" },
+  { name: "Sakshi", role: "Birthday bash for Sakshi", img: "/img1.webp" },
+  { name: "The Mehtas", role: "Housewarming for The Mehtas", img: "/img2.webp" },
+  { name: "The Sharmas", role: "Rooftop Diwali for The Sharmas", img: "/img3.webp" },
+  { name: "The Crew", role: "Friday game night", img: "/img4.webp" },
+  { name: "Riya & Karan", role: "Anniversary dinner for two", img: "/img5.webp" },
+  { name: "Priya", role: "Baby shower event", img: "/img6.webp" },
 ];
 
 export const FAQ = [

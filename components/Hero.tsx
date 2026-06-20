@@ -12,7 +12,10 @@ export default function Hero() {
         muted
         loop
         playsInline
+        preload="metadata"
+        poster="/vid1-poster.webp"
       >
+        <source src="/vid1.webm" type="video/webm" />
         <source src="/vid1.mp4" type="video/mp4" />
       </video>
       {/* gradient overlay for contrast */}
