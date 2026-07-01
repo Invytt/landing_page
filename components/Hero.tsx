@@ -50,23 +50,6 @@ export default function Hero() {
             Join the waitlist today
             <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
           </Button>
-
-          <Button
-            render={
-              <a
-                href="https://events.invytt.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-            nativeButton={false}
-            size="lg"
-            className="reveal h-12 gap-2 rounded-full bg-black px-9 text-base font-semibold text-white shadow-lg shadow-black/20 transition-all hover:bg-white hover:text-black hover:shadow-black/40"
-            style={{ animationDelay: "0.45s" }}
-          >
-            Explore Invytt Enterprise
-            <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
-          </Button>
         </div>
       </div>
 
