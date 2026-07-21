@@ -14,7 +14,7 @@ export const EVENT = {
   hours: "",
   venue: "",
   address: "",
-  target: "2026-08-01T09:00:00+05:30",
+  target: "2026-08-31T09:00:00+05:30",
   price: "Free to start",
 };
 

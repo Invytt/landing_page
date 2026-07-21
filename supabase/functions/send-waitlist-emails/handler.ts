@@ -7,8 +7,8 @@ export interface Signup {
 }
 
 // Launch target — keep in sync with app/data.ts (EVENT.target).
-export const LAUNCH_TARGET = "2026-08-01T09:00:00+05:30";
-export const LAUNCH_DATE_LABEL = "August 1, 2026";
+export const LAUNCH_TARGET = "2026-08-31T09:00:00+05:30";
+export const LAUNCH_DATE_LABEL = "August 31, 2026";
 
 /** Whole days from `nowMs` until the launch target, clamped at zero. */
 export function daysUntilLaunch(nowMs: number): string {
