@@ -1,7 +1,12 @@
 
 [functions.subscribe]
 enabled = true
-verify_jwt = true
+# Public endpoint by design: the waitlist form on the marketing site POSTs here
+# straight from the browser with no Authorization header (lib/waitlist.ts).
+# verify_jwt = true would 401 every signup. Must deploy with --no-verify-jwt.
+# Abuse control is the handler's email validation + the unique index on
+# waitlist_signups.email, not auth.
+verify_jwt = false
 import_map = "./functions/subscribe/deno.json"
 # Uncomment to specify a custom file path to the entrypoint.
 # Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx

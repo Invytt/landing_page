@@ -28,8 +28,15 @@ const json = (status: number, body: unknown) =>
   });
 
 serve(async (req: Request) => {
-  // Only the cron job (carrying the shared secret) may drain the queue.
-  if (CRON_SECRET && req.headers.get("x-cron-secret") !== CRON_SECRET) {
+  // Only the cron job (carrying the shared secret) may drain the queue. This
+  // function is deployed with verify_jwt = false, so the header is the only
+  // thing gating it — fail closed if the secret was never configured rather
+  // than leaving the queue open to the public internet.
+  if (!CRON_SECRET) {
+    console.error("CRON_SECRET is not set; refusing to drain the queue");
+    return json(500, { error: "misconfigured" });
+  }
+  if (req.headers.get("x-cron-secret") !== CRON_SECRET) {
     return json(401, { error: "unauthorized" });
   }
 

@@ -4,7 +4,9 @@ import { config } from "dotenv"
 
 config({ path: ".env", override: true })
 
-const TO = "siddhantg2002@gmail.com"
+// Recipient: first CLI arg, else TEST_EMAIL_TO, else the default inbox.
+// These are real sends — there is no AutoSend sandbox mode.
+const TO = process.argv[2] || process.env.TEST_EMAIL_TO || "siddhantg2002@gmail.com"
 const API = "https://api.autosend.com/v1/mails/send"
 const key = process.env.AUTOSEND_API_KEY
 const projectId = process.env.AUTOSEND_PROJECT_ID
@@ -34,7 +36,14 @@ const headers = { Authorization: `Bearer ${key}`, "Content-Type": "application/j
 if (projectId) headers["x-project-id"] = projectId
 
 for (const job of jobs) {
-  const html = render(await readFile(job.file, "utf8"), job.data)
+  let raw
+  try {
+    raw = await readFile(job.file, "utf8")
+  } catch {
+    console.log(`– skipped ${job.file} (not found)`)
+    continue
+  }
+  const html = render(raw, job.data)
   const res = await fetch(API, {
     method: "POST",
     headers,

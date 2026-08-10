@@ -84,12 +84,15 @@ Most copy lives in `app/data.ts` — event details, marquee items, "who it's for
    - `409` + `alreadyExists` → duplicate
    - otherwise → error
 
-The function uses `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (set in the Supabase project, not in `.env.local`).
+The function uses `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` (set in the Supabase project as secrets, not in a local env file). See `.env.example` for the full variable reference and which file each one belongs in.
 
-### Deploying the edge function
+### Deploying the edge functions
+
+Both functions are called without a Supabase JWT — the browser form has no auth header, and the mail worker authenticates its caller with the `x-cron-secret` header — so both must be deployed with `--no-verify-jwt`:
 
 ```bash
-supabase functions deploy subscribe
+supabase functions deploy subscribe --no-verify-jwt
+supabase functions deploy send-waitlist-emails --no-verify-jwt
 ```
 
 ## Testing
