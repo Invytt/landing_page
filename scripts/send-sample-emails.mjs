@@ -16,6 +16,20 @@ if (!key) {
   process.exit(1)
 }
 
+// Launch moment comes from launch_date.json — same source as the site countdown
+// and the waitlist worker, so a sample email can never quote a stale launch day.
+const launch = JSON.parse(await readFile("launch_date.json", "utf8"))
+const target = `${launch.date}T${launch.time}${launch.utcOffset}`
+const daysLeft = String(
+  Math.max(0, Math.floor((new Date(target).getTime() - Date.now()) / 86400000)),
+)
+const launchDate = new Date(target).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  timeZone: launch.timeZone,
+})
+
 const jobs = [
   {
     file: "emails/otp.html",
@@ -25,7 +39,7 @@ const jobs = [
   {
     file: "emails/welcom.html",
     subject: "Welcome to Invytt",
-    data: { daysLeft: "21", launchDate: "July 15, 2026" },
+    data: { daysLeft, launchDate },
   },
 ]
 

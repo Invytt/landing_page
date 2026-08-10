@@ -6,9 +6,24 @@ export interface Signup {
   email: string;
 }
 
-// Launch target — keep in sync with app/data.ts (EVENT.target).
-export const LAUNCH_TARGET = "2026-08-31T09:00:00+05:30";
-export const LAUNCH_DATE_LABEL = "August 31, 2026";
+// Launch moment comes from launch_date.json at the repo root — the same file the
+// site countdown reads through lib/launch.ts. Edit the JSON, never these lines.
+// (Deno can't use the "@/" alias or import the Next app, hence the relative path
+// and the small duplicated derivation.)
+import launch from "../../../launch_date.json" with { type: "json" };
+
+export const LAUNCH_TARGET =
+  `${launch.date}T${launch.time}${launch.utcOffset}`;
+
+export const LAUNCH_DATE_LABEL = new Date(LAUNCH_TARGET).toLocaleDateString(
+  "en-US",
+  {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: launch.timeZone,
+  },
+);
 
 /** Whole days from `nowMs` until the launch target, clamped at zero. */
 export function daysUntilLaunch(nowMs: number): string {

@@ -1,0 +1,7 @@
+{
+  "_comment": "Single source of truth for the launch moment. Edit ONLY this file — the site countdown, the marquee, the waitlist welcome email, and the sample-email script all derive from it.",
+  "date": "2026-08-31",
+  "time": "09:00:00",
+  "utcOffset": "+05:30",
+  "timeZone": "Asia/Kolkata"
+}

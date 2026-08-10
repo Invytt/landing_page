@@ -1,3 +1,5 @@
+import { LAUNCH_TARGET } from "@/lib/launch";
+
 export const COMPANY = {
   legalName: "Invytt Technology Private Limited",
   email: "events@invytt.com",
@@ -14,7 +16,8 @@ export const EVENT = {
   hours: "",
   venue: "",
   address: "",
-  target: "2026-08-31T09:00:00+05:30",
+  // Derived from launch_date.json — change the date/time there, not here.
+  target: LAUNCH_TARGET,
   price: "Free to start",
 };
 
