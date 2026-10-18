@@ -21,7 +21,7 @@ const faqs = [
     title: "Friends",
     items: [
       ["How do I add friends?", "Open the Friends sheet, use Search people to add, and tap Add to send a request. You can search by name or phone number."],
-      ["How does contact sync work?", "With permission, Invytt checks your phone book for people already on Invytt. Numbers are hashed on your device and raw numbers are not stored. Manage this at Profile → Privacy → Contact sync."],
+      ["How does contact sync work?", "With permission, Invytt checks your phone book for people already on Invytt. Numbers are changed into an unreadable form on your device and original numbers are not stored. Manage this at Profile → Privacy → Contact sync."],
       ["What does a private profile show?", "Non-friends see only the person's name and profile/banner image until they become friends."],
     ],
   },

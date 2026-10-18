@@ -41,8 +41,8 @@ export default function TermsPage() {
         <li>You retain ownership of content you create.</li>
         <li>You grant us a worldwide, non-exclusive, royalty-free license to host, store, reproduce, and display content solely to operate the App.</li>
         <li>You are responsible for your content and confirm that you have the rights to share it.</li>
-        <li>Text is checked against prohibited terms on our servers. Uploaded image media enters asynchronous backend moderation and may be visible to authorized participants while processing; rejected content is removed or replaced. Supported Apple devices may run an additional local image check. The backend may send image URLs to OpenAI. Media that cannot be automatically inspected may be reviewed, limited, or removed.</li>
-        <li>Chat is <strong>not end-to-end encrypted</strong>; authorized backend services can process messages and media for delivery, safety, and moderation.</li>
+        <li>Content is checked against our safety rules. Images may be visible to permitted participants while a review is completed. If content is not approved, it may be removed or replaced. Some images may be checked by a specialist safety service. On supported Apple devices, an additional privacy-focused check may happen on the device and its result is not sent to us. Content that cannot be checked automatically may be reviewed, limited, or removed.</li>
+        <li>Chat is not private from the systems that operate Invytt. Authorized service providers may process messages and media to deliver the service and keep the community safe.</li>
         <li>You can report content or a person from where you encountered them. If content was blocked in error, contact us through Profile → Account &amp; support.</li>
       </ul>
 
@@ -53,18 +53,11 @@ export default function TermsPage() {
       <h2>8. Friends and social features</h2>
       <p>Friend requests, contact matching, and profile visibility are provided as-is. Respect other users and do not send unwanted or abusive requests or messages.</p>
 
-      <h2>9. Third-party services</h2>
+      <h2>9. Other services</h2>
       <ul>
-        <li>Supabase: backend, database, authentication, and storage.</li>
-        <li>MSG91 and WhatsApp Business: OTP and selected event notifications.</li>
-        <li>AutoSend: email OTPs and transactional email.</li>
-        <li>Google Firebase: push notifications and crash diagnostics.</li>
-        <li>Google Places and Mapbox: place search, maps, and location display.</li>
-        <li>OpenAI: event-assistance features and image safety moderation.</li>
-        <li>GIPHY: GIF and sticker search and delivery.</li>
-        <li>Apple: on-device content screening on supported devices.</li>
+        <li>We use other companies to provide sign-in messages, email, push notifications, maps, location search, GIFs and stickers, storage, diagnostics, event suggestions, and safety checks.</li>
       </ul>
-      <p>V1 does not offer marketplace purchases, bookings, paid ticketing, or Google Calendar sync. Third-party use may be governed by their own terms.</p>
+      <p>These companies may process the information needed to provide the feature you use. Their own terms and privacy policies may also apply. V1 does not offer marketplace purchases, bookings, paid ticketing, or Google Calendar sync.</p>
 
       <h2>10. Intellectual property</h2>
       <p>The App, including its design, logos, trademarks, text, and software, is owned by or licensed to Invytt and protected by law. No rights are transferred except for your content and the license granted here.</p>

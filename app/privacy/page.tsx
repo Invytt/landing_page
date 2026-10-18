@@ -35,7 +35,7 @@ export default function PrivacyPage() {
         <li><strong>Account &amp; identity:</strong> mobile phone number used for sign-in via one-time password, first and last name.</li>
         <li><strong>Profile:</strong> profile photo, banner image, bio, pronouns, gender, date of birth, city, occupation, interests, social handles you choose to add, and optional email address.</li>
         <li><strong>Content you create:</strong> events, invitations, RSVPs, event media (photos, videos, GIFs, and stickers), messages, posts, comments, and other content you submit.</li>
-        <li><strong>Moderation records:</strong> moderation status, processing attempts, rejection or fallback state, and the minimum information needed to apply a result to the relevant message, event, profile, or cover.</li>
+        <li><strong>Safety-review records:</strong> whether content passed or failed our safety review, and the information needed to apply that result to the relevant message, event, profile, or cover.</li>
       </ul>
       <h3>2.2 Information collected automatically</h3>
       <ul>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
       </ul>
       <h3>2.3 Permission-gated device data</h3>
       <ul>
-        <li><strong>Contacts:</strong> phone numbers are hashed on your device before matching; raw numbers and names are not stored or used for advertising.</li>
+        <li><strong>Contacts:</strong> phone numbers are changed into an unreadable form on your device before matching; original numbers and names are not stored or used for advertising.</li>
         <li><strong>Camera:</strong> to take photos for event chat and event media.</li>
         <li><strong>Photo library:</strong> to set profile/banner images, add event photos or videos, and save event photos.</li>
       </ul>
@@ -58,10 +58,10 @@ export default function PrivacyPage() {
       <ul>
         <li>Create and manage your account and authenticate you by phone OTP.</li>
         <li>Provide profiles, friends, events, invitations, RSVPs, media, chat, expenses, and maps.</li>
-        <li>Match you with existing users through hashed phone numbers.</li>
+        <li>Match you with existing users without storing your contacts&apos; original phone numbers.</li>
         <li>Send transactional and, if enabled, push, WhatsApp, SMS, and email notifications.</li>
         <li>Send relevant event details to our AI provider for event-planning suggestions and captions.</li>
-        <li><strong>Moderate user-generated content.</strong> Text is checked against prohibited terms on our servers. Uploaded image media enters asynchronous backend moderation and may appear to authorized participants while processing; rejected media is removed or replaced by the relevant fallback. The backend may send an uploaded image URL to OpenAI. On supported Apple devices, an additional image check may run locally; that result is not sent to us and does not replace backend moderation. Videos and third-party media may follow a separate review or removal path.</li>
+        <li><strong>Keep the community safe.</strong> Text and images are checked against our safety rules. Images may be visible to permitted participants while a review is completed. If an image is not approved, we remove it or show a suitable replacement. Some images may be checked by a specialist safety service. On supported Apple devices, an additional privacy-focused check may happen on the device itself; its result is not sent to us. Videos and third-party media may follow a different review process.</li>
         <li>Maintain safety, prevent fraud and abuse, enforce our Terms, and comply with legal obligations.</li>
       </ul>
       <p><strong>Legal bases (GDPR, where applicable):</strong> contract performance, consent for permission-gated features, legitimate interests in security and improvement, and legal obligations.</p>
@@ -72,14 +72,14 @@ export default function PrivacyPage() {
       <p>Your profile details are visible according to your privacy settings. If your profile is private, non-friends see only your name and profile/banner image until you become friends. Content posted to events is visible to event participants.</p>
       <h3>4.2 Service providers</h3>
       <ul>
-        <li><strong>Supabase:</strong> backend hosting, database, authentication, and storage.</li>
-        <li><strong>MSG91 and WhatsApp Business:</strong> OTP and selected event messages.</li>
+        <li><strong>Hosting and storage providers:</strong> keeping the App, accounts, and uploaded content available.</li>
+        <li><strong>MSG91 and WhatsApp Business:</strong> one-time passwords and selected event messages.</li>
         <li><strong>AutoSend:</strong> email OTPs and transactional email.</li>
-        <li><strong>Google Firebase:</strong> push notifications and crash/performance diagnostics.</li>
+        <li><strong>Google Firebase:</strong> push notifications and help with crashes and performance problems.</li>
         <li><strong>Google Places and Mapbox:</strong> place search, maps, and location display.</li>
         <li><strong>GIPHY:</strong> GIF and sticker search and delivery.</li>
-        <li><strong>OpenAI:</strong> relevant event details for planning/captions and uploaded image URLs for automated safety moderation. We do not use uploaded chat or event images to train our own models.</li>
-        <li><strong>Apple:</strong> supported on-device photo screening; nothing is transmitted to Apple or us for that purpose.</li>
+        <li><strong>AI and safety service providers:</strong> relevant event details for planning suggestions and captions, and some uploaded images for safety checks. We do not use uploaded chat or event images to train our own models.</li>
+        <li><strong>Apple:</strong> an additional photo safety check on supported devices; the photo is not sent to Apple or to us for that check.</li>
       </ul>
       <p>We may also disclose information when required by law or to protect users, the public, or Invytt, and information may transfer in a merger, acquisition, or asset sale.</p>
 
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
       </ul>
 
       <h2>8. Security</h2>
-      <p>We use TLS/HTTPS, backend row-level security, restricted service access, and available device/platform protections. Chat is <strong>not end-to-end encrypted</strong>: authorized backend services can process chat data and media for delivery, storage, safety, and moderation. No transmission or storage method is 100% secure.</p>
+      <p>We use encryption while information is sent, limited access for authorized staff and service providers, and available device and platform protections. Chat is <strong>not private from the systems that operate Invytt</strong>: authorized service providers may process chat messages and media to deliver the service, store content, and keep the community safe. No transmission or storage method is 100% secure.</p>
 
       <h2>9. Children</h2>
       <p>The App is not intended for children under 18. If you believe a child has provided us data, contact us and we will delete it.</p>
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
       <p>Your information may be processed in India and other countries where service providers operate. Where required, we use appropriate safeguards.</p>
 
       <h2>11. Third-party links and services</h2>
-      <p>Maps, messaging, GIF/sticker search, storage, diagnostics, and AI moderation may be provided by third parties. Their practices are governed by their own policies. Review the policies of Supabase, MSG91, WhatsApp, AutoSend, Google, Firebase, Mapbox, GIPHY, and OpenAI.</p>
+      <p>Maps, messaging, GIFs and stickers, storage, diagnostics, and safety checks may be provided by other companies. Their practices are governed by their own policies. Please review the policies of the services used with the feature you choose.</p>
 
       <h2>12. Changes</h2>
       <p>We may update this Policy. The current version is published at <strong>https://invytt.com/privacy</strong> and linked from the App. We update the “Last updated” date and provide additional notice for material changes.</p>
