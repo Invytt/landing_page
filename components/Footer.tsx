@@ -86,6 +86,24 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          <p className="mt-8 text-base font-semibold text-white/40">Legal</p>
+          <ul className="mt-4 flex flex-col gap-3 text-base">
+            <li>
+              <a href="/help" className="text-white transition hover:text-accent">
+                Help &amp; FAQ
+              </a>
+            </li>
+            <li>
+              <a href="/privacy" className="text-white transition hover:text-accent">
+                Privacy policy
+              </a>
+            </li>
+            <li>
+              <a href="/terms" className="text-white transition hover:text-accent">
+                Terms of service
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
