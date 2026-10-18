@@ -89,11 +89,6 @@ export default function Footer() {
           <p className="mt-8 text-base font-semibold text-white/40">Legal</p>
           <ul className="mt-4 flex flex-col gap-3 text-base">
             <li>
-              <a href="/help" className="text-white transition hover:text-accent">
-                Help &amp; FAQ
-              </a>
-            </li>
-            <li>
               <a href="/help" target="_blank" rel="noopener noreferrer" className="text-white transition hover:text-accent">
                 Help &amp; FAQ
               </a>
