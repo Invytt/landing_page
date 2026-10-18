@@ -29,38 +29,6 @@ export default function LegalPage({
               className="-my-10 -ml-4 h-36 w-36 object-contain"
             />
           </Link>
-          <div className="hidden gap-4 text-black/60 sm:flex">
-            <Link href="/help" className="transition hover:text-black">
-              Help &amp; FAQ
-            </Link>
-            <Link href="/privacy" className="transition hover:text-black">
-              Privacy
-            </Link>
-            <Link href="/terms" className="transition hover:text-black">
-              Terms
-            </Link>
-          </div>
-          <details className="relative sm:hidden">
-            <summary
-              aria-label="Open legal navigation"
-              className="flex h-10 w-10 cursor-pointer list-none flex-col items-center justify-center gap-1.5 rounded-full text-black/70 [&::-webkit-details-marker]:hidden"
-            >
-              <span className="block h-0.5 w-6 rounded-full bg-current" />
-              <span className="block h-0.5 w-6 rounded-full bg-current" />
-              <span className="block h-0.5 w-6 rounded-full bg-current" />
-            </summary>
-            <div className="absolute right-0 top-12 z-10 grid min-w-44 gap-1 rounded-2xl border border-black/10 bg-bg p-2 text-sm font-medium text-black/70 shadow-lg shadow-black/10">
-              <Link href="/help" className="rounded-xl px-3 py-2 hover:bg-black/5 hover:text-black">
-                Help &amp; FAQ
-              </Link>
-              <Link href="/privacy" className="rounded-xl px-3 py-2 hover:bg-black/5 hover:text-black">
-                Privacy
-              </Link>
-              <Link href="/terms" className="rounded-xl px-3 py-2 hover:bg-black/5 hover:text-black">
-                Terms
-              </Link>
-            </div>
-          </details>
         </nav>
 
         <header className="border-b border-black/10 py-12 sm:py-16">
