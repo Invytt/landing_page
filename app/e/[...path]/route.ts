@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import {
   isEventShareAction,
+  eventPageCacheControl,
   proxyResponseHeaders,
   rewriteEventMetadataUrls,
   upstreamPathForEventShare,
@@ -50,7 +51,14 @@ async function proxy(request: NextRequest, path: string[]): Promise<Response> {
 
   if (isHtmlPage(path, request.method)) {
     responseHeaders.set("content-type", "text/html; charset=utf-8");
-    responseHeaders.set("cache-control", "no-store");
+    responseHeaders.set(
+      "cache-control",
+      eventPageCacheControl({
+        method: request.method,
+        path,
+        status: upstream.status,
+      }) ?? "no-store",
+    );
     return new Response(
       rewritePageUrls(await upstream.text(), request, path[0]!),
       { status: upstream.status, headers: responseHeaders },

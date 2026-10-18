@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  eventPageCacheControl,
   proxyResponseHeaders,
   rewriteEventMetadataUrls,
   upstreamPathForEventShare,
@@ -42,5 +43,21 @@ describe("event share proxy response headers", () => {
 
     expect(headers.get("content-security-policy")).toBeNull();
     expect(headers.get("content-type")).toBe("text/html; charset=utf-8");
+  });
+});
+
+describe("event share page caching", () => {
+  it("allows short-lived CDN caching for successful document GETs", () => {
+    expect(eventPageCacheControl({ method: "GET", path: ["abc123"], status: 200 }))
+      .toBe("public, s-maxage=60, stale-while-revalidate=300");
+  });
+
+  it("does not cache actions, non-page paths, or error responses", () => {
+    expect(eventPageCacheControl({ method: "POST", path: ["abc123"], status: 200 }))
+      .toBeNull();
+    expect(eventPageCacheControl({ method: "GET", path: ["otp-send"], status: 200 }))
+      .toBeNull();
+    expect(eventPageCacheControl({ method: "GET", path: ["abc123"], status: 404 }))
+      .toBeNull();
   });
 });

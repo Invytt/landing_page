@@ -1,5 +1,7 @@
 const FUNCTION_BASE = "/functions/v1/public-event";
 const FUNCTION_ACTIONS = new Set(["otp-send", "otp-verify"]);
+const EVENT_PAGE_CACHE_CONTROL =
+  "public, s-maxage=60, stale-while-revalidate=300";
 
 /** Maps the public website route to the matching public Event Function route. */
 export function upstreamPathForEventShare(path: string[]): string {
@@ -12,6 +14,28 @@ export function upstreamPathForEventShare(path: string[]): string {
 
 export function isEventShareAction(path: string[]): boolean {
   return FUNCTION_ACTIONS.has(path[0] ?? "");
+}
+
+export type EventPageCacheInput = {
+  method: string;
+  path: string[];
+  status: number;
+};
+
+/**
+ * Cache only a successful event document. RSVP/OTP actions, missing events,
+ * and all other function routes must never become shared cache entries.
+ */
+export function eventPageCacheControl(
+  input: EventPageCacheInput,
+): string | null {
+  if (
+    input.method !== "GET" ||
+    input.path.length !== 1 ||
+    isEventShareAction(input.path) ||
+    input.status !== 200
+  ) return null;
+  return EVENT_PAGE_CACHE_CONTROL;
 }
 
 /** Remove transport policies from the upstream API domain that do not apply to

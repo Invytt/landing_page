@@ -1,8 +1,8 @@
 import { LAUNCH_TARGET } from "@/lib/launch";
 
 export const COMPANY = {
-  legalName: "Invytt Technology Private Limited",
-  email: "events@invytt.com",
+  legalName: "INVYTT PRIVATE LIMITED",
+  email: "support@invytt.com",
   year: "2026",
 };
 
