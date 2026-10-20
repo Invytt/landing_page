@@ -10,7 +10,12 @@ const TO = process.argv[2] || process.env.TEST_EMAIL_TO || "siddhantg2002@gmail.
 const API = "https://api.autosend.com/v1/mails/send"
 const key = process.env.AUTOSEND_API_KEY
 const projectId = process.env.AUTOSEND_PROJECT_ID
-const from = { email: process.env.EMAIL_FROM || "events@invytt.com", name: "Invytt" }
+const emailFrom = process.env.EMAIL_FROM
+const from = { email: emailFrom, name: "Invytt" }
+if (!emailFrom) {
+  console.error("Missing EMAIL_FROM")
+  process.exit(1)
+}
 if (!key) {
   console.error("Missing AUTOSEND_API_KEY")
   process.exit(1)
@@ -39,7 +44,7 @@ const jobs = [
   {
     file: "emails/welcom.html",
     subject: "Welcome to Invytt",
-    data: { daysLeft, launchDate },
+    data: { daysLeft, launchDate, emailFrom },
   },
 ]
 
