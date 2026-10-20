@@ -24,8 +24,12 @@ const XIcon = ({ className }: IconProps) => (
 );
 
 const SOCIALS = [
-  { label: "Instagram", href: "#", Icon: Instagram },
-  { label: "X", href: "#", Icon: XIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/invytt?obrf=dm4zbm5lY2cyZ2Nq&utm_source=qr",
+    Icon: Instagram,
+  },
+  { label: "X", href: "https://x.com/invyttt?s=11", Icon: XIcon },
 ];
 
 export default function Footer() {
@@ -62,6 +66,8 @@ export default function Footer() {
               <a
                 key={label}
                 href={href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={label}
                 className="text-white/70 transition hover:text-white"
               >
