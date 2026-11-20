@@ -1,56 +1,117 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { ReactNode } from "react";
+import { LifeBuoy, ScrollText, ShieldCheck, type LucideIcon } from "lucide-react";
+import Marquee from "@/components/Marquee";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/site/ScrollProgress";
+import { Scallop } from "@/components/ui/kit";
+import LegalToc from "@/components/LegalToc";
+
+type Kind = "help" | "privacy" | "terms";
 
 type LegalPageProps = {
   title: string;
   summary: string;
   updated: string;
+  /** which page this is; picks its icon, tint and the current tab */
+  kind: Kind;
   children: ReactNode;
 };
 
-export default function LegalPage({
-  title,
-  summary,
-  updated,
-  children,
-}: LegalPageProps) {
-  return (
-    <main className="min-h-screen overflow-x-hidden bg-paper text-ink">
-      <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 sm:py-12">
-        <nav className="flex items-center justify-between border-b border-black/10 pb-6 text-sm">
-          <Link href="/" aria-label="Invytt home" className="inline-flex items-center">
-            <Image
-              src="/wordmark-ink.png"
-              alt="Invytt"
-              width={700}
-              height={299}
-              priority
-              className="h-10 w-auto"
-            />
-          </Link>
-        </nav>
+const PAGES: { kind: Kind; label: string; href: string; Icon: LucideIcon; tint: string }[] = [
+  { kind: "help", label: "Help & FAQ", href: "/help", Icon: LifeBuoy, tint: "#8FD9B6" },
+  { kind: "privacy", label: "Privacy policy", href: "/privacy", Icon: ShieldCheck, tint: "#CDBEF7" },
+  { kind: "terms", label: "Terms of service", href: "/terms", Icon: ScrollText, tint: "#FFD6A5" },
+];
 
-        <header className="border-b border-black/10 py-12 sm:py-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-black/50">
-            Invytt legal
-          </p>
-          <h1 className="mt-4 font-display text-5xl tracking-tight sm:text-7xl">
-            {title}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-black/70">{summary}</p>
-          <p className="mt-6 max-w-2xl text-sm leading-6 text-black/60">{updated}</p>
+/** The shared layout for Help, Privacy and Terms, in the site's Ember style. */
+export default function LegalPage({ title, summary, updated, kind, children }: LegalPageProps) {
+  const page = PAGES.find((p) => p.kind === kind)!;
+  return (
+    <>
+      <ScrollProgress />
+      <Marquee />
+      <Nav base="/" />
+      <main className="relative overflow-x-clip bg-paper text-ink">
+        {/* ── header ── */}
+        <header className="on-night dots-night relative isolate bg-night pb-24 pt-36 text-paper sm:pt-40">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-[-10%] top-0 -z-10 h-[60vh] w-[60vh] rounded-full opacity-35"
+            style={{ background: `radial-gradient(circle, ${page.tint} 0%, color-mix(in srgb, ${page.tint} 45%, transparent) 30%, color-mix(in srgb, ${page.tint} 12%, transparent) 55%, transparent 72%)` }}
+          />
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-3xl">
+                <p className="eyebrow flex items-center gap-3 text-peach">
+                  <span aria-hidden className="h-[2px] w-8 bg-current" />
+                  Invytt legal
+                </p>
+                <h1 className="display mt-5 text-[clamp(3rem,8vw,6rem)]">{title}</h1>
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-nightmuted">{summary}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {updated.split(" · ").map((u) => (
+                    <li key={u} className="rounded-full border-2 border-paper/25 px-3.5 py-1 text-sm font-semibold text-paper">
+                      {u}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <span
+                aria-hidden
+                className="flex h-28 w-28 shrink-0 rotate-[-8deg] items-center justify-center rounded-[30px] border-2 border-ink text-ink shadow-[6px_6px_0_#000] sm:h-32 sm:w-32"
+                style={{ background: page.tint }}
+              >
+                <page.Icon size={52} strokeWidth={2} />
+              </span>
+            </div>
+
+            {/* the three pages, as tabs */}
+            <nav aria-label="Legal pages" className="mt-10 flex flex-wrap gap-2.5">
+              {PAGES.map((p) => {
+                const on = p.kind === kind;
+                return (
+                  <Link
+                    key={p.kind}
+                    href={p.href}
+                    aria-current={on ? "page" : undefined}
+                    className={`inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform hover:-translate-y-0.5 ${
+                      on ? "text-ink shadow-[3px_3px_0_#000]" : "bg-night2 text-paper"
+                    }`}
+                    style={on ? { background: p.tint } : undefined}
+                  >
+                    <p.Icon size={16} strokeWidth={2.4} />
+                    {p.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+          <Scallop color="var(--color-paper)" at="bottom" />
         </header>
 
-        <article className="legal-content prose prose-lg mx-auto w-full max-w-[72ch] break-words py-8 text-base leading-7 text-black/85 prose-headings:font-display prose-headings:text-black prose-headings:tracking-tight prose-h2:mb-5 prose-h2:mt-16 prose-h2:text-xl prose-h2:leading-tight prose-h3:mb-3 prose-h3:mt-10 prose-h3:text-base prose-h3:leading-snug prose-p:my-6 prose-p:leading-7 prose-ul:my-6 prose-ul:pl-6 prose-ol:my-6 prose-ol:pl-6 prose-li:my-3 prose-li:pl-2 prose-li:leading-7 prose-li:marker:text-black/50 prose-a:font-medium prose-a:text-black prose-a:underline prose-a:decoration-black/35 prose-a:underline-offset-4 prose-strong:text-black prose-em:text-black/70 sm:py-14 sm:text-[1.0625rem] sm:leading-[1.8] sm:prose-h2:text-2xl sm:prose-h3:text-lg sm:prose-p:leading-[1.8] sm:prose-li:leading-[1.75]">
-          {children}
-        </article>
+        {/* ── body ── */}
+        <div className="dots mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[240px_1fr] lg:gap-16">
+          <LegalToc tint={page.tint} />
+          <article
+            id="legal-article"
+            className={`legal-content min-w-0 max-w-[72ch] text-base leading-[1.8] text-ink/85 sm:text-[1.0625rem] ${
+              kind === "help" ? "legal-faq" : ""
+            }`}
+          >
+            {children}
+          </article>
+        </div>
 
-        <footer className="border-t border-black/10 py-8 text-sm leading-6 text-black/60">
-          <p>INVYTT PRIVATE LIMITED · support@invytt.com</p>
-          <p className="mt-2">PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</p>
-        </footer>
-      </div>
-    </main>
+        <div className="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+          <div className="stk flex flex-col gap-2 rounded-[24px] bg-white p-6 text-sm leading-6 text-muted sm:p-7 lg:ml-[calc(240px+4rem)] lg:max-w-[72ch]">
+            <p className="font-bold text-ink">INVYTT PRIVATE LIMITED · support@invytt.com</p>
+            <p>PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</p>
+          </div>
+        </div>
+      </main>
+      <Footer base="/" />
+    </>
   );
 }

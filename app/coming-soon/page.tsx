@@ -7,10 +7,8 @@ import ScrollProgress from "@/components/site/ScrollProgress";
 import Cursor from "@/components/site/Cursor";
 import SoonHero from "@/components/soon/SoonHero";
 import Track from "@/components/soon/Track";
-import Marketplace from "@/components/soon/Marketplace";
-import Agency from "@/components/soon/Agency";
-import ForHosts from "@/components/soon/ForHosts";
-import SoonCTA from "@/components/soon/SoonCTA";
+// below the first screen: HTML now, scripts as the visitor scrolls near
+import { Agency, ForHosts, Marketplace, SoonCTA } from "@/components/site/lazy";
 
 const SOON_DESC =
   "What comes after launch on Invytt: a marketplace to shop, book services and venues, Invytt Agency to run the whole event for you, ticketed events, and bookings and payments in your profile.";

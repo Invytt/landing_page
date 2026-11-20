@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "motion/react";
 import { EVENT } from "@/app/data";
 import { getCountdown } from "@/lib/countdown";
 
@@ -17,17 +17,21 @@ const LABELS = ["Days", "Hours", "Min", "Sec"];
 export default function Countdown() {
   const target = new Date(EVENT.target).getTime();
   const [t, setT] = useState<number[] | null>(null);
+  const box = useRef<HTMLDivElement>(null);
+  // ticks only while it is on screen
+  const seen = useInView(box, { margin: "100px" });
 
   useEffect(() => {
     setT(diff(target));
+    if (!seen) return;
     const id = setInterval(() => setT(diff(target)), 1000);
     return () => clearInterval(id);
-  }, [target]);
+  }, [target, seen]);
 
   const parts = t ?? [0, 0, 0, 0];
 
   return (
-    <div className="flex flex-wrap items-start justify-center gap-2 sm:gap-3" role="timer" aria-label="Time until launch">
+    <div ref={box} className="flex flex-wrap items-start justify-center gap-2 sm:gap-3" role="timer" aria-label="Time until launch">
       {parts.map((p, i) => {
         const text = i === 0 ? String(p) : pad(p);
         return (

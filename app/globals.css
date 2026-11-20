@@ -197,45 +197,131 @@ body {
     -webkit-backface-visibility: hidden;
   }
 
-  /* legal pages */
+  /* legal pages: Help, Privacy, Terms */
+  .legal-content > p:first-child {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--color-ink);
+  }
   .legal-content h2 {
+    position: relative;
     margin-top: 4rem;
-    border-top: 1px solid rgb(0 0 0 / 10%);
-    padding-top: 2rem;
-    font-weight: 700;
+    padding-top: 2.25rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    scroll-margin-top: 9rem;
+  }
+  .legal-content h2::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, rgb(43 23 25 / 0.3) 0 7px, transparent 7px 13px);
   }
   .legal-content h3 {
-    margin-left: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.15rem;
     font-weight: 700;
+    color: var(--color-ink);
   }
-  .legal-content h3 + p,
-  .legal-content h3 + ul,
-  .legal-content h3 + ol {
-    margin-left: 1.5rem;
+  .legal-content p {
+    margin-top: 1.1rem;
   }
   .legal-content ul,
   .legal-content ol {
-    padding-left: 2.25rem;
+    margin-top: 1.1rem;
+    display: grid;
+    gap: 0.7rem;
   }
-  .legal-content ul {
-    list-style-type: disc;
+  .legal-content ul > li {
+    position: relative;
+    padding-left: 1.9rem;
+  }
+  .legal-content ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.45em;
+    width: 0.95rem;
+    height: 0.95rem;
+    background: var(--color-coral);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.9 6.6 4.5 10.2 12 12-7.5 1.8-11.1 5.4-12 12-.9-6.6-4.5-10.2-12-12 7.5-1.8 11.1-5.4 12-12Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.9 6.6 4.5 10.2 12 12-7.5 1.8-11.1 5.4-12 12-.9-6.6-4.5-10.2-12-12 7.5-1.8 11.1-5.4 12-12Z'/%3E%3C/svg%3E") center / contain no-repeat;
   }
   .legal-content ol {
-    list-style-type: decimal;
+    list-style: decimal;
+    padding-left: 1.6rem;
   }
-  .legal-content li {
-    padding-left: 0.35rem;
+  .legal-content strong {
+    color: var(--color-ink);
+    font-weight: 700;
   }
   .legal-content a {
+    font-weight: 700;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-coral);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
     overflow-wrap: anywhere;
   }
-  @media (max-width: 640px) {
-    .legal-content h3,
-    .legal-content h3 + p,
-    .legal-content h3 + ul,
-    .legal-content h3 + ol {
-      margin-left: 0.75rem;
+  .legal-content a:hover {
+    color: var(--color-deep);
+  }
+  /* key-value blocks (who we are, contact) as a sticker card */
+  .legal-content dl {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 0.4rem 1.5rem;
+    padding: 1.4rem 1.5rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+  @media (min-width: 640px) {
+    .legal-content dl {
+      grid-template-columns: max-content 1fr;
     }
+  }
+  .legal-content dt {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .legal-content dd {
+    margin: 0 0 0.6rem;
+  }
+  @media (min-width: 640px) {
+    .legal-content dd {
+      margin: 0;
+    }
+  }
+  /* Help: each question as its own sticker card */
+  .legal-faq section > div {
+    margin-top: 1rem;
+    padding: 1.25rem 1.4rem;
+    border: 2px solid var(--color-ink);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--color-ink);
+    transition: transform 0.15s;
+  }
+  .legal-faq section > div:hover {
+    transform: translateY(-2px);
+  }
+  .legal-faq section > div h3 {
+    margin-top: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.15;
+  }
+  .legal-faq section > div p {
+    margin-top: 0.5rem;
   }
 }
 
@@ -438,7 +524,8 @@ body {
 html[data-ready="1"] .loader {
   animation: loaderOut 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
 }
-html[data-seen="1"] .loader {
+html[data-seen="1"] .loader,
+html[data-gone="1"] .loader {
   display: none;
 }
 
@@ -519,4 +606,94 @@ html[data-seen="1"] .loader {
   .silver-shine {
     display: none;
   }
+}
+
+/* ── Performance ────────────────────────────────────────────────────────── */
+/* Looping animations stop in sections that are off screen (PerfRoot marks
+   them with data-off) and pick up where they left off on the way back. */
+/* (Only the looping classes are named, rather than every element, so that
+   marking a section touches as little of the page's styles as possible.) */
+[data-off] :is(
+    .animate-marquee,
+    .animate-pulse,
+    .bob,
+    .spin-slow,
+    .spin-drum,
+    .phone-sway,
+    .wiggle,
+    .scanline,
+    .flyin,
+    .silver-shine
+  ),
+[data-off] .typing i {
+  animation-play-state: paused !important;
+}
+
+/* Phones and tablets: a phone holds one turned pose instead of rocking, so
+   its edge and thickness still show without redrawing every frame. */
+@media (hover: none), (pointer: coarse) {
+  .phone-sway {
+    animation: none;
+    transform: rotateY(-16deg) rotateX(5deg);
+  }
+  /* until a section's script has run, its phones arrive as 3D models from
+     the server; skip their rim, keys and back (dozens of 3D planes each)
+     so the page stays light while it waits */
+  .p3d {
+    display: none;
+  }
+}
+
+/* Lite mode (slow connection, Data Saver, low-memory phone): everything
+   holds still, as it does for visitors who ask for less motion. */
+html[data-lite="1"] {
+  scroll-behavior: auto;
+}
+html[data-lite="1"] *,
+html[data-lite="1"] *::before,
+html[data-lite="1"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html[data-lite="1"] .loader,
+html[data-lite="1"] .silver-shine {
+  display: none;
+}
+html[data-lite="1"] .phone-sway {
+  animation: none !important;
+  transform: rotateY(-16deg) rotateX(5deg);
+}
+
+/* Headline words land without the blur on phones: blurring every word is
+   one of the costliest things a phone can be asked to draw. */
+@media (hover: none), (pointer: coarse) {
+  .wd {
+    filter: none !important;
+  }
+}
+/* Phones and lite mode: the hero's words are readable straight from the
+   HTML, before any script has loaded, instead of waiting to fly in. */
+@media (hover: none), (pointer: coarse) {
+  .hero-txt,
+  .hero-txt .wd {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .hero-in {
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
+html[data-lite="1"] .hero-txt,
+html[data-lite="1"] .hero-txt .wd,
+html[data-lite="1"] .wd {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+html[data-lite="1"] .hero-in {
+  opacity: 1 !important;
+  clip-path: none !important;
 }

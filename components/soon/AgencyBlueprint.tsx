@@ -13,6 +13,7 @@ import {
 import { Camera, ChefHat, Disc3, Flower2 } from "lucide-react";
 import { Confetti, Stamp, useRange } from "@/components/ui/kit";
 import { DepthField } from "@/components/ui/depth";
+import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 /* The opening of the Invytt Agency chapter. As you scroll, an event plan
    builds itself on a tilted 3D board: a concept mood board, the vendors,
@@ -157,19 +158,25 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
   const boardScale = useTransform(p, [0, 0.15, 1], [0.8, 1, 1.04]);
   const glowScale = useTransform(p, [0, 1], [0.6, 1.3]);
   const done = step >= PARTS.length;
+  // desktop only: on smaller screens the scene is never built
+  const wide = useMedia(WIDE_QUERY);
 
   if (calm) return null;
 
   return (
     <div ref={ref} className="relative hidden h-[460vh] lg:block">
+      {wide !== false && (
       <div className="sticky top-0 isolate grid h-screen grid-cols-[0.9fr_1.1fr] items-center overflow-hidden px-8 xl:px-[max(2rem,calc((100vw-80rem)/2+2rem))]">
         <DepthField seed={151} count={10} night progress={scrollYProgress} />
         <motion.span
           aria-hidden
           style={{ scale: glowScale }}
-          className="pointer-events-none absolute right-[10%] top-[15%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40 blur-3xl"
+          className="pointer-events-none absolute right-[10%] top-[15%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40"
         >
-          <span className="block h-full w-full rounded-full" style={{ background: "radial-gradient(circle, #FF9A5C 0%, transparent 65%)" }} />
+          <span
+            className="block h-full w-full rounded-full"
+            style={{ background: "radial-gradient(circle, rgb(255 154 92 / 0.95) 0%, rgb(255 154 92 / 0.45) 30%, rgb(255 154 92 / 0.12) 55%, transparent 72%)" }}
+          />
         </motion.span>
 
         {/* words */}
@@ -282,6 +289,7 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
           </motion.div>
         </div>
       </div>
+      )}
     </div>
   );
 }

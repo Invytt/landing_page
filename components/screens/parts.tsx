@@ -28,7 +28,7 @@ export function Av({
 }) {
   return (
     <img
-      src={`/avatars/index${((i - 1) % 12) + 1}.svg`}
+      src={`/avatars/index${((i - 1) % 12) + 1}.webp`}
       alt=""
       width={s}
       height={s}

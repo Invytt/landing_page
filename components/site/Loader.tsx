@@ -18,7 +18,7 @@ export default function Loader() {
           style={{ animation: "ldtilt 2.4s ease-in-out infinite" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/wordmark-ink.png" alt="" width={700} height={299} className="mx-auto h-auto w-36" />
+          <img src="/wordmark-ink.webp" alt="" width={360} height={154} className="mx-auto h-auto w-36" />
           <p className="mt-4 font-display text-2xl italic text-coral">Setting the table…</p>
           <div className="relative mt-5 h-3 overflow-hidden rounded-full border-2 border-ink bg-tint">
             <i

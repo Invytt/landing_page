@@ -8,6 +8,7 @@ import { Eyebrow, Reveal, Words, useCalm } from "@/components/ui/kit";
 import { DepthField } from "@/components/ui/depth";
 import { Phone } from "@/components/ui/phone";
 import { SOON_SCREENS } from "@/components/screens/soon";
+import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 const CARD = 600; // width of one card on the track, px
 const GAP = 80;
@@ -73,6 +74,10 @@ function TrackCard({
 export default function Track() {
   const wrap = useRef<HTMLDivElement>(null);
   const calm = useCalm();
+  // build only the layout that fits the screen (both until mounted)
+  const wide = useMedia(WIDE_QUERY);
+  const desk = !calm && wide !== false;
+  const mob = calm || wide !== true;
   const [dims, setDims] = useState({ vw: 1440, dist: 0, pad: 0 });
   const { scrollYProgress } = useScroll({ target: wrap, offset: ["start start", "end end"] });
 
@@ -107,6 +112,7 @@ export default function Track() {
     <section id="on-the-way" className="relative isolate bg-paper2">
       {/* desktop: the cards ride sideways as you scroll down */}
       <div ref={wrap} className={calm ? "hidden" : "relative hidden lg:block"} style={{ height: `${SOON.length * 70 + 80}vh` }}>
+        {desk && (
         <div className="sticky top-0 isolate flex h-screen flex-col justify-center overflow-hidden pt-20">
           <DepthField seed={109} count={10} progress={scrollYProgress} />
           {header}
@@ -126,9 +132,11 @@ export default function Track() {
             <span className="text-sm font-bold text-muted">{String(SOON.length).padStart(2, "0")}</span>
           </div>
         </div>
+        )}
       </div>
 
       {/* phones, tablets and reduced motion: one after another */}
+      {mob && (
       <div className={calm ? "py-20" : "py-20 lg:hidden"}>
         {header}
         <div className="mx-auto mt-12 max-w-3xl space-y-16 px-5 sm:px-8">
@@ -146,6 +154,7 @@ export default function Track() {
           ))}
         </div>
       </div>
+      )}
     </section>
   );
 }

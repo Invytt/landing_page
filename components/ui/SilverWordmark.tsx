@@ -30,9 +30,11 @@ export default function SilverWordmark({
       <img
         src="/wordmark-silver.webp"
         alt="Invytt"
-        width={1200}
-        height={477}
+        width={520}
+        height={207}
         fetchPriority={priority ? "high" : undefined}
+        loading={priority ? undefined : "lazy"}
+        decoding="async"
         className="relative block h-auto w-full"
       />
       <span aria-hidden className="silver-shine" />

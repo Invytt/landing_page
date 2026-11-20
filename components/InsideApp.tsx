@@ -27,6 +27,7 @@ import {
 import { Eyebrow, Reveal, Tilt, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
 import { DepthField, Parallax } from "@/components/ui/depth";
+import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 import {
   CreateScreen,
@@ -304,6 +305,10 @@ export default function InsideApp() {
   });
   const [active, setActive] = useState(0);
   useMotionValueEvent(pos, "change", (v) => setActive(Math.min(N - 1, Math.max(0, Math.round(v)))));
+  // build only the layout that fits the screen (both until mounted)
+  const wide = useMedia(WIDE_QUERY);
+  const desk = !calm && wide !== false;
+  const mob = calm || wide !== true;
 
   const header = (
     <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
@@ -319,6 +324,7 @@ export default function InsideApp() {
       <DepthField seed={47} count={8} className="!top-auto h-[60%] bottom-0" />
       {/* ── desktop: six phones fan out, scroll walks through them ── */}
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[460vh] lg:block"}>
+        {desk && (
         <div className="sticky top-0 isolate grid h-screen grid-cols-[minmax(320px,0.8fr)_1.7fr] items-center overflow-hidden pt-20 shorter:pt-0">
           <DepthField seed={41} count={10} progress={scrollYProgress} />
           <div className="relative z-10 pl-8 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
@@ -358,9 +364,11 @@ export default function InsideApp() {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       {/* ── phones and tablets: swipe through the screens ── */}
+      {mob && (
       <div className={calm ? "pt-20" : "pt-20 lg:hidden"}>
         <Parallax speed={0.08}>{header}</Parallax>
         <div
@@ -382,6 +390,7 @@ export default function InsideApp() {
           ))}
         </div>
       </div>
+      )}
 
       {/* ── feature wall ── */}
       <div className="relative isolate mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8 lg:pb-32 lg:pt-10">

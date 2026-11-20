@@ -3,14 +3,15 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { FAQ, COMPANY, EVENT } from "./data";
 import { LAUNCH_DATE_LABEL } from "@/lib/launch";
+import { LITE_SCRIPT } from "@/lib/lite";
+import PerfRoot from "@/components/site/PerfRoot";
 
 // The app's own typefaces, self-hosted: Instrument Sans for reading,
 // Instrument Serif for headlines.
+// Both are trimmed to the characters the site uses (Latin, punctuation, ₹).
+// The site never sets sans text in italic, so that file is not shipped.
 const sans = localFont({
-  src: [
-    { path: "./fonts/InstrumentSans.woff2", style: "normal", weight: "400 700" },
-    { path: "./fonts/InstrumentSans-Italic.woff2", style: "italic", weight: "400 700" },
-  ],
+  src: [{ path: "./fonts/InstrumentSans.woff2", style: "normal", weight: "400 700" }],
   variable: "--f-sans",
   display: "swap",
 });
@@ -179,6 +180,8 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
+        {/* lite mode for slow connections, Data Saver and low-memory phones */}
+        <script dangerouslySetInnerHTML={{ __html: LITE_SCRIPT }} />
         {/* show the loading card once per visit, not on every page view */}
         <script
           dangerouslySetInnerHTML={{
@@ -191,7 +194,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <PerfRoot />
+      </body>
     </html>
   );
 }

@@ -2,15 +2,18 @@ import Marquee from "@/components/Marquee";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
-import Pillars from "@/components/Pillars";
-import Steps from "@/components/Steps";
-import InsideApp from "@/components/InsideApp";
-import PartyLive from "@/components/PartyLive";
-import GuestWeb from "@/components/GuestWeb";
-import About from "@/components/About";
-import FaqSection from "@/components/FAQ";
-import TicketCTA from "@/components/TicketCTA";
 import Footer from "@/components/Footer";
+// below the first screen: HTML now, scripts as the visitor scrolls near
+import {
+  About,
+  FaqSection,
+  GuestWeb,
+  InsideApp,
+  PartyLive,
+  Pillars,
+  Steps,
+  TicketCTA,
+} from "@/components/site/lazy";
 import Loader from "@/components/site/Loader";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import ScrollProgress from "@/components/site/ScrollProgress";

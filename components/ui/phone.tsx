@@ -4,6 +4,7 @@
 import { motion, type MotionValue } from "motion/react";
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { TOUCH_QUERY, useMedia } from "@/lib/perf";
 
 type Angle = number | MotionValue<number>;
 
@@ -17,8 +18,8 @@ type Angle = number | MotionValue<number>;
 const W = 300;
 const H = 622;
 const R = 48; // corner radius
-const D = 9; // thickness: a slim phone, not a slab
-const CORNER_STEPS = 7;
+const D = 22; // thickness, in proportion to a real phone of this size
+const CORNER_STEPS = 10;
 
 type Strip = { x: number; y: number; len: number; tangent: number; normal: number };
 
@@ -58,15 +59,142 @@ const RIM: Strip[] = (() => {
 function rimShade(normal: number) {
   const lit = (Math.cos(((normal + 135) * Math.PI) / 180) + 1) / 2;
   const mix = (a: number, b: number) => Math.round(a + (b - a) * lit);
-  const c = `rgb(${mix(38, 140)} ${mix(20, 104)} ${mix(22, 106)})`;
-  return `linear-gradient(to bottom, #120708 0%, ${c} 30%, ${c} 70%, #120708 100%)`;
+  const c = `rgb(${mix(46, 150)} ${mix(26, 114)} ${mix(28, 116)})`;
+  const hi = `rgb(${mix(70, 214)} ${mix(48, 184)} ${mix(50, 184)})`;
+  // a metal frame: rounded dark edges, flat sides, a thin highlight down the middle
+  return `linear-gradient(to bottom, #120708 0%, ${c} 18%, ${c} 44%, ${hi} 50%, ${c} 56%, ${c} 82%, #120708 100%)`;
 }
 
+// centre of each button along the side; side -1 = left, 1 = right
 const BUTTONS = [
-  { x: -1.5, y: 133, len: 26 },
-  { x: -1.5, y: 189, len: 46 },
-  { x: W + 1.5, y: 185, len: 70 },
+  { side: -1, y: 133, len: 26 },
+  { side: -1, y: 189, len: 46 },
+  { side: 1, y: 185, len: 70 },
 ];
+
+const KEY_OUT = 4; // how far a key stands out of the frame
+const KEY_H = Math.round(D * 0.5); // key height across the frame
+
+/** One side key, built as a small solid box with its own lit faces. */
+function Key({ side, y, len, still }: { side: number; y: number; len: number; still: boolean }) {
+  const face = (w: number, h: number, transform: string, background: string, radius = 1) => (
+    <i
+      aria-hidden
+      className="absolute block"
+      style={{
+        left: -w / 2,
+        top: -h / 2,
+        width: w,
+        height: h,
+        transform,
+        background,
+        borderRadius: radius,
+      }}
+    />
+  );
+  return (
+    <span className={cn("preserve-3d absolute block", still && "p3d")} style={{ left: side < 0 ? 0 : W, top: y, width: 0, height: 0 }}>
+      {/* the face you press: brushed metal, brightest down its middle */}
+      {face(
+        KEY_H,
+        len,
+        `translateX(${side * KEY_OUT}px) rotateY(90deg)`,
+        "linear-gradient(to right, #3a2224 0%, #8d6a6c 30%, #d8bfc0 50%, #8d6a6c 70%, #3a2224 100%)",
+        2.5,
+      )}
+      {/* top and bottom ends */}
+      {face(KEY_OUT, KEY_H, `translateX(${(side * KEY_OUT) / 2}px) translateY(${-len / 2}px) rotateX(90deg)`, "#5c3c3e")}
+      {face(KEY_OUT, KEY_H, `translateX(${(side * KEY_OUT) / 2}px) translateY(${len / 2}px) rotateX(90deg)`, "#1a0b0c")}
+      {/* the two long sides, facing the screen and the back */}
+      {face(KEY_OUT, len, `translateX(${(side * KEY_OUT) / 2}px) translateZ(${KEY_H / 2}px)`, "linear-gradient(to bottom, #6e4c4e, #3a2224)")}
+      {face(KEY_OUT, len, `translateX(${(side * KEY_OUT) / 2}px) translateZ(${-KEY_H / 2}px)`, "linear-gradient(to bottom, #3a2224, #1a0b0c)")}
+      {/* a dark seam where the key meets the frame */}
+      {face(KEY_H + 2, len + 2, `translateX(${side * 0.3}px) rotateY(90deg)`, "#0d0405", 3)}
+    </span>
+  );
+}
+
+/** The screen face: bezel, screen, camera notch and glass glare. */
+function Face({ children, label }: { children: ReactNode; label?: string }) {
+  return (
+    <>
+      <div
+        aria-hidden={label ? true : undefined}
+        className="relative h-full w-full overflow-hidden rounded-[38px] bg-paper text-ink"
+      >
+        {children}
+        <span
+          aria-hidden
+          className="absolute left-1/2 top-[9px] z-30 h-[22px] w-[82px] -translate-x-1/2 rounded-full bg-ink"
+        />
+      </div>
+      {/* glass glare */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[48px]"
+        style={{
+          background:
+            "linear-gradient(120deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 26%, transparent 42%)",
+        }}
+      />
+    </>
+  );
+}
+
+/**
+ * A phone that holds still, drawn flat: one face in one turned pose, with
+ * the metal edge and side keys painted beside it. It reads as the same
+ * phone, but it is a handful of elements instead of about sixty planes in
+ * 3D, which is what lets a phone scroll a page full of them smoothly.
+ */
+function FlatPhone({ children, label, plate }: { children: ReactNode; label?: string; plate?: string }) {
+  const EDGE = Math.round(D * 0.4); // how much of the edge shows at this angle
+  return (
+    <div
+      className="absolute inset-0"
+      style={{ transform: "perspective(1600px) rotateY(-16deg) rotateX(5deg)" }}
+    >
+      {plate && (
+        <span
+          aria-hidden
+          className="absolute -inset-[26px] rounded-[70px] border-[3px] border-ink"
+          style={{ background: plate, transform: "translate(14px, 10px)" }}
+        />
+      )}
+      {/* the side key on the visible edge */}
+      <span
+        aria-hidden
+        className="absolute rounded-[3px]"
+        style={{
+          left: W + EDGE - 3,
+          top: BUTTONS[2].y - BUTTONS[2].len / 2 + 3,
+          width: 6,
+          height: BUTTONS[2].len,
+          background: "linear-gradient(to right, #3a2224, #b9999a 55%, #5c3c3e)",
+        }}
+      />
+      {/* the metal edge, showing to the right and below the face */}
+      <span
+        aria-hidden
+        className="absolute inset-0 rounded-[48px]"
+        style={{
+          transform: `translate(${EDGE}px, ${Math.round(EDGE / 3)}px)`,
+          background: "linear-gradient(to right, #2e1a1c 0%, #6e4c4e 70%, #b9999a 88%, #4a2e30 100%)",
+          boxShadow: "inset 0 0 0 1.5px #120708",
+        }}
+      />
+      <div
+        className="absolute inset-0 rounded-[48px] bg-ink p-[11px]"
+        style={{
+          boxShadow:
+            "0 0 0 var(--pring-w, 0px) var(--pring, transparent), inset 0 0 0 2px rgb(255 255 255 / 0.1)",
+        }}
+      >
+        <Face label={label}>{children}</Face>
+      </div>
+    </div>
+  );
+}
 
 export function Phone({
   children,
@@ -91,6 +219,10 @@ export function Phone({
   /** colour of a card set behind the phone that turns with it */
   plate?: string;
 }) {
+  // on phones and tablets a phone that is not being turned is drawn flat
+  const touch = useMedia(TOUCH_QUERY);
+  const still = rx === undefined && ry === undefined;
+  const flat = touch === true && still;
   return (
     <div
       role={label ? "img" : undefined}
@@ -107,17 +239,24 @@ export function Phone({
           tilted far back can never cut into it. */}
       <span
         aria-hidden
-        className="absolute inset-[6%] rounded-[16%/8%]"
+        className="absolute inset-[1%]"
         style={{
           transform: "translate(7%, 5%)",
-          background: "var(--pshadow-c, rgb(43 23 25 / 0.24))",
-          filter: "blur(calc(18px * var(--ps, 1)))",
+          // a soft gradient rather than a blur filter: it looks the same and
+          // costs a phone nothing to draw
+          background:
+            "radial-gradient(closest-side, var(--pshadow-c, rgb(43 23 25 / 0.24)) 62%, transparent 100%)",
         }}
       />
       <div
-        className="preserve-3d absolute left-0 top-0 origin-top-left"
+        className={cn("absolute left-0 top-0 origin-top-left", !flat && "preserve-3d")}
         style={{ width: W, height: H, transform: "scale(var(--ps, 1))" }}
       >
+        {flat ? (
+          <FlatPhone label={label} plate={plate}>
+            {children}
+          </FlatPhone>
+        ) : (
         <motion.div className="preserve-3d absolute inset-0" style={{ rotateX: rx, rotateY: ry }}>
           <div className={cn("preserve-3d absolute inset-0", sway && "phone-sway")}>
             {/* a coloured card a little way behind the phone, turning with it */}
@@ -133,7 +272,7 @@ export function Phone({
               <i
                 key={i}
                 aria-hidden
-                className="absolute block"
+                className={cn("absolute block", still && "p3d")}
                 style={{
                   left: st.x,
                   top: st.y,
@@ -146,29 +285,18 @@ export function Phone({
                 }}
               />
             ))}
-            {/* side buttons, standing just proud of the rim */}
+            {/* side buttons: small solid keys standing out of the frame */}
             {BUTTONS.map((b) => (
-              <i
-                key={b.y}
-                aria-hidden
-                className="absolute block rounded-[2px]"
-                style={{
-                  left: b.x,
-                  top: b.y,
-                  width: b.len,
-                  height: D * 0.7,
-                  marginLeft: -b.len / 2,
-                  marginTop: -D * 0.35,
-                  transform: "rotateZ(90deg) rotateX(90deg)",
-                  background: "linear-gradient(to bottom, #2b1719, #7a5658, #2b1719)",
-                }}
-              />
+              <Key key={b.y} side={b.side} y={b.y} len={b.len} still={still} />
             ))}
 
             {/* back: coral plate, camera bump, wordmark */}
             <div
               aria-hidden
-              className="backface-hidden absolute inset-0 overflow-hidden rounded-[48px] border-[3px] border-ink bg-coral"
+              className={cn(
+                "backface-hidden absolute inset-0 overflow-hidden rounded-[48px] border-[3px] border-ink bg-coral",
+                still && "p3d",
+              )}
               style={{ transform: `rotateY(180deg) translateZ(${D / 2}px)` }}
             >
               <span className="dots absolute inset-0 opacity-60" />
@@ -182,8 +310,10 @@ export function Phone({
                 <i className="block h-[10px] w-[10px] rounded-full bg-sand" />
               </span>
               <img
-                src="/wordmark-ink.png"
+                src="/wordmark-ink.webp"
                 alt=""
+                loading="lazy"
+                decoding="async"
                 width={700}
                 height={299}
                 className="absolute left-1/2 top-1/2 h-auto w-[50%] -translate-x-1/2 -translate-y-1/2 opacity-90"
@@ -199,28 +329,11 @@ export function Phone({
                   "0 0 0 var(--pring-w, 0px) var(--pring, transparent), inset 0 0 0 2px rgb(255 255 255 / 0.1)",
               }}
             >
-              <div
-                aria-hidden={label ? true : undefined}
-                className="relative h-full w-full overflow-hidden rounded-[38px] bg-paper text-ink"
-              >
-                {children}
-                <span
-                  aria-hidden
-                  className="absolute left-1/2 top-[9px] z-30 h-[22px] w-[82px] -translate-x-1/2 rounded-full bg-ink"
-                />
-              </div>
-              {/* glass glare */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[48px]"
-                style={{
-                  background:
-                    "linear-gradient(120deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 26%, transparent 42%)",
-                }}
-              />
+              <Face label={label}>{children}</Face>
             </div>
           </div>
         </motion.div>
+        )}
       </div>
     </div>
   );
