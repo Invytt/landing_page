@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { MARQUEE, EVENT } from "@/app/data";
 import { getCountdown } from "@/lib/countdown";
+import { Spark } from "@/components/ui/kit";
 
+/** The ticker across the very top: launch countdown plus early-access perks. */
 export default function Marquee() {
   const [countdown, setCountdown] = useState<string | null>(null);
 
@@ -26,17 +28,17 @@ export default function Marquee() {
   const loop = [...items, ...items];
 
   return (
-    <div className="sticky top-0 z-[60] overflow-hidden bg-[#0a0a0a] text-white">
-      <div className="flex w-max animate-marquee py-2.5">
+    <div className="sticky top-0 z-[60] overflow-hidden border-b-2 border-ink bg-coral text-white">
+      <div className="flex w-max animate-marquee py-2 hover:[animation-play-state:paused]">
         {loop.map((t, i) => (
           <span
             key={i}
-            className={`flex items-center whitespace-nowrap px-4 text-xs font-medium tracking-tight ${
-              t === countdown ? "text-accent" : "text-white/80"
+            className={`flex items-center whitespace-nowrap px-4 text-xs font-bold tracking-wide ${
+              t === countdown ? "tabular-nums text-white" : "text-white/90"
             }`}
           >
             {t}
-            <span className="px-4 text-white/40">✦</span>
+            <Spark className="ml-8 h-3 w-3 text-ink" />
           </span>
         ))}
       </div>

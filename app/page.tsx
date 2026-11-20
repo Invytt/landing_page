@@ -1,38 +1,39 @@
 import Marquee from "@/components/Marquee";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
+import Problem from "@/components/Problem";
+import Pillars from "@/components/Pillars";
+import Steps from "@/components/Steps";
+import InsideApp from "@/components/InsideApp";
+import PartyLive from "@/components/PartyLive";
+import GuestWeb from "@/components/GuestWeb";
 import About from "@/components/About";
-import FeaturedIn from "@/components/FeaturedIn";
-import Partners from "@/components/Partners";
 import FaqSection from "@/components/FAQ";
 import TicketCTA from "@/components/TicketCTA";
 import Footer from "@/components/Footer";
+import Loader from "@/components/site/Loader";
+import SmoothScroll from "@/components/site/SmoothScroll";
+import ScrollProgress from "@/components/site/ScrollProgress";
+import Cursor from "@/components/site/Cursor";
 
 export default function Home() {
   return (
     <>
+      <Loader />
+      <SmoothScroll />
+      <ScrollProgress />
+      <Cursor />
       <Marquee />
       <Nav />
-      <main className="relative -mt-[112px]">
+      <main className="relative">
         <Hero />
-        <div id="problem">
-          <Partners />
-        </div>
-        {/* stacked panels: platform pins, how-it-works slides up and covers it.
-            xs phones: panels fall back to normal flow (no sticky stack). */}
-        <div className="relative">
-          <div id="features" className="sticky top-0 max-[359.98px]:static">
-            <FeaturedIn />
-          </div>
-          <div
-            id="how-it-works"
-            data-nav-light
-            className="relative z-10 overflow-hidden rounded-t-[2.5rem] sticky top-0 max-[359.98px]:static"
-          >
-            <HowItWorks />
-          </div>
-        </div>
+        <Problem />
+        {/* The two anchors of the page: five pillars, then five steps. */}
+        <Pillars />
+        <Steps />
+        <InsideApp />
+        <PartyLive />
+        <GuestWeb />
         <About />
         <FaqSection />
         <TicketCTA />
