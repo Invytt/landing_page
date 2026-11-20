@@ -9,6 +9,7 @@ import {
   FaqSection,
   GuestWeb,
   InsideApp,
+  Mingle,
   PartyLive,
   Pillars,
   Steps,
@@ -35,6 +36,8 @@ export default function Home() {
         <Pillars />
         <Steps />
         <InsideApp />
+        {/* guests who don't mingle, and the icebreakers that fix it */}
+        <Mingle />
         <PartyLive />
         <GuestWeb />
         <About />

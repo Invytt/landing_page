@@ -385,3 +385,87 @@ export const SOON: SoonFeature[] = [
     screen: "bookings",
   },
 ];
+
+// ── Guests who don't mingle, and the icebreakers that fix it ──────────────────
+// Game names, prompts and bingo squares are the app's own (Invytt Games).
+export const MINGLE_PAINS = [
+  {
+    title: "Same circles all night",
+    body: "People stay with whoever they came with. Everyone else in the room stays a stranger.",
+  },
+  {
+    title: "The host does every introduction",
+    body: "You spend your own party walking people over to each other.",
+  },
+  {
+    title: "Quiet guests leave early",
+    body: "Anyone who only knows you runs out of people to talk to.",
+  },
+];
+
+export type Icebreaker = {
+  id: "match" | "bingo" | "roulette" | "truths" | "ice" | "room";
+  title: string;
+  body: string;
+  /** what it is in the app, and for how many */
+  meta: string;
+  tint: string;
+};
+
+export const ICEBREAKERS: Icebreaker[] = [
+  {
+    id: "match",
+    title: "Find your match",
+    body: "Everyone gets half a coloured shape. Find whoever holds the other half, and you both get a question to start on.",
+    meta: "Invytt Games · 4+ · 5 min",
+    tint: "#CDBEF7",
+  },
+  {
+    id: "bingo",
+    title: "Guest bingo",
+    body: "Fill your card with real people. Scan their profile code for a square and you're both marked as met.",
+    meta: "Invytt Games · 3+ · 10 min",
+    tint: "#8FD9B6",
+  },
+  {
+    id: "roulette",
+    title: "Pair-up roulette",
+    body: "Spin, get paired with someone new, and go chat. A new partner every round.",
+    meta: "Invytt Games · 4+ · 4 min a round",
+    tint: "#FFD6A5",
+  },
+  {
+    id: "truths",
+    title: "Two truths and a lie",
+    body: "Everyone shares three facts about themselves. The room votes on the lie and learns the stories.",
+    meta: "Invytt Games · 3–20 · 10 min",
+    tint: "#F6C1D0",
+  },
+  {
+    id: "ice",
+    title: "Break the ice",
+    body: "Guests ask the party companion in the chat for an icebreaker, an opener, or who to talk to next.",
+    meta: "Party companion · for guests",
+    tint: "#BFDDFB",
+  },
+  {
+    id: "room",
+    title: "Work the room",
+    body: "Hosts get live tips to get guests mingling, and a quick group activity when the room goes quiet.",
+    meta: "Host companion · for hosts",
+    tint: "#FF9A5C",
+  },
+];
+
+/** Squares from the app's Guest bingo pack. */
+export const BINGO_SQUARES = [
+  "Has been to Goa",
+  "Plays an instrument",
+  "Speaks 3 languages",
+  "Can cook biryani",
+  "Night owl",
+  "Has a pet",
+  "Met the host at work",
+  "Drinks chai daily",
+  "Loves spicy food",
+];

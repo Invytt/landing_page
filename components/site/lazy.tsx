@@ -80,6 +80,7 @@ function later<P extends object>(id: string, load: () => Promise<{ default: Comp
 export const Pillars = later("features", () => import("@/components/Pillars"));
 export const Steps = later("how-it-works", () => import("@/components/Steps"));
 export const InsideApp = later("inside", () => import("@/components/InsideApp"));
+export const Mingle = later("mingle", () => import("@/components/Mingle"));
 export const PartyLive = later("live", () => import("@/components/PartyLive"));
 export const GuestWeb = later("guests", () => import("@/components/GuestWeb"));
 export const About = later("about", () => import("@/components/About"));

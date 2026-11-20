@@ -158,7 +158,7 @@ export default function PartyLive() {
   return (
     <section id="live" className="on-night dots-night relative isolate overflow-hidden bg-night pb-24 pt-28 text-paper lg:pb-32 lg:pt-36">
       <DepthField seed={53} count={18} night />
-      <Scallop color="var(--color-paper2)" at="top" />
+      <Scallop color="var(--color-paper)" at="top" />
 
       <Parallax speed={0.12}>
       <div ref={head} className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">

@@ -172,42 +172,6 @@ export default function HeroScene({
 
     scene.add(phone);
 
-    /* ── drifting party shapes ── */
-    type Floaty = {
-      mesh: THREE.Mesh;
-      base: THREE.Vector3;
-      amp: number;
-      phase: number;
-      spin: THREE.Vector3;
-      depth: number;
-    };
-    const mat = (c: number, flat = false) =>
-      new THREE.MeshStandardMaterial({ color: c, roughness: 0.45, metalness: 0.05, flatShading: flat });
-    const defs: [THREE.BufferGeometry, THREE.Material, number, number, number, number][] = [
-      [new THREE.TorusGeometry(0.42, 0.17, 20, 48), mat(0xd2402a), -2.55, 1.75, -0.6, 1.1],
-      [new THREE.SphereGeometry(0.36, 32, 24), mat(0xcdbef7), 2.5, 2.05, -1.2, 0.8],
-      [new THREE.ConeGeometry(0.32, 0.7, 28), mat(0x8fd9b6), 2.45, -1.75, 0.2, 1.3],
-      [new THREE.IcosahedronGeometry(0.36, 0), mat(0xbfddfb, true), -2.5, -1.95, 0.1, 1.2],
-      [new THREE.CapsuleGeometry(0.17, 0.5, 8, 20), mat(0xf6c1d0), -1.75, 2.65, -1.6, 0.6],
-      [new THREE.OctahedronGeometry(0.3, 0), mat(0xffd6a5, true), 1.85, -2.6, -0.8, 0.9],
-      [new THREE.SphereGeometry(0.14, 20, 16), mat(0xff9a5c), -3.2, 0.2, 0.6, 1.6],
-      [new THREE.SphereGeometry(0.11, 20, 16), mat(0x3ccfbf), 3.25, 0.45, 0.8, 1.7],
-      [new THREE.TorusGeometry(0.2, 0.08, 16, 32), mat(0xffd6a5), 1.5, 2.85, 0.3, 1.2],
-    ];
-    const floaties: Floaty[] = defs.map(([g, m, x, y, z, depth], i) => {
-      const mesh = new THREE.Mesh(g, m);
-      mesh.position.set(x, y, z);
-      scene.add(mesh);
-      return {
-        mesh,
-        base: new THREE.Vector3(x, y, z),
-        amp: 0.12 + (i % 3) * 0.06,
-        phase: i * 1.7,
-        spin: new THREE.Vector3(0.2 + (i % 4) * 0.12, 0.3 + (i % 3) * 0.15, 0.1),
-        depth,
-      };
-    });
-
     /* ── input ── */
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     const onMove = (e: PointerEvent) => {
@@ -259,17 +223,6 @@ export default function HeroScene({
       phone.position.x = pointer.x * 0.12;
       phone.scale.setScalar((0.72 + 0.28 * intro) * (1 - scroll * 0.12));
 
-      for (const f of floaties) {
-        const spread = 1 + scroll * 0.55;
-        f.mesh.position.x = f.base.x * spread * intro + pointer.x * 0.28 * f.depth;
-        f.mesh.position.y =
-          f.base.y * spread * intro + Math.sin(t * 0.9 + f.phase) * f.amp - pointer.y * 0.22 * f.depth;
-        f.mesh.position.z = f.base.z + scroll * f.depth;
-        f.mesh.rotation.x = t * f.spin.x + f.phase;
-        f.mesh.rotation.y = t * f.spin.y;
-        f.mesh.rotation.z = t * f.spin.z;
-        f.mesh.scale.setScalar(intro);
-      }
       renderer.render(scene, camera);
     };
     tick();

@@ -15,7 +15,7 @@ import {
 } from "motion/react";
 import { ArrowDown, Check, Disc3, Mail } from "lucide-react";
 import { EVENT } from "@/app/data";
-import { Magnetic, Scallop, Spark, Words } from "@/components/ui/kit";
+import { Magnetic, Scallop, Words } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
 import { EventScreen } from "@/components/screens";
 import { Av, AvStack } from "@/components/screens/parts";
@@ -139,7 +139,6 @@ export default function Hero() {
   const archY = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const archScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const stageY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const badgeRotate = useTransform(scrollYProgress, [0, 1], [0, 220]);
   const gridY = useTransform(scrollYProgress, [0, 1], [0, 260]);
   const glowY = useTransform(scrollYProgress, [0, 1], [0, 340]);
 
@@ -371,24 +370,6 @@ export default function Hero() {
             </span>
           </Floaty>
 
-          {/* turning seal */}
-          <motion.div
-            aria-hidden
-            style={{ rotate: badgeRotate }}
-            className="absolute -bottom-10 right-[2%] z-20 hidden h-32 w-32 lg:block"
-          >
-            <svg viewBox="0 0 120 120" className="spin-slow h-full w-full" style={{ animationDuration: "22s" }}>
-              <circle cx="60" cy="60" r="59" fill="#FBF6F4" stroke="#2B1719" strokeWidth="2" />
-              <defs>
-                <path id="seal" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
-              </defs>
-              <text fontSize="10.5" fontWeight="700" letterSpacing="2.4" fill="#2B1719">
-                <textPath href="#seal">EVERY GOOD PLAN STARTS WITH AN INVITE ✦ </textPath>
-              </text>
-              <circle cx="60" cy="60" r="24" fill="#D2402A" stroke="#2B1719" strokeWidth="2" />
-            </svg>
-            <Spark className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 text-paper" />
-          </motion.div>
         </motion.div>
       </div>
 

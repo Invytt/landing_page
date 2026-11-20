@@ -182,3 +182,23 @@ describe("coming soon page", () => {
     }
   });
 });
+
+describe("the mingle section", () => {
+  it("names the problem and every icebreaker, using the app's own game names", async () => {
+    const { default: Mingle } = await import("@/components/Mingle");
+    const { ICEBREAKERS, MINGLE_PAINS } = await import("@/app/data");
+    const { container } = render(<Mingle />);
+    expect(text(container.querySelector("h2"))).toBe("Everyone came. Nobody mingled.");
+    for (const p of MINGLE_PAINS) expect(screen.getByText(p.title)).toBeInTheDocument();
+    for (const b of ICEBREAKERS) {
+      expect(screen.getByRole("heading", { level: 3, name: b.title })).toBeInTheDocument();
+    }
+    // the four games are real Invytt Games
+    const games = ICEBREAKERS.filter((b) => b.meta.startsWith("Invytt Games")).map((b) => b.title);
+    expect(games).toHaveLength(4);
+    for (const g of games) expect(GAMES.some((x) => x.title === g)).toBe(true);
+    // both views of the room are reachable
+    expect(screen.getByRole("button", { name: "Without Invytt" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "With Invytt" })).toBeInTheDocument();
+  });
+});
