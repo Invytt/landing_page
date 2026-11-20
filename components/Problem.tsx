@@ -91,7 +91,7 @@ function ToolChip({ i, p, s }: { i: number; p: MotionValue<number>; s: Spot }) {
 function InviteCard() {
   return (
     <div className="stk-lg relative w-[min(86vw,380px)] rounded-[28px] bg-white p-6 text-center">
-      <Image src="/wordmark-ink.png" alt="Invytt" width={128} height={55} className="mx-auto h-auto w-32" />
+      <Image src="/wordmark-ink.webp" alt="Invytt" width={128} height={55} className="mx-auto h-auto w-32" />
       <p className="display mt-3 text-4xl text-ink">
         One app for the <em>whole party</em>
       </p>

@@ -40,6 +40,8 @@ function Polaroid({
   // the drift is for the desktop board only; stacked on a phone it would push
   // neighbours into each other and open gaps between them
   const y = useTransform(progress, (v) => (desk ? pin.depth * (1 - 2 * v) : 0));
+  // the spinner behind the photo stops once the photo is in
+  const [loaded, setLoaded] = useState(false);
   return (
     <motion.figure
       drag={desk}
@@ -62,12 +64,14 @@ function Polaroid({
           className="absolute -top-3 left-1/2 h-6 w-24 -translate-x-1/2 border-x-2 border-dashed border-ink/20 opacity-90"
           style={{ background: TAPE[i], rotate: `${i % 2 ? 4 : -5}deg` }}
         />
-        <div className="relative aspect-[4/3] overflow-hidden rounded-sm border-2 border-ink">
+        <div
+          className={`relative aspect-[4/3] overflow-hidden rounded-sm border-2 border-ink ${loaded ? "" : "img-wait"}`}
+        >
           <Image
             src={s.img}
             alt={s.role}
             fill
-            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+            onLoad={() => setLoaded(true)}
             draggable={false}
             className="pointer-events-none object-cover"
           />

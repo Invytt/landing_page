@@ -44,6 +44,19 @@ function afterLoad(run: () => void): () => void {
 }
 
 /**
+ * Holds a section's place while it is on its way: while its HTML is still
+ * streaming in, or, arriving from another page on the site, until its file
+ * is in.
+ */
+function SectionLoader() {
+  return (
+    <div role="status" aria-label="Loading" className="grid min-h-[60vh] place-items-center">
+      <span aria-hidden className="spinner" />
+    </div>
+  );
+}
+
+/**
  * Each section gets its own Suspense boundary, so the rest of the page
  * hydrates (and responds) right away while the section waits its turn with
  * its server HTML in place.
@@ -55,7 +68,7 @@ function later<P extends object>(id: string, load: () => Promise<{ default: Comp
     // in hand by the time the visitor gets there
     useEffect(() => afterLoad(() => void load().catch(() => {})), []);
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={<SectionLoader />}>
         <Section {...props} />
       </Suspense>
     );
