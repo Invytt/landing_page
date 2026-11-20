@@ -608,6 +608,30 @@ html[data-gone="1"] .loader {
   }
 }
 
+/* ── Loading: a spinner while a picture or a section is on its way ──────── */
+/* Drawn behind the picture, so it shows from the first paint (no script
+   needed) and the picture covers it as it arrives. */
+.spinner,
+.img-wait::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 3px solid var(--color-tint);
+  border-top-color: var(--color-coral);
+  animation: spin 0.8s linear infinite;
+}
+.img-wait {
+  background: var(--color-paper2);
+}
+.img-wait::before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -14px 0 0 -14px;
+}
+
 /* ── Performance ────────────────────────────────────────────────────────── */
 /* Looping animations stop in sections that are off screen (PerfRoot marks
    them with data-off) and pick up where they left off on the way back. */
@@ -623,9 +647,11 @@ html[data-gone="1"] .loader {
     .wiggle,
     .scanline,
     .flyin,
-    .silver-shine
+    .silver-shine,
+    .spinner
   ),
-[data-off] .typing i {
+[data-off] .typing i,
+[data-off] .img-wait::before {
   animation-play-state: paused !important;
 }
 

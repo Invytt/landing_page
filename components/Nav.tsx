@@ -106,7 +106,7 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
         >
           <a href={base || "#"} aria-label="Invytt home" className="shrink-0">
             <Image
-              src="/wordmark-ink.png"
+              src="/wordmark-ink.webp"
               alt="Invytt"
               width={75}
               height={32}
