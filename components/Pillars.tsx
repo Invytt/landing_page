@@ -13,6 +13,7 @@ import { PILLARS, type Pillar } from "@/app/data";
 import { Eyebrow, Reveal, Stamp, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
 import { DepthField, Parallax } from "@/components/ui/depth";
+import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 import {
   InventoryScreen,
@@ -87,6 +88,11 @@ export default function Pillars() {
   const calm = useCalm();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const [active, setActive] = useState(0);
+  // Build only the layout that fits the screen. Until mounted both are in
+  // the HTML (the server cannot know the screen), then the other one goes.
+  const wide = useMedia(WIDE_QUERY);
+  const desk = !calm && wide !== false;
+  const mob = calm || wide !== true;
 
 
   // The phone makes one full turn at each hand-off; the screen swaps while
@@ -126,6 +132,7 @@ export default function Pillars() {
     <section id="features" className="relative bg-paper2">
       {/* ── desktop: pinned deck + turning phone ── */}
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[560vh] lg:block"}>
+        {desk && (
         <div className="sticky top-0 isolate flex h-screen items-center overflow-hidden pt-24 shorter:pt-0">
           <DepthField seed={11} count={10} progress={scrollYProgress} />
           <div className="mx-auto grid w-full max-w-7xl grid-cols-[1.1fr_1fr] items-center gap-10 px-8">
@@ -184,9 +191,11 @@ export default function Pillars() {
             </div>
           </div>
         </div>
+        )}
       </div>
 
       {/* ── phones and tablets (and reduced motion): swipe through the five ── */}
+      {mob && (
       <div className={calm ? "py-20" : "py-20 lg:hidden"}>
         <Parallax speed={0.08} className="mx-auto max-w-7xl px-5 sm:px-8">{header}</Parallax>
         <div
@@ -206,6 +215,7 @@ export default function Pillars() {
         </div>
         <p className="px-5 text-center text-sm font-bold text-muted sm:px-8">Swipe to see all five</p>
       </div>
+      )}
     </section>
   );
 }

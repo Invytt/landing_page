@@ -4,6 +4,7 @@ import { useRef, type CSSProperties, type ReactNode } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Spark, useCalm } from "@/components/ui/kit";
+import { useMedia } from "@/lib/perf";
 
 /* ── Parallax ─────────────────────────────────────────────────────────────
    Things at different depths move at different speeds as the page scrolls.
@@ -182,6 +183,10 @@ export function DepthField({
   progress?: MotionValue<number>;
   className?: string;
 }) {
+  // only built where there is a margin to hold it, after the page has
+  // loaded: below 1400px it would be invisible work
+  const roomy = useMedia("(min-width: 1400px)");
+  if (!roomy) return null;
   const bits = scatter(seed, count, night);
   return (
     <div

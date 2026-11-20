@@ -10,9 +10,10 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <LegalPage
+      kind="terms"
       title="Terms of Service"
       summary="The terms that apply when you create an account or use Invytt."
-      updated="Last updated: 18 October 2026 · Effective: 18 October 2026 · Version 1.0"
+      updated="Last updated: 20 November 2026 · Effective: 20 November 2026 · Version 1.1"
     >
       <p>By creating an account or using Invytt, you agree to these Terms and our Privacy Policy. If you do not agree, do not use the App.</p>
 
@@ -41,23 +42,24 @@ export default function TermsPage() {
         <li>You retain ownership of content you create.</li>
         <li>You grant us a worldwide, non-exclusive, royalty-free license to host, store, reproduce, and display content solely to operate the App.</li>
         <li>You are responsible for your content and confirm that you have the rights to share it.</li>
-        <li>Content is checked against our safety rules. Images may be visible to permitted participants while a review is completed. If content is not approved, it may be removed or replaced. Some images may be checked by a specialist safety service. On supported Apple devices, an additional privacy-focused check may happen on the device and its result is not sent to us. Content that cannot be checked automatically may be reviewed, limited, or removed.</li>
+        <li>Content is checked against our safety rules. Images may be visible to permitted participants while a review is completed. If content is not approved, it may be removed or replaced. Uploaded images are checked by a safety service. On supported Apple devices, an additional privacy-focused check may happen on the device and its result is not sent to us. Content that cannot be checked automatically may be reviewed, limited, or removed.</li>
         <li>Chat is not private from the systems that operate Invytt. Authorized service providers may process messages and media to deliver the service and keep the community safe.</li>
-        <li>You can report content or a person from where you encountered them. If content was blocked in error, contact us through Profile → Account &amp; support.</li>
+        <li>You can report content or a person from where you encountered them. If content was blocked in error, email <a href="mailto:support@invytt.com">support@invytt.com</a>.</li>
       </ul>
 
       <h2>6. Events, invitations, and RSVPs</h2>
       <p>You are solely responsible for events you organize and attend, including legality, safety, and interactions with attendees. Invytt is not a party to and is not responsible for arrangements between users.</p>
+      <p>If you share an event link, people without the app can RSVP on the web. As host, you receive their name, phone number, gender, and answers to your questions; use them only to run that event. The Group Pot in an event is a record of shared expenses between guests; Invytt does not collect, hold, or move that money.</p>
       <h2>7. No purchases in V1</h2>
-      <p>Version 1 is free and offers no purchases, bookings, or payments. We do not collect payment details, and marketplace, vendor, order, and refund functionality is unavailable. Future paid features will be covered by updated Terms before release.</p>
+      <p>Version 1 is free and offers no purchases, bookings, paid tickets, or payments. Public events are free to join. We do not collect payment details, and shopping, vendor and venue bookings, orders, and refunds are not available. Future paid features will be covered by updated Terms before release.</p>
       <h2>8. Friends and social features</h2>
       <p>Friend requests, contact matching, and profile visibility are provided as-is. Respect other users and do not send unwanted or abusive requests or messages.</p>
 
       <h2>9. Other services</h2>
       <ul>
-        <li>We use other companies to provide sign-in messages, email, push notifications, maps, location search, GIFs and stickers, storage, diagnostics, event suggestions, and safety checks.</li>
+        <li>We use other companies to provide sign-in messages, email, push notifications, maps, location search, GIFs and stickers, song search, storage, diagnostics, event coach suggestions, and safety checks.</li>
       </ul>
-      <p>These companies may process the information needed to provide the feature you use. Their own terms and privacy policies may also apply. V1 does not offer marketplace purchases, bookings, paid ticketing, or Google Calendar sync.</p>
+      <p>These companies may process the information needed to provide the feature you use. Their own terms and privacy policies may also apply. V1 does not offer shopping, bookings, paid ticketing, or Google Calendar sync. Calendar sync saves your plans to your phone&apos;s own calendar only.</p>
 
       <h2>10. Intellectual property</h2>
       <p>The App, including its design, logos, trademarks, text, and software, is owned by or licensed to Invytt and protected by law. No rights are transferred except for your content and the license granted here.</p>

@@ -108,8 +108,8 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
             <Image
               src="/wordmark-ink.png"
               alt="Invytt"
-              width={700}
-              height={299}
+              width={75}
+              height={32}
               priority
               className="h-8 w-auto"
             />

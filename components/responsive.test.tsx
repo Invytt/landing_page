@@ -73,12 +73,25 @@ describe("responsive layout", () => {
   });
 
   it("Pillars are a swipe carousel on mobile/tablet and a pinned scene on lg+", () => {
-    const { container } = render(<Pillars />);
+    // a phone builds only the carousel
+    const { container, unmount } = render(<Pillars />);
     const carousel = container.querySelector(".overflow-x-auto")!;
     expect(carousel.className).toMatch(/snap-x/);
     expect(carousel.parentElement!.className).toMatch(/lg:hidden/);
-    expect(container.innerHTML).toMatch(/hidden[^"]*lg:block/);
-    expect(container.innerHTML).toMatch(/sticky/);
+    expect(container.innerHTML).not.toMatch(/sticky/);
+    unmount();
+
+    // a desktop builds only the pinned scene
+    const real = window.matchMedia;
+    window.matchMedia = ((q: string) => ({ ...real(q), matches: q.includes("min-width: 1024px") })) as typeof window.matchMedia;
+    try {
+      const wide = render(<Pillars />).container;
+      expect(wide.innerHTML).toMatch(/hidden[^"]*lg:block/);
+      expect(wide.innerHTML).toMatch(/sticky/);
+      expect(wide.querySelector(".overflow-x-auto")).toBeNull();
+    } finally {
+      window.matchMedia = real;
+    }
   });
 
   it("Steps stack on mobile/tablet and alternate sides on lg+", () => {

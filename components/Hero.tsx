@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   AnimatePresence,
   motion,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -20,6 +21,7 @@ import { EventScreen } from "@/components/screens";
 import { Av, AvStack } from "@/components/screens/parts";
 import WaitlistForm from "@/components/WaitlistForm";
 import { cardHoldMs, introDelay, markReady } from "@/lib/intro";
+import { isLite, isTouch } from "@/lib/perf";
 
 const HeroScene = dynamic(() => import("@/components/site/HeroScene"), { ssr: false });
 
@@ -28,13 +30,18 @@ const WORDS = ["birthday", "housewarming", "special day"];
 function FlipWord() {
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
+  const box = useRef<HTMLSpanElement>(null);
+  const seen = useInView(box);
   useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => setI((v) => (v + 1) % WORDS.length), 2400);
+    if (reduce || !seen || isLite()) return;
+    const id = setInterval(() => {
+      if (!document.hidden) setI((v) => (v + 1) % WORDS.length);
+    }, 2400);
     return () => clearInterval(id);
-  }, [reduce]);
+  }, [reduce, seen]);
   return (
     <span
+      ref={box}
       className="relative inline-flex min-w-[7.6em] items-center justify-center rounded-full border-2 border-ink bg-coral px-5 py-1 text-white shadow-[4px_4px_0_#000]"
       style={{ perspective: 600 }}
     >
@@ -106,6 +113,9 @@ export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const [three, setThree] = useState(false);
+  // the film plays only on desktop, on a good connection, after the page has
+  // loaded; phones and lite mode keep the still
+  const [film, setFilm] = useState(false);
   const [ready, setReady] = useState(false);
   const [go, setGo] = useState(false);
   const d0 = useMemo(introDelay, []);
@@ -135,11 +145,20 @@ export default function Hero() {
 
   useEffect(() => {
     const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (calm) video.current?.pause();
     const desktop = window.matchMedia(
       "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
     ).matches;
-    if (desktop && !calm && canWebGL()) setThree(true);
+    if (calm || isLite()) return;
+    if (desktop && canWebGL()) setThree(true);
+    if (isTouch()) return;
+    // start the film once everything else has arrived
+    const start = () => window.setTimeout(() => setFilm(true), 300);
+    if (document.readyState === "complete") {
+      start();
+      return;
+    }
+    window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
   }, []);
 
   return (
@@ -157,8 +176,12 @@ export default function Hero() {
       {/* soft coral glow behind the stage */}
       <motion.div
         aria-hidden
-        style={{ y: glowY, background: "radial-gradient(circle, #D2402A 0%, transparent 65%)" }}
-        className="pointer-events-none absolute right-[-10%] top-[10%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40 blur-3xl"
+        style={{
+          y: glowY,
+          background:
+            "radial-gradient(circle, rgb(210 64 42 / 0.9) 0%, rgb(210 64 42 / 0.45) 30%, rgb(210 64 42 / 0.12) 55%, transparent 72%)",
+        }}
+        className="pointer-events-none absolute right-[-10%] top-[10%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40"
       />
 
       <div className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-x-8 gap-y-14 px-5 pb-24 pt-36 sm:px-8 lg:grid-cols-[1.08fr_1fr] lg:pb-28 lg:pt-36 lg:short:pt-32">
@@ -166,19 +189,20 @@ export default function Hero() {
         <motion.div style={{ y: textY }} className="relative z-30">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
+            className="hero-txt inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-paper/25 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-nightmuted"
             animate={go ? { opacity: 1, y: 0 } : undefined}
             transition={{ delay: d0, duration: 0.6 }}
-            className="inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-paper/25 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-nightmuted"
           >
             <i className="h-2 w-2 rounded-full bg-live" />
             {EVENT.dateRange} · {EVENT.city}
           </motion.p>
 
-          <h1 className="display mt-6 text-[clamp(3.1rem,7vw,6rem)] text-paper lg:short:mt-5 lg:short:text-[4.9rem]">
+          <h1 className="hero-txt display mt-6 text-[clamp(3.1rem,7vw,6rem)] text-paper lg:short:mt-5 lg:short:text-[4.9rem]">
             <Words text="Every good plan starts with an *invite*" delay={d0 + 0.05} stagger={0.07} start={go} />
           </h1>
 
           <motion.div
+            className="hero-txt"
             initial={{ opacity: 0, y: 18 }}
             animate={go ? { opacity: 1, y: 0 } : undefined}
             transition={{ delay: d0 + 0.6, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -223,27 +247,40 @@ export default function Hero() {
             initial={{ opacity: 0, clipPath: "inset(100% 0 0 0 round 999px 999px 28px 28px)" }}
             animate={go ? { opacity: 1, clipPath: "inset(0% 0 0 0 round 999px 999px 28px 28px)" } : undefined}
             transition={{ delay: d0, duration: 1.1, ease: [0.7, 0, 0.3, 1] }}
-            className="absolute inset-x-[12%] bottom-0 top-[4%] overflow-hidden rounded-b-[28px] rounded-t-full border-2 border-paper/25 bg-night2"
+            className="hero-in absolute inset-x-[12%] bottom-0 top-[4%] overflow-hidden rounded-b-[28px] rounded-t-full border-2 border-paper/25 bg-night2"
           >
-            <video
-              ref={video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/hero-poster.jpg"
+            {/* the still is part of the first paint; the film replaces it later */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-poster.jpg"
+              alt=""
               aria-hidden
-              className="h-full w-full object-cover opacity-90"
-            >
-              <source src="/hero.mp4" type="video/mp4" />
-            </video>
+              width={720}
+              height={1280}
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover opacity-90"
+            />
+            {film && (
+              <video
+                ref={video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/hero-poster.jpg"
+                aria-hidden
+                className="relative h-full w-full object-cover opacity-90"
+              >
+                <source src="/hero.mp4" type="video/mp4" />
+              </video>
+            )}
             <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-transparent" />
           </motion.div>
 
           {/* CSS phone: shown first, and kept when 3D is not available */}
           <motion.div
-            className="absolute left-1/2 top-1/2 z-10"
+            className="hero-in absolute left-1/2 top-1/2 z-10"
             initial={{ opacity: 0, y: 80, x: "-50%", rotate: 12 }}
             animate={
               go

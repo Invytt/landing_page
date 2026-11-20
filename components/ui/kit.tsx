@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { Fragment, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { isLite } from "@/lib/perf";
 
 /* ── Small pieces shared by every section ─────────────────────────────── */
 
@@ -42,12 +43,13 @@ export function useRange<T extends string | number>(
  * server and the first client render so the two always match; scroll scenes
  * swap to their calm layout right after mounting.
  */
+/** Less motion: the visitor asked for it, or the page is in lite mode. */
 export function useCalm() {
   const [calm, setCalm] = useState(false);
   useEffect(() => {
     const q = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setCalm(q.matches);
-    const on = () => setCalm(q.matches);
+    setCalm(q.matches || isLite());
+    const on = () => setCalm(q.matches || isLite());
     q.addEventListener?.("change", on);
     return () => q.removeEventListener?.("change", on);
   }, []);
@@ -159,7 +161,7 @@ export function Words({
           // text, so lines wrap and centre exactly as plain text would
           <Fragment key={k++}>
             <motion.span
-              className="inline-block"
+              className="wd inline-block"
               variants={{
                 hide: { opacity: 0, y: "0.5em", rotate: 4, filter: "blur(6px)" },
                 show: {

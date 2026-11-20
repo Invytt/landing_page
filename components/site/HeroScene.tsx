@@ -85,28 +85,51 @@ export default function HeroScene({
     scene.add(fill);
 
     /* ── phone ── */
+    // same proportions as the flat phones (components/ui/phone.tsx):
+    // 300 x 622 with a 22-deep frame and three side keys
     const W = 2.16;
     const H = 4.48;
-    const D = 0.2;
+    const BEVEL = 0.03;
+    const D = (W * 22) / 300 - BEVEL * 2;
     const phone = new THREE.Group();
 
     const bodyGeo = new THREE.ExtrudeGeometry(roundedRect(W, H, 0.38), {
       depth: D,
       bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.05,
-      bevelSegments: 6,
+      bevelThickness: BEVEL,
+      bevelSize: BEVEL,
+      bevelSegments: 8,
       curveSegments: 28,
     });
     bodyGeo.translate(0, 0, -D / 2);
-    const bodyMat = new THREE.MeshStandardMaterial({
-      color: 0xfbf6f4,
-      roughness: 0.32,
-      metalness: 0.15,
+    // the frame: dark brushed metal, like the flat phones' rim
+    const metal = new THREE.MeshStandardMaterial({
+      color: 0x6e4c4e,
+      roughness: 0.28,
+      metalness: 0.75,
     });
-    phone.add(new THREE.Mesh(bodyGeo, bodyMat));
+    phone.add(new THREE.Mesh(bodyGeo, metal));
 
-    const face = D / 2 + 0.052;
+    // side keys: two volume keys on the left, power on the right
+    const KEY_OUT = (W * 4) / 300;
+    const KEY_H = (W * 11) / 300;
+    const keyMat = new THREE.MeshStandardMaterial({ color: 0x8d6a6c, roughness: 0.22, metalness: 0.85 });
+    const keys: [number, number, number][] = [
+      [-1, 133, 26],
+      [-1, 189, 46],
+      [1, 185, 70],
+    ];
+    for (const [side, cy, len] of keys) {
+      const l = (len / 622) * H;
+      const g = new THREE.CapsuleGeometry(KEY_H / 2, Math.max(0.001, l - KEY_H), 6, 16);
+      const k = new THREE.Mesh(g, keyMat);
+      // a capsule stands along y; flatten it across x so it reads as a key
+      k.scale.set((KEY_OUT * 2) / KEY_H, 1, 1);
+      k.position.set(side * (W / 2 + BEVEL), H / 2 - (cy / 622) * H, 0);
+      phone.add(k);
+    }
+
+    const face = D / 2 + BEVEL + 0.002;
     const inkMat = new THREE.MeshBasicMaterial({ color: 0x2b1719 });
     const bezel = new THREE.Mesh(panel(W - 0.06, H - 0.06, 0.35), inkMat);
     bezel.position.z = face;

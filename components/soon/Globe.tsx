@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { isLite, isTouch } from "@/lib/perf";
 
 /* A dotted globe on a 2D canvas: turns slowly on its own, can be dragged,
    and pins pulse over Indian cities. Light enough to run on phones. */
@@ -31,10 +32,12 @@ export default function Globe({ className }: { className?: string }) {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches || isLite();
+    const touch = isTouch();
 
-    // evenly spread points on a sphere
-    const N = 1500;
+    // evenly spread points on a sphere (fewer on phones; at their size the
+    // globe reads the same)
+    const N = touch ? 900 : 1500;
     const pts: [number, number, number][] = [];
     const golden = Math.PI * (3 - Math.sqrt(5));
     for (let i = 0; i < N; i++) {
@@ -60,7 +63,7 @@ export default function Globe({ className }: { className?: string }) {
     let w = 0;
     let h = 0;
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, touch ? 1.5 : 2);
       w = canvas.clientWidth;
       h = canvas.clientHeight;
       canvas.width = Math.round(w * dpr);
@@ -88,11 +91,25 @@ export default function Globe({ className }: { className?: string }) {
     const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
     io.observe(canvas);
 
+    // dots are drawn in a few brightness bands, one path per band, so a
+    // frame is a handful of fills instead of one per dot
+    const BANDS = 8;
+    const bandFill = Array.from(
+      { length: BANDS },
+      (_, b) => `rgba(255,234,229,${(0.15 + ((b + 0.5) / BANDS) * 0.7).toFixed(3)})`,
+    );
+
     let raf = 0;
+    let last = 0;
     const started = performance.now();
     const draw = (now: number) => {
       raf = requestAnimationFrame(draw);
       if (!visible || document.hidden) return;
+      // phones: 30 frames a second is plenty for a slow turn. Calm: hold still
+      // and redraw only while it is being dragged.
+      if (touch && now - last < 32) return;
+      if (calm && !dragging && last) return;
+      last = now;
       const t = (now - started) / 1000;
       if (!dragging) {
         yaw += vel;
@@ -124,14 +141,20 @@ export default function Globe({ className }: { className?: string }) {
       ctx.stroke();
 
       // dots: brighter facing us, dimmer at the rim
+      const bands = Array.from({ length: BANDS }, () => new Path2D());
       for (const [x, y, z] of pts) {
         const [rx, ry, rz] = rotate(x, y, z);
         if (rz < 0) continue;
-        const a = 0.15 + rz * 0.7;
-        ctx.fillStyle = `rgba(255,234,229,${a.toFixed(3)})`;
-        ctx.beginPath();
-        ctx.arc(cx + rx * R, cy - ry * R, 0.6 + rz * 1.1, 0, Math.PI * 2);
-        ctx.fill();
+        const b = Math.min(BANDS - 1, Math.floor(rz * BANDS));
+        const px = cx + rx * R;
+        const py = cy - ry * R;
+        const r = 0.6 + rz * 1.1;
+        bands[b].moveTo(px + r, py);
+        bands[b].arc(px, py, r, 0, Math.PI * 2);
+      }
+      for (let b = 0; b < BANDS; b++) {
+        ctx.fillStyle = bandFill[b];
+        ctx.fill(bands[b]);
       }
 
       // pins
