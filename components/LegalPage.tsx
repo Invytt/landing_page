@@ -16,17 +16,17 @@ export default function LegalPage({
   children,
 }: LegalPageProps) {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-bg text-paper">
+    <main className="min-h-screen overflow-x-hidden bg-paper text-ink">
       <div className="mx-auto max-w-5xl px-5 py-8 sm:px-8 sm:py-12">
         <nav className="flex items-center justify-between border-b border-black/10 pb-6 text-sm">
           <Link href="/" aria-label="Invytt home" className="inline-flex items-center">
             <Image
-              src="/logo.png"
+              src="/wordmark-ink.png"
               alt="Invytt"
-              width={1024}
-              height={1024}
+              width={700}
+              height={299}
               priority
-              className="-my-10 -ml-4 h-36 w-36 object-contain"
+              className="h-10 w-auto"
             />
           </Link>
         </nav>
@@ -35,7 +35,7 @@ export default function LegalPage({
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-black/50">
             Invytt legal
           </p>
-          <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight sm:text-6xl">
+          <h1 className="mt-4 font-display text-5xl tracking-tight sm:text-7xl">
             {title}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-black/70">{summary}</p>

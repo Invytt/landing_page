@@ -18,9 +18,3 @@ export const LAUNCH_DATE_LABEL = new Date(LAUNCH_TARGET).toLocaleDateString(
     timeZone: LAUNCH_TIME_ZONE,
   },
 );
-
-/** Whole days from `nowMs` until launch, clamped at zero. */
-export function daysUntilLaunch(nowMs: number): string {
-  const targetMs = new Date(LAUNCH_TARGET).getTime();
-  return String(Math.max(0, Math.floor((targetMs - nowMs) / 86400000)));
-}

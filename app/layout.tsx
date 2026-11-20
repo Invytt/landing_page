@@ -1,25 +1,36 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope, Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 import { FAQ, COMPANY, EVENT } from "./data";
+import { LAUNCH_DATE_LABEL } from "@/lib/launch";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["400", "500", "600", "700", "800"],
+// The app's own typefaces, self-hosted: Instrument Sans for reading,
+// Instrument Serif for headlines.
+const sans = localFont({
+  src: [
+    { path: "./fonts/InstrumentSans.woff2", style: "normal", weight: "400 700" },
+    { path: "./fonts/InstrumentSans-Italic.woff2", style: "italic", weight: "400 700" },
+  ],
+  variable: "--f-sans",
+  display: "swap",
+});
+const serif = localFont({
+  src: [
+    { path: "./fonts/InstrumentSerif-Regular.woff2", style: "normal", weight: "400" },
+    { path: "./fonts/InstrumentSerif-Italic.woff2", style: "italic", weight: "400" },
+  ],
+  variable: "--f-serif",
+  display: "swap",
 });
 
 const SITE_URL = "https://invytt.com";
 const OG_IMAGE = "/og-image.png";
-const LOGO = "/logo-black.png";
+const LOGO = "/icon-512.png";
 
-const TITLE = "Invytt — The all-in-one platform for hosting events";
-const DESCRIPTION =
-  "Invytt is the all-in-one event hosting app for India. Send invites, track RSVPs, plan inventory with AI, book vetted vendors, and split costs — all in one place. No more group chats, spreadsheets, or midnight UPI requests.";
+const TITLE = "Invytt — Every good plan starts with an invite";
+const DESCRIPTION = `Invytt is the app for hosting in India. Send invites, collect RSVPs (even over WhatsApp), let AI size your food and supplies, split the cost, and run the party with live games and a companion in the chat. Launching ${LAUNCH_DATE_LABEL}.`;
+const SHORT =
+  "Invites, RSVPs, AI supply planning, cost-splitting and live party games, all in one app. You bring the people, Invytt brings the rest.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -31,26 +42,26 @@ export const metadata: Metadata = {
   applicationName: "Invytt",
   generator: "Next.js",
   keywords: [
+    "Invytt",
     "event hosting app",
-    "event planning India",
+    "party planning app India",
     "online invitations",
     "RSVP tracking",
-    "digital invites WhatsApp",
-    "AI inventory planner",
-    "event vendor marketplace",
-    "caterers decorators photographers booking",
-    "cost splitting app",
-    "party planning app India",
-    "birthday housewarming Diwali planning",
-    "host events online",
-    "Invytt",
+    "WhatsApp RSVP",
+    "AI party supply planner",
+    "split party costs",
+    "party games app",
+    "birthday party planning",
+    "housewarming invite",
+    "Diwali party planning",
+    "event invite app",
   ],
   authors: [{ name: COMPANY.legalName, url: SITE_URL }],
   creator: COMPANY.legalName,
   publisher: COMPANY.legalName,
-  category: "technology",
+  category: "lifestyle",
   alternates: {
-    canonical: SITE_URL,
+    canonical: "/",
   },
   openGraph: {
     type: "website",
@@ -58,22 +69,22 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Invytt",
     title: TITLE,
-    description:
-      "Host the event, skip the chaos. Invites, RSVPs, AI inventory planning, a vendor marketplace, and cost-splitting — all in one app.",
+    description: SHORT,
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Invytt — The all-in-one platform for hosting events",
+        alt: "The silver Invytt wordmark beside an invitation to a rooftop dinner, with the line: Every good plan starts with an invite",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@invyttt",
+    creator: "@invyttt",
     title: TITLE,
-    description:
-      "Host the event, skip the chaos. Invites, RSVPs, AI inventory planning, a vendor marketplace, and cost-splitting — all in one app.",
+    description: SHORT,
     images: [OG_IMAGE],
   },
   robots: {
@@ -87,11 +98,8 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: {
-    icon: LOGO,
-    shortcut: LOGO,
-    apple: LOGO,
-  },
+  // icons come from the app's own icon, as files Next picks up by name:
+  // app/favicon.ico, app/icon.png and app/apple-icon.png (manifest has the large sizes)
   formatDetection: {
     email: false,
     address: false,
@@ -100,7 +108,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#1F0B0C",
   width: "device-width",
   initialScale: 1,
 };
@@ -118,6 +126,10 @@ const jsonLd = {
       email: COMPANY.email,
       foundingDate: "2026",
       areaServed: "IN",
+      sameAs: [
+        "https://www.instagram.com/invytt",
+        "https://x.com/invyttt",
+      ],
       description: DESCRIPTION,
     },
     {
@@ -133,7 +145,7 @@ const jsonLd = {
       "@type": "SoftwareApplication",
       name: "Invytt",
       applicationCategory: "LifestyleApplication",
-      operatingSystem: "Web, iOS, Android",
+      operatingSystem: "iOS, Android",
       url: SITE_URL,
       description: DESCRIPTION,
       offers: {
@@ -165,9 +177,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className={cn(inter.variable, manrope.variable, "font-sans", geist.variable)}>
+    <html lang="en-IN" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="canonical" href={SITE_URL} />
+        {/* show the loading card once per visit, not on every page view */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('invytt-seen')){document.documentElement.dataset.seen='1'}else{sessionStorage.setItem('invytt-seen','1')}}catch(e){}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

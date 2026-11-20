@@ -1,153 +1,126 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import Countdown from "./Countdown";
+import WaitlistForm, { type SubmitState } from "./WaitlistForm";
 import { MARQUEE } from "@/app/data";
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import { Reveal } from "@/components/Reveal";
-import { subscribe } from "@/lib/waitlist";
-import { createAvatar } from "@dicebear/core";
-import { lorelei } from "@dicebear/collection";
+import { LAUNCH_DATE_LABEL } from "@/lib/launch";
+import { Confetti, Scallop, Spark, Tilt, Words } from "@/components/ui/kit";
+import { DepthField, Parallax } from "@/components/ui/depth";
 
-type SubmitState = "idle" | "loading" | "success" | "duplicate" | "error";
+import { AvStack, FauxQr } from "@/components/screens/parts";
 
-const BUTTON_LABEL: Record<SubmitState, string> = {
-  idle: "Get early access",
-  loading: "Joining…",
-  success: "You're in ✓",
-  duplicate: "Already joined",
-  error: "Try again",
-};
+const PERK_TINTS = ["#CDBEF7", "#8FD9B6", "#FFD6A5", "#F6C1D0"];
 
-const PEOPLE = [
-  { seed: "ava", bg: "b6e3f4" },
-  { seed: "milo", bg: "ffd5dc" },
-  { seed: "juno", bg: "c0aede" },
-  { seed: "remy", bg: "ffdfbf" },
-  { seed: "nova", bg: "d1f4d0" },
-] as const;
-
-const AVATARS = PEOPLE.map((p) =>
-  createAvatar(lorelei, {
-    seed: p.seed,
-    backgroundColor: [p.bg],
-    radius: 50,
-    beardProbability: 0,
-  }).toDataUri(),
-);
-
+/** The waitlist, printed as an admission ticket. The stub tears off when you join. */
 export default function TicketCTA() {
-  const [email, setEmail] = useState("");
   const [state, setState] = useState<SubmitState>("idle");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (state === "loading" || state === "success") return;
-    setState("loading");
-    setMessage("");
-    const result = await subscribe(
-      email,
-      process.env.NEXT_PUBLIC_SUBSCRIBE_URL as string,
-    );
-    setState(result.state);
-    setMessage(result.message);
-  };
-
-  const disabled = state === "loading" || state === "success";
+  const joined = state === "success";
 
   return (
-    <section id="tickets" className="border-t border-white/10 relative flex min-h-screen flex-col overflow-hidden bg-[#1a1a1a] text-white">
-      <BackgroundBeams />
+    <section id="tickets" className="on-night dots-night relative isolate overflow-hidden bg-night pb-24 pt-28 text-paper lg:pb-32 lg:pt-36">
+      <Scallop color="var(--color-paper)" at="top" />
+      <DepthField seed={79} count={12} night />
+      <Parallax speed={0.5} className="absolute left-[6%] top-[14%] -z-10 hidden lg:block">
+        <Spark className="spin-slow h-10 w-10 text-coral" />
+      </Parallax>
+      <Parallax speed={-0.15} className="absolute right-[8%] top-[30%] -z-10 hidden lg:block">
+        <Spark className="spin-slow h-7 w-7 text-sand" style={{ animationDuration: "11s" }} />
+      </Parallax>
+      <Parallax speed={0.3} className="absolute bottom-[12%] left-[12%] -z-10 hidden lg:block">
+        <Spark className="spin-slow h-6 w-6 text-lilac" style={{ animationDuration: "9s" }} />
+      </Parallax>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-5 py-20 text-center sm:py-28">
-        <Reveal>
-          <div className="mb-4 flex items-center justify-center gap-3 sm:mb-6 sm:gap-4">
-            <span className="h-px w-8 bg-white/15 sm:w-12" />
-            <p className="text-sm uppercase tracking-[0.2em] text-accent sm:text-base">
-              Early access
-            </p>
-            <span className="h-px w-8 bg-white/15 sm:w-12" />
-          </div>
-          <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl md:text-7xl">
-            Ready to host without the chaos?
-          </h2>
-          <p className="mx-auto mt-5 max-w-md text-base text-white/70 sm:mt-6 sm:text-lg">
-            Join the hosts building their next event on Invytt. Drop your email
-            and we&apos;ll let you know the moment it&apos;s live.
-          </p>
-        </Reveal>
-
-        <p className="mt-8 mb-3 text-xs uppercase tracking-[0.2em] text-white/40 sm:mt-10">
-          Launching in
+      <Parallax speed={0.14} className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <p className="eyebrow inline-flex items-center gap-3 text-coral">
+          <span aria-hidden className="h-[2px] w-8 bg-current" />
+          Early access
+          <span aria-hidden className="h-[2px] w-8 bg-current" />
         </p>
-        <Countdown />
-
-        <form
-          onSubmit={handleSubmit}
-          className="mx-auto mt-8 flex w-full max-w-md items-center gap-2 rounded-full border border-white/15 bg-white/5 p-1.5 pl-6 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/40 sm:mt-10"
-        >
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={disabled}
-            placeholder="you@email.com"
-            className="min-w-0 flex-1 bg-transparent py-3 text-base text-white transition placeholder:text-white/40 focus:outline-none disabled:opacity-60"
-          />
-          <button
-            type="submit"
-            disabled={disabled}
-            className="shrink-0 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            {BUTTON_LABEL[state]}
-          </button>
-        </form>
-        <p
-          className={`mt-3 text-xs ${
-            state === "error"
-              ? "text-red-400"
-              : state === "success" || state === "duplicate"
-                ? "text-accent"
-                : "text-white/40"
-          }`}
-        >
-          {message || "No spam — just one email when we launch."}
+        <h2 className="display mt-5 text-[clamp(2.6rem,6.4vw,5.6rem)]">
+          <Words text="Ready to host *without the chaos?*" />
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-nightmuted">
+          Join the hosts building their next event on Invytt. Drop your email
+          and we&apos;ll let you know the moment it&apos;s live.
         </p>
+      </Parallax>
 
-        <p className="mt-8 mb-3 text-xs uppercase tracking-[0.2em] text-white/40">
-          Early-access perks
-        </p>
-        <Reveal className="flex flex-wrap justify-center gap-2">
-          {MARQUEE.map((perk) => (
-            <span
-              key={perk}
-              className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs text-white/70 transition duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent/10 hover:text-white sm:text-sm"
+      <div className="relative mx-auto mt-14 max-w-5xl px-4 sm:px-8" style={{ perspective: 1600 }}>
+        <Tilt max={4} glare={false}>
+          <div className="relative flex flex-col lg:flex-row">
+            {/* ── main part of the ticket ── */}
+            <div className="relative flex-1 rounded-[30px] border-2 border-ink bg-paper p-6 text-ink shadow-[8px_8px_0_#000] sm:p-10 lg:rounded-r-none lg:border-r-0">
+              <p className="eyebrow text-center text-muted">Launching in</p>
+              <div className="mt-4">
+                <Countdown />
+              </div>
+
+              <WaitlistForm className="mx-auto mt-8 max-w-xl text-center" onState={setState} />
+
+              <div className="tear-x my-7" />
+
+              <p className="eyebrow text-center text-muted">Early-access perks</p>
+              <ul className="mt-4 flex flex-wrap justify-center gap-2.5">
+                {MARQUEE.map((perk, i) => (
+                  <motion.li
+                    key={perk}
+                    initial={{ opacity: 0, y: 16, rotate: 0 }}
+                    whileInView={{ opacity: 1, y: 0, rotate: i % 2 ? 1.5 : -1.5 }}
+                    whileHover={{ y: -3, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.07, type: "spring", stiffness: 260, damping: 18 }}
+                    className="stk-sm rounded-full px-4 py-1.5 text-sm font-bold"
+                    style={{ background: PERK_TINTS[i % PERK_TINTS.length] }}
+                  >
+                    {perk}
+                  </motion.li>
+                ))}
+              </ul>
+
+              <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <AvStack ids={[1, 3, 6, 8, 11]} s={34} />
+                <p className="text-base text-muted">
+                  Join the <span className="font-bold text-ink">everyday hosts</span> already in line
+                </p>
+              </div>
+            </div>
+
+            {/* ── the stub ── */}
+            <motion.div
+              animate={
+                joined
+                  ? { x: 26, y: 30, rotate: 7 }
+                  : { x: 0, y: 0, rotate: 0 }
+              }
+              transition={{ type: "spring", stiffness: 160, damping: 12 }}
+              className="relative origin-top-left rounded-[30px] border-2 border-ink bg-coral p-6 text-white shadow-[8px_8px_0_#000] lg:w-[250px] lg:rounded-l-none lg:border-l-0"
             >
-              {perk}
-            </span>
-          ))}
-        </Reveal>
+              {/* tear line + notches */}
+              <span aria-hidden className="tear-y absolute bottom-6 left-0 top-6 hidden opacity-70 lg:block" />
+              <span aria-hidden className="absolute -top-[13px] left-[-12px] hidden h-6 w-6 rounded-full border-2 border-ink bg-night lg:block" />
+              <span aria-hidden className="absolute -bottom-[13px] left-[-12px] hidden h-6 w-6 rounded-full border-2 border-ink bg-night lg:block" />
 
-        <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
-          <div className="flex -space-x-2">
-            {AVATARS.map((src, i) => (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                key={i}
-                src={src}
-                alt=""
-                className="h-8 w-8 rounded-full bg-white/10 ring-2 ring-[#1a1a1a]"
-              />
-            ))}
+              <div className="flex h-full flex-row items-center justify-between gap-5 lg:flex-col lg:justify-center lg:text-center">
+                <div>
+                  <p className="eyebrow">Admit one</p>
+                  <p className="display mt-2 text-4xl leading-none">Founding host</p>
+                  <p className="mt-3 text-sm font-semibold text-white/85">
+                    Doors open {LAUNCH_DATE_LABEL}
+                  </p>
+                </div>
+                <div className="shrink-0 rounded-2xl border-2 border-ink bg-paper p-2.5">
+                  <FauxQr size={96} seed={23} />
+                </div>
+                <p className="hidden text-xs font-bold uppercase tracking-[0.2em] lg:block">
+                  {joined ? "Yours. See you there." : "No. 0001"}
+                </p>
+              </div>
+              {joined && <Confetti count={40} spread={380} />}
+            </motion.div>
           </div>
-          <p className="text-sm text-white/60">
-            Join the{" "}
-            <span className="font-semibold text-white">everyday hosts</span>{" "}
-            already in line
-          </p>
-        </div>
+        </Tilt>
       </div>
     </section>
   );

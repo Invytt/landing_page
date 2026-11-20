@@ -2,10 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-// Stub heavy children so the test focuses on the form behaviour.
-vi.mock("@/components/ui/background-beams", () => ({
-  BackgroundBeams: () => <div data-testid="beams" />,
-}));
+// Stub the ticking countdown so the test focuses on the form behaviour.
 vi.mock("@/components/Countdown", () => ({
   default: () => <div data-testid="countdown" />,
 }));

@@ -1,6 +1,12 @@
-import Image from "next/image";
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+"use client";
+
+import SilverWordmark from "@/components/ui/SilverWordmark";
+import { useRef } from "react";
+import { motion, useScroll } from "motion/react";
+import { Parallax } from "@/components/ui/depth";
 import { COMPANY } from "@/app/data";
+import { ArrowRight, PartyPopper, Sparkles } from "lucide-react";
+import { Magnetic, Spark } from "@/components/ui/kit";
 
 type IconProps = { className?: string };
 
@@ -32,80 +38,107 @@ const SOCIALS = [
   { label: "X", href: "https://x.com/invyttt?s=11", Icon: XIcon },
 ];
 
-export default function Footer() {
+const LETTERS = "invytt".split("");
+// how far each letter starts below its line, so they arrive at different speeds
+const LIFT = [140, 260, 90, 320, 180, 230];
+
+/** On the coming-soon page (`soon`), the big button leads back to what's in the app now. */
+export default function Footer({ base = "", soon = false }: { base?: string; soon?: boolean }) {
+  const word = useRef<HTMLDivElement>(null);
+  // 0 as the wordmark enters, 1 when the page bottoms out: the letters settle
+  // into one line exactly at the end of the page
+  const { scrollYProgress } = useScroll({ target: word, offset: ["start end", "end end"] });
   return (
-    <footer className="border-t border-white/10 bg-[#1a1a1a] px-5 pt-12 text-white sm:pt-16">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-[1.4fr_1.2fr]">
+    <footer className="on-night relative overflow-hidden border-t-2 border-ink bg-night px-5 pt-16 text-paper sm:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-[1.5fr_1fr_1fr]">
         {/* brand */}
         <div className="col-span-2 lg:col-span-1">
-          <Image
-            src="/logo.png"
-            alt="Invytt"
-            width={1024}
-            height={1024}
-            className="-my-10 -ml-3.5 h-32 w-32"
-          />
-          <p className="mt-3 font-display text-lg font-semibold text-accent sm:text-xl">
-            The all-in-one platform for hosting events.
+          <SilverWordmark className="w-40" land={false} delay={0.4} />
+          <p className="display mt-5 max-w-sm text-3xl text-paper">
+            The all-in-one platform for <em>hosting events.</em>
           </p>
-          <p className="mt-3 max-w-xs text-sm text-white/50">
+          <p className="mt-4 max-w-sm text-base leading-relaxed text-nightmuted">
             Invites, RSVPs, AI inventory planning, a vendor marketplace, and
             cost-splitting all in one app.
           </p>
           <a
             href={`mailto:${COMPANY.email}`}
-            className="mt-4 inline-block text-sm text-white/70 transition hover:text-accent"
+            className="mt-5 inline-block text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-4"
           >
             {COMPANY.email}
           </a>
-          <p className="mt-5 text-xs text-white/40">
-            © {COMPANY.legalName}, {COMPANY.year}
-          </p>
-          <div className="mt-6 flex gap-5">
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="text-white/70 transition hover:text-white"
+          {/* the main way between the two pages */}
+          <Magnetic className="mt-7 block w-max">
+            <a
+              href={soon ? "/" : "/coming-soon"}
+              className={`group flex items-center gap-4 rounded-[22px] border-2 border-ink py-3 pl-3 pr-5 text-ink shadow-[5px_5px_0_#000] transition-transform hover:-translate-y-0.5 ${
+                soon ? "bg-mint" : "bg-sand"
+              }`}
+            >
+              <span
+                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-ink text-white transition-transform duration-300 group-hover:rotate-90 ${
+                  soon ? "bg-goingtext" : "bg-coral"
+                }`}
               >
-                <Icon className="h-5 w-5" />
-              </a>
+                {soon ? <PartyPopper size={22} strokeWidth={2.4} /> : <Sparkles size={22} strokeWidth={2.4} />}
+              </span>
+              <span className="leading-tight">
+                <span className="block text-xs font-bold uppercase tracking-[0.16em] text-ink/70">
+                  {soon ? "In the app at launch" : "Coming soon"}
+                </span>
+                <span className="display block text-2xl">
+                  {soon ? <>See what&rsquo;s here now</> : <>See what&rsquo;s next</>}
+                </span>
+              </span>
+              <ArrowRight size={20} strokeWidth={2.6} className="transition-transform group-hover:translate-x-1" />
+            </a>
+          </Magnetic>
+          <div className="mt-6 flex gap-3">
+            {SOCIALS.map(({ label, href, Icon }) => (
+              <Magnetic key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink bg-paper text-ink shadow-[3px_3px_0_#000] transition-colors hover:bg-coral hover:text-white"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              </Magnetic>
             ))}
           </div>
         </div>
 
-        {/* navigation column */}
+        {/* navigation */}
         <div>
-          <p className="text-base font-semibold text-white/40">Navigate</p>
-          <ul className="mt-4 flex flex-col gap-3 text-base">
+          <p className="eyebrow text-nightmuted">Navigate</p>
+          <ul className="mt-5 flex flex-col gap-3 text-lg">
             {NAV.map(({ label, href }) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className="text-white transition hover:text-accent"
-                >
+                <a href={base + href} className="font-semibold text-paper transition-colors hover:text-peach">
                   {label}
                 </a>
               </li>
             ))}
+
           </ul>
-          <p className="mt-8 text-base font-semibold text-white/40">Legal</p>
-          <ul className="mt-4 flex flex-col gap-3 text-base">
+        </div>
+        <div>
+          <p className="eyebrow text-nightmuted">Legal</p>
+          <ul className="mt-5 flex flex-col gap-3 text-lg">
             <li>
-              <a href="/help" target="_blank" rel="noopener noreferrer" className="text-white transition hover:text-accent">
+              <a href="/help" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
                 Help &amp; FAQ
               </a>
             </li>
             <li>
-              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-white transition hover:text-accent">
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
                 Privacy policy
               </a>
             </li>
             <li>
-              <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-white transition hover:text-accent">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
                 Terms of service
               </a>
             </li>
@@ -113,11 +146,32 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* giant hover-fill wordmark — bottom half clipped */}
-      <div className="relative mt-12 h-[16vw] w-full overflow-hidden sm:mt-16">
-        <div className="absolute inset-x-0 top-0 h-[32vw]">
-          <TextHoverEffect text="invytt" />
-        </div>
+      <p className="mx-auto mt-14 max-w-7xl text-sm text-nightmuted">
+        © {COMPANY.legalName}, {COMPANY.year}
+      </p>
+
+      {/* giant wordmark: each letter rises into place */}
+      <div ref={word} aria-hidden className="relative mx-auto mt-6 flex max-w-7xl justify-center pb-[3vw] pt-[4vw]">
+        <Parallax progress={scrollYProgress} range={[-120, 0]} className="absolute left-[13%] top-[1vw]">
+          <Spark className="spin-slow h-[5vw] w-[5vw] text-coral" />
+        </Parallax>
+        <Parallax progress={scrollYProgress} range={[200, 0]} className="absolute right-[11%] top-[5vw]">
+          <Spark className="spin-slow h-[3vw] w-[3vw] text-sand" style={{ animationDuration: "10s" }} />
+        </Parallax>
+        {LETTERS.map((ch, i) => (
+          <Parallax key={i} progress={scrollYProgress} range={[LIFT[i], 0]}>
+            <motion.span
+              initial={{ opacity: 0, rotate: i % 2 ? 10 : -10 }}
+              whileInView={{ opacity: 1, rotate: 0 }}
+              whileHover={{ y: "-6%", rotate: i % 2 ? 4 : -4, color: "#D2402A" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ type: "spring", stiffness: 140, damping: 14, delay: i * 0.08 }}
+              className="display inline-block cursor-default text-[27vw] leading-[0.9] text-paper lg:text-[22rem]"
+            >
+              {ch}
+            </motion.span>
+          </Parallax>
+        ))}
       </div>
     </footer>
   );
