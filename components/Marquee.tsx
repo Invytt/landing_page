@@ -40,9 +40,8 @@ export default function Marquee() {
     <div className="sticky top-0 z-[60] overflow-hidden border-b-2 border-ink bg-coral text-white">
       <div
         ref={bar}
-        className={`flex w-max animate-marquee py-2 pr-11 hover:[animation-play-state:paused] ${
-          paused ? "[animation-play-state:paused]" : ""
-        }`}
+        data-paused={paused || undefined}
+        className="flex w-max animate-marquee py-2 pr-11"
       >
         {loop.map((t, i) => (
           <span

@@ -34,7 +34,7 @@ function Drum() {
       style={{ perspective: 1500 }}
     >
       <motion.div className="preserve-3d absolute inset-0" style={{ rotateY: turn, z: "calc(var(--rad) * -0.55)" }}>
-        <div className="preserve-3d spin-drum absolute inset-0 hover:[animation-play-state:paused]">
+        <div className="preserve-3d spin-drum absolute inset-0">
           {GAMES.map((g, i) => (
             <div
               key={g.title}

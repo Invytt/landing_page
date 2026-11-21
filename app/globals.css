@@ -354,6 +354,16 @@ body {
 .animate-marquee {
   animation: marquee 32s linear infinite;
 }
+/* Pausing lives here, not in Tailwind utilities: those sit in a cascade layer,
+   and the unlayered shorthand above would reset them to running. */
+.animate-marquee[data-paused] {
+  animation-play-state: paused;
+}
+@media (hover: hover) {
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+}
 
 @keyframes fadeUp {
   from {
@@ -392,6 +402,12 @@ body {
 }
 .spin-drum {
   animation: drum 38s linear infinite;
+}
+/* unlayered, like the shorthand above, so it isn't reset (see .animate-marquee) */
+@media (hover: hover) {
+  .spin-drum:hover {
+    animation-play-state: paused;
+  }
 }
 @keyframes drum {
   to {
