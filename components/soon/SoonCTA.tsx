@@ -35,7 +35,7 @@ export default function SoonCTA() {
         <motion.div
           animate={state === "success" ? { rotate: [0, -2, 2, 0], scale: [1, 1.03, 1] } : undefined}
           transition={{ duration: 0.6 }}
-          className="relative rounded-[30px] border-2 border-ink bg-paper p-6 text-center text-ink shadow-[8px_8px_0_#000] sm:p-8"
+          className="relative rounded-[30px] border-2 border-ink bg-paper p-6 text-center text-ink sm:p-8"
         >
           <WaitlistForm onState={setState} />
           {state === "success" && <Confetti count={36} spread={320} />}

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, PartyPopper, X } from "lucide-react";
+import { Menu, PartyPopper, Sparkles, X } from "lucide-react";
 
 const LINKS = [
   { label: "Features", href: "#features" },
@@ -20,7 +20,6 @@ const LINKS = [
  */
 export default function Nav({ base = "", soon = false }: { base?: string; soon?: boolean }) {
   const [hidden, setHidden] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const lastY = useRef(0);
@@ -32,7 +31,6 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
 
     const update = () => {
       const y = window.scrollY;
-      setScrolled(y > 24);
       const goingDown = y > lastY.current;
       if (Math.abs(y - lastY.current) > 6) {
         setHidden(goingDown && y > 80);
@@ -103,9 +101,7 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
         }`}
       >
         <div
-          className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border-2 border-ink bg-paper py-2 pl-5 pr-2 text-ink transition-shadow duration-300 ${
-            scrolled ? "shadow-[5px_5px_0_var(--color-ink)]" : "shadow-[4px_4px_0_#000]"
-          }`}
+          className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border-2 border-ink bg-paper py-2 pl-5 pr-2 text-ink"
         >
           <a href={base || "#"} aria-label="Invytt home" className="flex h-11 shrink-0 items-center">
             <Image
@@ -138,19 +134,19 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
           </nav>
 
           <div className="flex items-center gap-2">
-            {/* the roadmap lives in the footer; on the roadmap page this leads back */}
-            {soon && (
-              <Link
-                href="/"
-                className="stk-btn !min-h-10 !gap-1.5 !px-3.5 !py-2 !text-sm !shadow-[3px_3px_0_var(--color-ink)] max-sm:!hidden bg-mint text-ink"
-              >
-                <PartyPopper size={15} strokeWidth={2.6} />
-                What&apos;s here now
-              </Link>
-            )}
+            {/* what's coming next; on the coming-soon page this leads back */}
+            <Link
+              href={soon ? "/" : "/coming-soon"}
+              className={`stk-btn !min-h-10 !gap-1.5 !px-3.5 !py-2 !text-sm max-sm:!hidden text-ink ${
+                soon ? "bg-mint" : "bg-sand"
+              }`}
+            >
+              {soon ? <PartyPopper size={15} strokeWidth={2.6} /> : <Sparkles size={15} strokeWidth={2.6} />}
+              {soon ? "What’s here now" : "Coming soon"}
+            </Link>
             <a
               href={base ? "#notify" : "#tickets"}
-              className="stk-btn !min-h-11 bg-coral !px-4 !py-2 !text-sm text-white !shadow-[3px_3px_0_var(--color-ink)]"
+              className="stk-btn !min-h-11 bg-coral !px-4 !py-2 !text-sm text-white"
             >
               Get early access
             </a>
@@ -213,12 +209,14 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
                 <a href={base ? "#notify" : "#tickets"} onClick={() => setOpen(false)} className="stk-btn bg-coral text-white">
                   Get early access
                 </a>
-                {soon && (
-                  <Link href="/" onClick={() => setOpen(false)} className="stk-btn bg-mint text-ink">
-                    <PartyPopper size={17} strokeWidth={2.6} />
-                    What&apos;s here now
-                  </Link>
-                )}
+                <Link
+                  href={soon ? "/" : "/coming-soon"}
+                  onClick={() => setOpen(false)}
+                  className={`stk-btn text-ink ${soon ? "bg-mint" : "bg-sand"}`}
+                >
+                  {soon ? <PartyPopper size={17} strokeWidth={2.6} /> : <Sparkles size={17} strokeWidth={2.6} />}
+                  {soon ? "What’s here now" : "Coming soon"}
+                </Link>
               </motion.div>
             </nav>
           </motion.div>

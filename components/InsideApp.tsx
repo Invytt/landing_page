@@ -188,7 +188,7 @@ const FEATURES: Feature[] = [
           { c: "#CDBEF7", r: 4, l: 34 },
           { c: "#F6C1D0", r: 12, l: 68 },
         ].map((p) => (
-          <i key={p.l} className="absolute top-1 block h-[84px] w-[68px] rounded-md border-2 border-ink bg-white p-1.5 pb-4 shadow-[3px_3px_0_var(--color-ink)]" style={{ left: p.l, rotate: `${p.r}deg` }}>
+          <i key={p.l} className="absolute top-1 block h-[84px] w-[68px] rounded-md border-2 border-ink bg-white p-1.5 pb-4 " style={{ left: p.l, rotate: `${p.r}deg` }}>
             <b className="block h-full w-full rounded-sm border-[1.5px] border-ink" style={{ background: p.c }} />
           </i>
         ))}
@@ -217,7 +217,7 @@ const FEATURES: Feature[] = [
     line: "Classic, Member pass, Scrapbook, Editorial or Bento.",
     tint: "#CDBEF7",
     demo: (
-      <span className="block w-28 overflow-hidden rounded-xl border-2 border-ink bg-white shadow-[3px_3px_0_var(--color-ink)]">
+      <span className="block w-28 overflow-hidden rounded-xl border-2 border-ink bg-white ">
         <span className="block bg-coral px-2 py-1 text-[8px] font-bold tracking-[0.14em] text-white">MEMBER PASS</span>
         <span className="flex items-center gap-1.5 p-2 text-xs font-bold">
           <Av i={2} s={26} /> Asha
@@ -246,7 +246,7 @@ const FEATURES: Feature[] = [
     demo: (
       <span className="flex flex-col items-start gap-2">
         <AvStack ids={[1, 5, 9, 12]} s={30} />
-        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-bold text-ink shadow-[2px_2px_0_var(--color-ink)]">
+        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-bold text-ink ">
           Add friend
         </span>
       </span>

@@ -60,7 +60,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
               </div>
               <span
                 aria-hidden
-                className="flex h-28 w-28 shrink-0 rotate-[-8deg] items-center justify-center rounded-[30px] border-2 border-ink text-ink shadow-[6px_6px_0_#000] sm:h-32 sm:w-32"
+                className="flex h-28 w-28 shrink-0 rotate-[-8deg] items-center justify-center rounded-[30px] border-2 border-ink text-ink sm:h-32 sm:w-32"
                 style={{ background: page.tint }}
               >
                 <page.Icon size={52} strokeWidth={2} />
@@ -77,7 +77,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
                     href={p.href}
                     aria-current={on ? "page" : undefined}
                     className={`inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform hover:-translate-y-0.5 ${
-                      on ? "text-ink shadow-[3px_3px_0_#000]" : "bg-night2 text-paper"
+                      on ? "text-ink " : "bg-night2 text-paper"
                     }`}
                     style={on ? { background: p.tint } : undefined}
                   >

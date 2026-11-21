@@ -71,7 +71,7 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
           <Magnetic className="mt-7 block w-max">
             <a
               href={soon ? "/" : "/coming-soon"}
-              className={`group flex items-center gap-4 rounded-[22px] border-2 border-ink py-3 pl-3 pr-5 text-ink shadow-[5px_5px_0_#000] transition-transform hover:-translate-y-0.5 ${
+              className={`group flex items-center gap-4 rounded-[22px] border-2 border-ink py-3 pl-3 pr-5 text-ink transition-transform hover:-translate-y-0.5 ${
                 soon ? "bg-mint" : "bg-sand"
               }`}
             >
@@ -101,7 +101,7 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink bg-paper text-ink shadow-[3px_3px_0_#000] transition-colors hover:bg-coral hover:text-white"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink bg-paper text-ink transition-colors hover:bg-coral hover:text-white"
                 >
                   <Icon className="h-5 w-5" />
                 </a>

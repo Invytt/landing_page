@@ -67,7 +67,7 @@ export default function FaqSection() {
                     tabIndex={on ? 0 : -1}
                     onClick={() => pick(g.id)}
                     className={`relative min-h-11 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform duration-150 ${
-                      on ? "-translate-y-0.5 shadow-[3px_3px_0_var(--color-ink)]" : "bg-white hover:-translate-y-0.5"
+                      on ? "-translate-y-0.5 " : "bg-white hover:-translate-y-0.5"
                     }`}
                   >
                     {on && (

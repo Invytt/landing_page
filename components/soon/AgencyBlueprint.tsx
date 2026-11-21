@@ -221,7 +221,7 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
               <li
                 key={t}
                 className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold transition-all duration-300 ${
-                  i < step ? "bg-peach text-ink shadow-[3px_3px_0_#000]" : i === step ? "bg-paper text-ink shadow-[3px_3px_0_#000]" : "bg-night2 text-nightmuted"
+                  i < step ? "bg-peach text-ink " : i === step ? "bg-paper text-ink " : "bg-night2 text-nightmuted"
                 }`}
               >
                 {String(i + 1).padStart(2, "0")} {t}
@@ -248,7 +248,6 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
                 backgroundImage:
                   "linear-gradient(rgb(255 234 229 / 0.07) 1px, transparent 1px), linear-gradient(90deg, rgb(255 234 229 / 0.07) 1px, transparent 1px)",
                 backgroundSize: "28px 28px",
-                boxShadow: "0 40px 80px rgb(0 0 0 / 0.55)",
               }}
             >
               <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.2em] text-nightmuted">

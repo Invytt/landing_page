@@ -95,21 +95,14 @@ body {
 }
 
 @layer components {
-  /* Sticker: ink outline + hard offset shadow, as in the app. */
-  .stk {
-    border: 2px solid var(--color-ink);
-    box-shadow: 4px 4px 0 var(--color-ink);
-  }
-  .stk-sm {
-    border: 2px solid var(--color-ink);
-    box-shadow: 3px 3px 0 var(--color-ink);
-  }
+  /* Sticker: an ink outline, flat. Nothing on the site casts a shadow. */
+  .stk,
+  .stk-sm,
   .stk-lg {
     border: 2px solid var(--color-ink);
-    box-shadow: 7px 7px 0 var(--color-ink);
   }
 
-  /* Sticker button: sinks into its shadow when pressed. */
+  /* Sticker button: flat, nudges up on hover and presses in when tapped. */
   .stk-btn {
     display: inline-flex;
     align-items: center;
@@ -119,24 +112,20 @@ body {
     padding: 0.7rem 1.5rem;
     border-radius: 999px;
     border: 2px solid var(--color-ink);
-    box-shadow: 4px 4px 0 var(--color-ink);
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.15;
     text-align: center;
     transition:
       transform 0.09s ease-out,
-      box-shadow 0.09s ease-out,
       background-color 0.15s;
     cursor: pointer;
   }
   .stk-btn:hover {
-    transform: translate(1px, 1px);
-    box-shadow: 3px 3px 0 var(--color-ink);
+    transform: translateY(-1px);
   }
   .stk-btn:active {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 var(--color-ink);
+    transform: scale(0.97);
   }
   .stk-btn:disabled {
     cursor: not-allowed;
@@ -145,11 +134,6 @@ body {
   .on-night {
     --pring-w: 2px;
     --pring: rgb(251 246 244 / 0.55);
-    --pshadow-c: rgb(0 0 0 / 0.6);
-  }
-  .on-night .stk-btn,
-  .stk-btn.on-night {
-    box-shadow: 4px 4px 0 #000;
   }
 
   .eyebrow {
@@ -298,7 +282,6 @@ body {
     border: 2px solid var(--color-ink);
     border-radius: 22px;
     background: #fff;
-    box-shadow: 4px 4px 0 var(--color-ink);
   }
   @media (min-width: 640px) {
     .legal-content dl {
@@ -324,7 +307,6 @@ body {
     border: 2px solid var(--color-ink);
     border-radius: 22px;
     background: #fff;
-    box-shadow: 4px 4px 0 var(--color-ink);
     transition: transform 0.15s;
   }
   .legal-faq section > div:hover {

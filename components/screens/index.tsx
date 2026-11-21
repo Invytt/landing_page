@@ -38,7 +38,7 @@ export function HomeScreen() {
           <Caps>Friday, 27 Nov</Caps>
           <Title className="mt-[2px]">Hey, Asha</Title>
         </div>
-        <span className="mt-[4px] flex h-[32px] w-[32px] items-center justify-center rounded-full border-2 border-ink bg-white shadow-[2px_2px_0_#2B1719]">
+        <span className="mt-[4px] flex h-[32px] w-[32px] items-center justify-center rounded-full border-2 border-ink bg-white ">
           <Bell size={15} strokeWidth={2.4} />
         </span>
       </div>
@@ -119,9 +119,7 @@ function StyleThumb({ name, bg, on }: { name: string; bg: string; on?: boolean }
   return (
     <div className="relative">
       <div
-        className={`relative flex h-[92px] flex-col justify-between overflow-hidden rounded-[12px] border-2 border-ink p-[7px] ${
-          on ? "shadow-[3px_3px_0_#D2402A]" : "shadow-[2px_2px_0_#2B1719]"
-        }`}
+        className="relative flex h-[92px] flex-col justify-between overflow-hidden rounded-[12px] border-2 border-ink p-[7px]"
         style={{ background: bg, color: dark ? "#fff" : "#2B1719" }}
       >
         {name === "Record" ? (
@@ -248,7 +246,7 @@ export function EventScreen() {
       </Card>
 
       <div className="mt-[12px] grid grid-cols-3 gap-[6px] text-center text-[11px] font-bold">
-        <span className="flex items-center justify-center gap-[3px] rounded-full border-2 border-ink bg-going py-[7px] text-goingtext shadow-[2px_2px_0_#2B1719]">
+        <span className="flex items-center justify-center gap-[3px] rounded-full border-2 border-ink bg-going py-[7px] text-goingtext ">
           <Check size={11} strokeWidth={3.5} /> Going
         </span>
         <span className="rounded-full border-2 border-ink bg-white py-[7px]">Maybe</span>
@@ -343,7 +341,7 @@ function TicketCard({
 }) {
   return (
     <div
-      className="relative flex overflow-hidden rounded-[16px] border-2 border-ink shadow-[3px_3px_0_#2B1719]"
+      className="relative flex overflow-hidden rounded-[16px] border-2 border-ink"
       style={{ background: tint, ...style }}
     >
       <div className="min-w-0 flex-1 p-[11px]">
@@ -387,7 +385,7 @@ export function ProfileScreen() {
         <Caps>Profile</Caps>
         <Pill tint="#FFEAE5">Member pass</Pill>
       </div>
-      <div className="mt-[8px] overflow-hidden rounded-[18px] border-2 border-ink bg-white shadow-[4px_4px_0_#2B1719]">
+      <div className="mt-[8px] overflow-hidden rounded-[18px] border-2 border-ink bg-white ">
         <div className="flex items-center justify-between bg-coral px-[12px] py-[7px] text-[8.5px] font-bold tracking-[0.16em] text-white">
           <span>INVYTT MEMBER PASS</span>
           <span>No. 0042</span>
@@ -552,10 +550,10 @@ export function TemplatesScreen() {
       </div>
       <Caps className="mt-[10px]">Make it yours</Caps>
       <div className="mt-[6px] flex items-center gap-[7px]">
-        {["#FF9A5C", "#CDBEF7", "#8FD9B6", "#F6C1D0", "#BFDDFB", "#FFD6A5"].map((c, i) => (
+        {["#FF9A5C", "#CDBEF7", "#8FD9B6", "#F6C1D0", "#BFDDFB", "#FFD6A5"].map((c) => (
           <i
             key={c}
-            className={`h-[24px] w-[24px] rounded-full border-2 border-ink ${i === 1 ? "shadow-[2px_2px_0_#D2402A]" : ""}`}
+            className="h-[24px] w-[24px] rounded-full border-2 border-ink"
             style={{ background: c }}
           />
         ))}
@@ -790,7 +788,7 @@ export function CompanionScreen() {
           </div>
           <div className="max-w-[86%] rounded-[14px] rounded-bl-[4px] border-2 border-ink bg-white px-[10px] py-[7px]">
             Try Tap race. One minute, everyone can play from their phone.
-            <span className="mt-[7px] flex h-[30px] items-center justify-center rounded-full border-2 border-ink bg-mint text-[10.5px] font-bold shadow-[2px_2px_0_#2B1719]">
+            <span className="mt-[7px] flex h-[30px] items-center justify-center rounded-full border-2 border-ink bg-mint text-[10.5px] font-bold ">
               Start Tap race
             </span>
           </div>
@@ -822,7 +820,7 @@ export function GameScreen() {
     <Screen>
       <div className="flex items-center justify-between">
         <Caps>Hot takes · Round 2 of 5</Caps>
-        <Pill tint="#FFD6A5" shadow>0:12</Pill>
+        <Pill tint="#FFD6A5">0:12</Pill>
       </div>
       <Card tint="#FF9A5C" className="mt-[14px] !p-[16px] text-center" style={{ rotate: "-1.5deg" }}>
         <Caps className="!text-ink/70">The take</Caps>
@@ -909,10 +907,10 @@ export function ScanScreen({ met = false }: { met?: boolean }) {
         <div className="absolute inset-[28px] rounded-[12px] bg-white p-[10px] opacity-90">
           <FauxQr size={124} seed={7} />
         </div>
-        <i className="scanline absolute inset-x-[10px] h-[3px] rounded-full bg-live shadow-[0_0_14px_#3CCFBF]" />
+        <i className="scanline absolute inset-x-[10px] h-[3px] rounded-full bg-live " />
       </div>
       {met ? (
-        <div className="mx-auto mt-[36px] w-[214px] rounded-[16px] border-2 border-ink bg-paper p-[12px] text-center text-ink shadow-[3px_3px_0_#000]">
+        <div className="mx-auto mt-[36px] w-[214px] rounded-[16px] border-2 border-ink bg-paper p-[12px] text-center text-ink ">
           <div className="flex justify-center">
             <AvStack ids={[2, 6]} s={34} />
           </div>
@@ -943,7 +941,7 @@ export function GuestWebPage({
   return (
     <div className={`bg-paper text-ink ${compact ? "p-[14px] pt-[46px]" : "p-5 sm:p-7"}`}>
       <div
-        className="rounded-[18px] border-2 border-ink p-4 shadow-[4px_4px_0_#2B1719]"
+        className="rounded-[18px] border-2 border-ink p-4"
         style={{ background: "#FF9A5C" }}
       >
         <span className="inline-flex rounded-full border-[1.5px] border-ink bg-white px-2.5 py-0.5 text-[11px] font-bold">
@@ -970,7 +968,7 @@ export function GuestWebPage({
           {stamp}
         </div>
         <div className="mt-2 grid grid-cols-3 gap-1.5 text-center text-xs font-bold">
-          <span className="rounded-full border-2 border-ink bg-going py-2 text-goingtext shadow-[2px_2px_0_#2B1719]">
+          <span className="rounded-full border-2 border-ink bg-going py-2 text-goingtext ">
             Going
           </span>
           <span className="rounded-full border-2 border-ink bg-white py-2">Maybe</span>

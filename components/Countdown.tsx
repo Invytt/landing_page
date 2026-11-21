@@ -37,7 +37,7 @@ export default function Countdown() {
         return (
           <div key={LABELS[i]} className="flex flex-col items-center">
             <div
-              className="relative flex h-16 min-w-[3.6rem] items-center justify-center overflow-hidden rounded-xl border-2 border-ink bg-night px-2.5 font-display text-4xl tabular-nums text-paper shadow-[3px_3px_0_var(--color-ink)] sm:h-20 sm:min-w-[4.6rem] sm:text-5xl"
+              className="relative flex h-16 min-w-[3.6rem] items-center justify-center overflow-hidden rounded-xl border-2 border-ink bg-night px-2.5 font-display text-4xl tabular-nums text-paper sm:h-20 sm:min-w-[4.6rem] sm:text-5xl"
               style={{ perspective: 400 }}
             >
               <AnimatePresence mode="popLayout" initial={false}>

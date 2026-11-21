@@ -52,7 +52,7 @@ function StepRow({ step, i, calm }: { step: Step; i: number; calm: boolean }) {
         ref={stamp}
         aria-hidden
         style={calm ? undefined : { scale: stampScale, rotate: stampRotate }}
-        className="absolute left-0 top-10 z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink bg-coral font-display text-3xl text-white shadow-[4px_4px_0_var(--color-ink)] lg:left-1/2 lg:top-1/2 lg:h-20 lg:w-20 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:text-5xl"
+        className="absolute left-0 top-10 z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink bg-coral font-display text-3xl text-white lg:left-1/2 lg:top-1/2 lg:h-20 lg:w-20 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:text-5xl"
       >
         {step.n}
       </motion.span>
@@ -167,7 +167,7 @@ export default function Steps() {
               {!calm && (
                 <motion.span
                   style={{ top: riderTop, x: riderX, rotate: riderRotate }}
-                  className="absolute left-1/2 z-20 -ml-6 -mt-6 flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-ink bg-sand text-ink shadow-[3px_3px_0_var(--color-ink)]"
+                  className="absolute left-1/2 z-20 -ml-6 -mt-6 flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-ink bg-sand text-ink"
                 >
                   <Mail size={22} strokeWidth={2.4} />
                 </motion.span>

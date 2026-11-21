@@ -96,56 +96,54 @@ function scatter(seed: number, count: number, night: boolean): Bit[] {
   });
 }
 
-function ShapeArt({ shape, size, tint, night }: { shape: Shape; size: number; tint: string; night: boolean }) {
-  const ink = night ? "#000" : "#2B1719";
+function ShapeArt({ shape, size, tint }: { shape: Shape; size: number; tint: string }) {
   const line = "#2B1719";
-  const shadow = `drop-shadow(2px 2px 0 ${ink})`;
   switch (shape) {
     case "spark":
-      return <Spark className="block" style={{ width: size, height: size, color: tint, filter: shadow }} />;
+      return <Spark className="block" style={{ width: size, height: size, color: tint }} />;
     case "ring":
       return (
         <span
           className="block rounded-full"
-          style={{ width: size, height: size, border: `${Math.max(5, size / 5)}px solid ${tint}`, boxShadow: `0 0 0 2px ${line}, inset 0 0 0 2px ${line}, 3px 3px 0 2px ${ink}` }}
+          style={{ width: size, height: size, border: `${Math.max(5, size / 5)}px solid ${tint}`, boxShadow: `0 0 0 2px ${line}, inset 0 0 0 2px ${line}` }}
         />
       );
     case "dot":
       return (
         <span
           className="block rounded-full border-2"
-          style={{ width: size * 0.7, height: size * 0.7, background: tint, borderColor: line, boxShadow: `2px 2px 0 ${ink}` }}
+          style={{ width: size * 0.7, height: size * 0.7, background: tint, borderColor: line }}
         />
       );
     case "pill":
       return (
         <span
           className="block rounded-full border-2"
-          style={{ width: size * 1.3, height: size * 0.5, background: tint, borderColor: line, boxShadow: `3px 3px 0 ${ink}` }}
+          style={{ width: size * 1.3, height: size * 0.5, background: tint, borderColor: line }}
         />
       );
     case "tri":
       return (
-        <svg width={size} height={size} viewBox="0 0 40 40" className="block" style={{ filter: shadow }}>
+        <svg width={size} height={size} viewBox="0 0 40 40" className="block">
           <path d="M20 4 37 34H3Z" fill={tint} stroke={line} strokeWidth="2.5" strokeLinejoin="round" />
         </svg>
       );
     case "squiggle":
       return (
-        <svg width={size * 1.4} height={size * 0.6} viewBox="0 0 70 30" className="block" style={{ filter: shadow }}>
+        <svg width={size * 1.4} height={size * 0.6} viewBox="0 0 70 30" className="block">
           <path d="M4 18c8-14 14 10 22-2s14 10 22-2 12 8 18-2" fill="none" stroke={tint} strokeWidth="7" strokeLinecap="round" />
         </svg>
       );
     case "plus":
       return (
-        <svg width={size * 0.8} height={size * 0.8} viewBox="0 0 30 30" className="block" style={{ filter: shadow }}>
+        <svg width={size * 0.8} height={size * 0.8} viewBox="0 0 30 30" className="block">
           <path d="M11 2h8v9h9v8h-9v9h-8v-9H2v-8h9z" fill={tint} stroke={line} strokeWidth="2" strokeLinejoin="round" />
         </svg>
       );
   }
 }
 
-function Floater({ bit, night, progress }: { bit: Bit; night: boolean; progress?: MotionValue<number> }) {
+function Floater({ bit, progress }: { bit: Bit; progress?: MotionValue<number> }) {
   return (
     <Parallax
       speed={bit.speed}
@@ -158,7 +156,7 @@ function Floater({ bit, night, progress }: { bit: Bit; night: boolean; progress?
         [bit.side === "l" ? "left" : "right"]: `calc(max(0px, (100% - 80rem) / 2) * ${bit.edge.toFixed(3)} + 8px)`,
       }}
     >
-      <ShapeArt shape={bit.shape} size={bit.size} tint={bit.tint} night={night} />
+      <ShapeArt shape={bit.shape} size={bit.size} tint={bit.tint} />
     </Parallax>
   );
 }
@@ -194,7 +192,7 @@ export function DepthField({
       className={cn("pointer-events-none absolute inset-0 -z-10 hidden overflow-hidden min-[1400px]:block", className)}
     >
       {bits.map((b, i) => (
-        <Floater key={i} bit={b} night={night} progress={progress} />
+        <Floater key={i} bit={b} progress={progress} />
       ))}
     </div>
   );

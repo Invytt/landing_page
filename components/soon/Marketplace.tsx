@@ -91,7 +91,7 @@ function FlipCard({ a, i }: { a: Aisle; i: number }) {
                   {a.icons.map((I, k) => (
                     <span
                       key={k}
-                      className="bob flex h-20 w-20 items-center justify-center rounded-[22px] border-2 border-ink bg-white shadow-[4px_4px_0_var(--color-ink)]"
+                      className="bob flex h-20 w-20 items-center justify-center rounded-[22px] border-2 border-ink bg-white"
                       style={{ ["--bob" as string]: `${3 + k * 0.6}s`, ["--r" as string]: `${(k - 1) * 8}deg` }}
                     >
                       <I size={34} strokeWidth={2} />
@@ -114,7 +114,7 @@ function FlipCard({ a, i }: { a: Aisle; i: number }) {
                 </span>
                 <span className="flex flex-wrap gap-2">
                   {a.kinds.map((k) => (
-                    <span key={k} className="rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold text-ink shadow-[3px_3px_0_#000]" style={{ background: a.tint }}>
+                    <span key={k} className="rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold text-ink " style={{ background: a.tint }}>
                       {k}
                     </span>
                   ))}

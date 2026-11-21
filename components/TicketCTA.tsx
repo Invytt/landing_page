@@ -49,7 +49,7 @@ export default function TicketCTA() {
         <Tilt max={4} glare={false}>
           <div className="relative flex flex-col lg:flex-row">
             {/* ── main part of the ticket ── */}
-            <div className="relative flex-1 rounded-[30px] border-2 border-ink bg-paper p-6 text-ink shadow-[8px_8px_0_#000] sm:p-10 lg:rounded-r-none lg:border-r-0">
+            <div className="relative flex-1 rounded-[30px] border-2 border-ink bg-paper p-6 text-ink sm:p-10 lg:rounded-r-none lg:border-r-0">
               <p className="eyebrow text-center text-muted">Launching in</p>
               <div className="mt-4">
                 <Countdown />
@@ -93,7 +93,7 @@ export default function TicketCTA() {
                   : { x: 0, y: 0, rotate: 0 }
               }
               transition={{ type: "spring", stiffness: 160, damping: 12 }}
-              className="relative origin-top-left rounded-[30px] border-2 border-ink bg-coral p-6 text-white shadow-[8px_8px_0_#000] lg:w-[250px] lg:rounded-l-none lg:border-l-0"
+              className="relative origin-top-left rounded-[30px] border-2 border-ink bg-coral p-6 text-white lg:w-[250px] lg:rounded-l-none lg:border-l-0"
             >
               {/* tear line + notches */}
               <span aria-hidden className="tear-y absolute bottom-6 left-0 top-6 hidden opacity-70 lg:block" />

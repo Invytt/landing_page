@@ -76,7 +76,6 @@ export default function WaitlistForm({
         onSubmit={handleSubmit}
         className={cn(
           "flex w-full flex-col gap-2 rounded-[28px] border-2 border-ink bg-white p-1.5 sm:flex-row sm:items-center sm:rounded-full sm:pl-5",
-          night ? "shadow-[5px_5px_0_#000]" : "shadow-[5px_5px_0_var(--color-ink)]",
         )}
       >
         <label className="sr-only" htmlFor={id}>
@@ -107,7 +106,7 @@ export default function WaitlistForm({
           type="submit"
           disabled={disabled}
           className={cn(
-            "stk-btn shrink-0 !shadow-none hover:!translate-x-0 hover:!translate-y-0 active:!translate-x-0 active:!translate-y-0 active:scale-[0.97]",
+            "stk-btn shrink-0 hover:!translate-x-0 hover:!translate-y-0 active:!translate-x-0 active:!translate-y-0 active:scale-[0.97]",
             shown === "success" || shown === "joined"
               ? "bg-going text-goingtext"
               : state === "duplicate"

@@ -244,19 +244,6 @@ export function Phone({
         ...style,
       }}
     >
-      {/* soft shadow on the page. It sits outside the 3D scene, so a phone
-          tilted far back can never cut into it. */}
-      <span
-        aria-hidden
-        className="absolute inset-[1%]"
-        style={{
-          transform: "translate(7%, 5%)",
-          // a soft gradient rather than a blur filter: it looks the same and
-          // costs a phone nothing to draw
-          background:
-            "radial-gradient(closest-side, var(--pshadow-c, rgb(43 23 25 / 0.24)) 62%, transparent 100%)",
-        }}
-      />
       <div
         className={cn("absolute left-0 top-0 origin-top-left", !flat && "preserve-3d")}
         style={{ width: W, height: H, transform: "scale(var(--ps, 1))" }}
@@ -309,7 +296,7 @@ export function Phone({
               style={{ transform: `rotateY(180deg) translateZ(${D / 2}px)` }}
             >
               <span className="dots absolute inset-0 opacity-60" />
-              <span className="absolute left-[22px] top-[22px] grid h-[92px] w-[92px] grid-cols-2 place-items-center gap-1 rounded-[28px] border-[3px] border-ink bg-night p-2 shadow-[3px_3px_0_#2B1719]">
+              <span className="absolute left-[22px] top-[22px] grid h-[92px] w-[92px] grid-cols-2 place-items-center gap-1 rounded-[28px] border-[3px] border-ink bg-night p-2 ">
                 {[0, 1, 2].map((k) => (
                   <i
                     key={k}

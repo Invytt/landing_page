@@ -82,7 +82,7 @@ export default function SoonHero() {
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_1fr]">
         <motion.div style={{ y: textY }} className="relative z-30">
           <SilverWordmark className="mb-7 block w-44 sm:w-52" priority delay={1.1} />
-          <p className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-coral px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-white shadow-[3px_3px_0_#000]">
+          <p className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-coral px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-white ">
             <Sparkles size={14} strokeWidth={2.6} /> Coming soon
           </p>
           <h1 className="display mt-6 text-[clamp(3rem,7.4vw,6.4rem)]">
@@ -110,27 +110,27 @@ export default function SoonHero() {
           <Globe className="absolute inset-0 h-full w-full" />
 
           <Orbiter mx={mx} my={my} depth={-40} rotate={-8} delay={0.3} className="left-[2%] top-[10%]">
-            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-sand px-3.5 py-2 text-sm font-bold text-ink shadow-[4px_4px_0_#000]">
+            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-sand px-3.5 py-2 text-sm font-bold text-ink ">
               <Gift size={16} strokeWidth={2.4} /> Shop
             </span>
           </Orbiter>
           <Orbiter mx={mx} my={my} depth={55} rotate={7} delay={0.42} className="right-[0%] top-[18%]">
-            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-sky px-3.5 py-2 text-sm font-bold text-ink shadow-[4px_4px_0_#000]">
+            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-sky px-3.5 py-2 text-sm font-bold text-ink ">
               <Camera size={16} strokeWidth={2.4} /> Book a service
             </span>
           </Orbiter>
           <Orbiter mx={mx} my={my} depth={-62} rotate={5} delay={0.54} className="bottom-[16%] left-[-2%]">
-            <span className="flex items-center gap-2 rounded-2xl border-2 border-ink bg-pink px-3.5 py-2.5 text-sm font-bold text-ink shadow-[4px_4px_0_#000]">
+            <span className="flex items-center gap-2 rounded-2xl border-2 border-ink bg-pink px-3.5 py-2.5 text-sm font-bold text-ink ">
               <Ticket size={16} strokeWidth={2.4} /> Early Bird · ₹499
             </span>
           </Orbiter>
           <Orbiter mx={mx} my={my} depth={38} rotate={-6} delay={0.66} className="bottom-[6%] right-[4%]">
-            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-mint px-3.5 py-2 text-sm font-bold text-ink shadow-[4px_4px_0_#000]">
+            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-mint px-3.5 py-2 text-sm font-bold text-ink ">
               <Wallet size={16} strokeWidth={2.4} /> My bookings
             </span>
           </Orbiter>
           <Orbiter mx={mx} my={my} depth={24} rotate={-3} delay={0.78} className="left-1/2 top-[-2%] -translate-x-1/2">
-            <span className="block rounded-2xl border-2 border-ink bg-peach px-4 py-2 text-ink shadow-[4px_4px_0_#000]">
+            <span className="block rounded-2xl border-2 border-ink bg-peach px-4 py-2 text-ink ">
               <span className="block text-[11px] font-bold uppercase tracking-[0.14em]">Invytt Agency</span>
               <span className="display block text-2xl">We handle it all</span>
             </span>
@@ -139,7 +139,7 @@ export default function SoonHero() {
       </div>
 
       {/* hazard ticker */}
-      <div className="absolute inset-x-0 bottom-10 z-10 -rotate-2 overflow-hidden border-y-2 border-ink bg-sand py-2.5 text-ink shadow-[0_4px_0_#000]">
+      <div className="absolute inset-x-0 bottom-10 z-10 -rotate-2 overflow-hidden border-y-2 border-ink bg-sand py-2.5 text-ink ">
         <div className="flex w-max animate-marquee">
           {[...STRIP, ...STRIP, ...STRIP, ...STRIP].map((t, i) => (
             <span key={i} className="flex items-center whitespace-nowrap px-5 text-sm font-bold uppercase tracking-[0.12em]">

@@ -75,7 +75,7 @@ function Floor({ mixed, narrow }: { mixed: boolean; narrow: boolean }) {
   return (
     <div
       aria-hidden
-      className="dots relative h-[600px] overflow-hidden rounded-[28px] border-2 border-ink bg-white shadow-[6px_6px_0_var(--color-ink)] sm:h-[460px]"
+      className="dots relative h-[600px] overflow-hidden rounded-[28px] border-2 border-ink bg-white sm:h-[460px]"
       style={{ contain: "layout paint" }}
     >
       {/* before: the circles */}
@@ -135,7 +135,7 @@ function Floor({ mixed, narrow }: { mixed: boolean; narrow: boolean }) {
               transition: `left 0.9s cubic-bezier(0.7, 0, 0.3, 1) ${i * 0.04}s, top 0.9s cubic-bezier(0.7, 0, 0.3, 1) ${i * 0.04}s`,
             }}
           >
-            <Av i={p.id} s={38} className={cn("shadow-[2px_2px_0_var(--color-ink)]", p.id === HOST && "ring-2 ring-coral ring-offset-2")} />
+            <Av i={p.id} s={38} className={cn(p.id === HOST && "ring-2 ring-coral ring-offset-2")} />
           </div>
         );
       })}
@@ -184,7 +184,7 @@ function Tag({
   return (
     <span
       className={cn(
-        "absolute w-max rounded-full border-2 border-ink px-2.5 py-1 text-center text-[11px] font-bold leading-tight shadow-[2px_2px_0_var(--color-ink)] sm:max-w-none sm:whitespace-nowrap sm:text-xs",
+        "absolute w-max rounded-full border-2 border-ink px-2.5 py-1 text-center text-[11px] font-bold leading-tight sm:max-w-none sm:whitespace-nowrap sm:text-xs",
         wide ? "max-w-[88%]" : "max-w-[44%]",
         light ? "text-white" : "text-ink",
       )}
@@ -401,7 +401,7 @@ export default function Mingle() {
               onClick={() => pick(o.v)}
               className={cn(
                 "min-h-11 rounded-full border-2 border-ink px-4 py-2 text-sm font-bold transition-colors duration-200",
-                mixed === o.v ? "bg-ink text-paper shadow-[3px_3px_0_var(--color-coral)]" : "bg-white text-ink hover:bg-tint",
+                mixed === o.v ? "bg-ink text-paper " : "bg-white text-ink hover:bg-tint",
               )}
             >
               {o.label}

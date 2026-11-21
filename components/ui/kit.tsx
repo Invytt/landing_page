@@ -71,7 +71,7 @@ export function Eyebrow({
   );
 }
 
-/** A sticker: tinted fill, ink outline, hard shadow, slight tilt. */
+/** A sticker: tinted fill, ink outline, slight tilt. */
 export function Sticker({
   children,
   className,

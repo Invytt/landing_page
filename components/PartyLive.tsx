@@ -38,7 +38,7 @@ function Drum() {
           {GAMES.map((g, i) => (
             <div
               key={g.title}
-              className="backface-hidden absolute left-1/2 top-1/2 flex flex-col justify-between rounded-[22px] border-2 border-ink p-3 text-ink shadow-[4px_4px_0_#000] sm:p-4"
+              className="backface-hidden absolute left-1/2 top-1/2 flex flex-col justify-between rounded-[22px] border-2 border-ink p-3 text-ink sm:p-4"
               style={{
                 width: "var(--cw)",
                 height: "calc(var(--cw) * 1.32)",
@@ -77,12 +77,11 @@ function Wheel() {
           rotate,
           background: `conic-gradient(${WHEEL.map((c, i) => `${c} ${i * 45}deg ${(i + 1) * 45}deg`).join(",")})`,
         }}
-        className="h-full w-full rounded-full border-2 border-ink shadow-[5px_5px_0_#000]"
+        className="h-full w-full rounded-full border-2 border-ink"
       />
       <span className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink bg-paper" />
       <span
         className="absolute -top-3 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[12px] border-t-[22px] border-x-transparent border-t-paper"
-        style={{ filter: "drop-shadow(0 2px 0 #000)" }}
       />
     </div>
   );
@@ -135,7 +134,7 @@ function MeetScene({ calm }: { calm: boolean }) {
           transition={{ type: "spring", stiffness: 380, damping: 14 }}
           className="absolute left-1/2 top-0 z-20 -translate-x-1/2"
         >
-          <Sticker tint="#8FD9B6" className="whitespace-nowrap !px-5 !py-2 !text-base shadow-[4px_4px_0_#000]">
+          <Sticker tint="#8FD9B6" className="whitespace-nowrap !px-5 !py-2 !text-base ">
             <Spark className="h-4 w-4" /> You two just met
           </Sticker>
           {!calm && <Confetti count={22} spread={200} />}
@@ -195,7 +194,7 @@ export default function PartyLive() {
                 whileInView={{ opacity: 1, x: 0, rotate: i % 2 ? 2 : -2 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.09, type: "spring", stiffness: 260, damping: 18 }}
-                className="rounded-full border-2 border-ink bg-tint px-4 py-2 text-sm font-bold text-ink shadow-[3px_3px_0_#000]"
+                className="rounded-full border-2 border-ink bg-tint px-4 py-2 text-sm font-bold text-ink"
               >
                 {t}
               </motion.li>

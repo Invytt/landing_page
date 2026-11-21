@@ -25,7 +25,7 @@ function TicketDemo() {
             type="button"
             onClick={() => setPick(i)}
             aria-pressed={pick === i}
-            className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold transition-transform ${pick === i ? "-translate-y-0.5 shadow-[3px_3px_0_var(--color-ink)]" : "bg-white"}`}
+            className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold transition-transform ${pick === i ? "-translate-y-0.5 " : "bg-white"}`}
             style={pick === i ? { background: t.c } : undefined}
           >
             {t.t} · {t.p}

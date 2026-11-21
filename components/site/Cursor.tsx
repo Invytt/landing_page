@@ -39,7 +39,7 @@ export default function Cursor() {
       style={{ x: sx, y: sy }}
     >
       <motion.span
-        className="flex items-center justify-center rounded-full border-2 border-ink bg-coral text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-[2px_2px_0_#2B1719]"
+        className="flex items-center justify-center rounded-full border-2 border-ink bg-coral text-[11px] font-bold uppercase tracking-[0.12em] text-white"
         style={{ translateX: 14, translateY: 14 }}
         animate={{
           width: label ? Math.max(58, label.length * 9 + 26) : 12,

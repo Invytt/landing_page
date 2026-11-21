@@ -143,7 +143,7 @@ export default function Pillars() {
                     key={p.n}
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-ink text-sm font-bold transition-all duration-300 ${
                       i === active
-                        ? "scale-110 bg-coral text-white shadow-[3px_3px_0_var(--color-ink)]"
+                        ? "scale-110 bg-coral text-white"
                         : i < active
                           ? "bg-ink text-paper"
                           : "bg-white text-ink"

@@ -96,7 +96,7 @@ export function TabBar({ active }: { active?: string }) {
     <div className="absolute inset-x-0 bottom-0 z-20 flex h-[62px] items-start justify-between border-t-2 border-ink bg-white px-[14px] pt-[8px]">
       {item(TABS[0])}
       {item(TABS[1])}
-      <span className="-mt-[22px] flex h-[42px] w-[42px] items-center justify-center rounded-full border-2 border-ink bg-coral text-white shadow-[2.5px_2.5px_0_#2B1719]">
+      <span className="-mt-[22px] flex h-[42px] w-[42px] items-center justify-center rounded-full border-2 border-ink bg-coral text-white ">
         <Plus size={22} strokeWidth={2.6} />
       </span>
       {item(TABS[2])}
@@ -148,7 +148,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-[16px] border-2 border-ink p-[10px] shadow-[3px_3px_0_#2B1719]",
+        "rounded-[16px] border-2 border-ink p-[10px]",
         className,
       )}
       style={{ background: tint, ...style }}
@@ -162,18 +162,15 @@ export function Pill({
   children,
   tint = "#fff",
   className,
-  shadow = false,
 }: {
   children: ReactNode;
   tint?: string;
   className?: string;
-  shadow?: boolean;
 }) {
   return (
     <span
       className={cn(
         "inline-flex items-center gap-[4px] whitespace-nowrap rounded-full border-[1.5px] border-ink px-[8px] py-[2px] text-[9.5px] font-bold leading-[1.4]",
-        shadow && "shadow-[2px_2px_0_#2B1719]",
         className,
       )}
       style={{ background: tint }}
@@ -218,7 +215,7 @@ export function Btn({
   return (
     <span
       className={cn(
-        "flex h-[40px] items-center justify-center gap-[6px] rounded-full border-2 border-ink text-[12.5px] font-bold shadow-[3px_3px_0_#2B1719]",
+        "flex h-[40px] items-center justify-center gap-[6px] rounded-full border-2 border-ink text-[12.5px] font-bold",
         light ? "text-white" : "text-ink",
         className,
       )}

@@ -66,7 +66,7 @@ export default function LegalToc({ tint }: { tint: string }) {
               href={`#${it.id}`}
               aria-current={on ? "location" : undefined}
               className={`block rounded-xl border-2 px-3 py-2 text-[15px] font-semibold leading-snug transition-colors ${
-                on ? "border-ink text-ink shadow-[3px_3px_0_var(--color-ink)]" : "border-transparent text-muted hover:text-ink"
+                on ? "border-ink text-ink " : "border-transparent text-muted hover:text-ink"
               }`}
               style={on ? { background: tint } : undefined}
             >

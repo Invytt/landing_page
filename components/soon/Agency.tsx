@@ -62,7 +62,7 @@ function StackCard({
       >
         <span aria-hidden className="absolute inset-0 -z-10 rounded-[28px]" style={{ background: s.tint }} />
         <div className="flex items-center gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-white shadow-[3px_3px_0_var(--color-ink)]">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-white ">
             <s.Icon size={22} strokeWidth={2.2} />
           </span>
           <h3 className="display flex-1 text-4xl sm:text-5xl">{s.title}</h3>
@@ -89,7 +89,7 @@ function Clock({ hours }: { hours: MotionValue<number> }) {
   const minDeg = useTransform(hours, (h) => (h % 1) * 360);
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[380px]">
-      <div className="absolute inset-0 rounded-full border-2 border-ink bg-paper shadow-[8px_8px_0_#000]" />
+      <div className="absolute inset-0 rounded-full border-2 border-ink bg-paper " />
       <div className="absolute inset-[14px] rounded-full border-2 border-dashed border-ink/25" />
       {Array.from({ length: 12 }, (_, k) => (
         <span
@@ -165,7 +165,7 @@ function TheDay({ calm }: { calm: boolean }) {
               <motion.div
                 animate={{ x: on ? 0 : 12, opacity: on ? 1 : 0.45 }}
                 transition={{ type: "spring", stiffness: 240, damping: 22 }}
-                className="rounded-[22px] border-2 border-ink bg-paper p-5 text-ink shadow-[5px_5px_0_#000]"
+                className="rounded-[22px] border-2 border-ink bg-paper p-5 text-ink"
               >
                 <p className="eyebrow text-muted">{d.t}</p>
                 <p className="display mt-1 text-3xl">{d.w}</p>
@@ -207,7 +207,7 @@ function Compare() {
       </Reveal>
       <div
         ref={box}
-        className="relative mt-10 hidden h-[420px] touch-pan-y select-none overflow-hidden rounded-[30px] border-2 border-ink shadow-[8px_8px_0_#000] sm:block"
+        className="relative mt-10 hidden h-[420px] touch-pan-y select-none overflow-hidden rounded-[30px] border-2 border-ink sm:block"
         onPointerDown={(e) => {
           (e.target as Element).setPointerCapture?.(e.pointerId);
           drag(e.clientX);
@@ -264,7 +264,7 @@ function Compare() {
         {/* handle */}
         <div className="pointer-events-none absolute inset-y-0" style={{ left: `${pos}%` }}>
           <span className="absolute inset-y-0 -left-[1.5px] w-[3px] bg-ink" />
-          <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-coral text-white shadow-[3px_3px_0_var(--color-ink)]">
+          <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-coral text-white ">
             <ArrowLeftRight size={22} strokeWidth={2.6} />
           </span>
         </div>
@@ -285,7 +285,7 @@ function Compare() {
 
       {/* phones: the two sides stacked */}
       <div className="mt-8 space-y-5 sm:hidden">
-        <div className="dots rounded-[26px] border-2 border-ink bg-paper2 p-5 text-ink shadow-[6px_6px_0_#000]">
+        <div className="dots rounded-[26px] border-2 border-ink bg-paper2 p-5 text-ink ">
           <p className="eyebrow text-coral">Doing it yourself</p>
           <ul className="mt-4 flex flex-wrap gap-2.5">
             {DIY.map((d, k) => (
@@ -299,7 +299,7 @@ function Compare() {
             ))}
           </ul>
         </div>
-        <div className="rounded-[26px] border-2 border-ink bg-mint p-5 text-ink shadow-[6px_6px_0_#000]">
+        <div className="rounded-[26px] border-2 border-ink bg-mint p-5 text-ink ">
           <p className="eyebrow text-goingtext">With Invytt Agency</p>
           <ul className="mt-4 space-y-2">
             {STAGES.map((st) => (

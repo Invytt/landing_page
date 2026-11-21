@@ -192,7 +192,7 @@ export function AgencyScreen() {
       <p className="mt-[6px] font-display text-[30px] leading-[1]">
         We handle <span className="italic text-peach">it all.</span>
       </p>
-      <div className="mt-[12px] rounded-[16px] border-2 border-ink bg-paper p-[10px] text-ink shadow-[3px_3px_0_#000]">
+      <div className="mt-[12px] rounded-[16px] border-2 border-ink bg-paper p-[10px] text-ink ">
         <Caps>Your event</Caps>
         <p className="mt-[2px] font-display text-[19px] leading-[1.05]">Meera &amp; Kabir&rsquo;s sangeet</p>
         <p className="text-[10px] text-muted">Sat 12 Dec · 120 guests</p>
@@ -214,14 +214,14 @@ export function AgencyScreen() {
           ))}
         </div>
       </div>
-      <div className="mt-[10px] flex items-center gap-[8px] rounded-[16px] border-2 border-ink bg-night2 p-[9px] shadow-[3px_3px_0_#000]">
+      <div className="mt-[10px] flex items-center gap-[8px] rounded-[16px] border-2 border-ink bg-night2 p-[9px] ">
         <Av i={10} s={30} />
         <span className="leading-[1.25]">
           <span className="block text-[11px] font-bold">Your event lead</span>
           <span className="block text-[9.5px] text-nightmuted">Decor mood board is ready to review</span>
         </span>
       </div>
-      <Btn tint="#FBF6F4" light={false} className="absolute inset-x-[14px] bottom-[14px] !shadow-[3px_3px_0_#000]">
+      <Btn tint="#FBF6F4" light={false} className="absolute inset-x-[14px] bottom-[14px] ">
         <Sparkles size={13} strokeWidth={2.6} /> Plan with Invytt
       </Btn>
     </Screen>
@@ -253,7 +253,7 @@ export function TicketsScreen() {
           </Card>
         ))}
       </div>
-      <div className="relative mt-[10px] flex overflow-hidden rounded-[16px] border-2 border-ink bg-white shadow-[3px_3px_0_#2B1719]">
+      <div className="relative mt-[10px] flex overflow-hidden rounded-[16px] border-2 border-ink bg-white ">
         <div className="flex-1 p-[9px] leading-[1.25]">
           <Caps>Payout</Caps>
           <p className="font-display text-[22px] leading-[1.1]">₹1,08,031</p>
