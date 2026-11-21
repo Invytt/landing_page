@@ -23,8 +23,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { TOOLS } from "@/app/data";
-import { Confetti, Eyebrow, Stamp, Words, useCalm, useRange } from "@/components/ui/kit";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Confetti, Stamp, Words, useCalm, useRange } from "@/components/ui/kit";
+import { Parallax } from "@/components/ui/depth";
 
 
 const ICONS: LucideIcon[] = [
@@ -138,9 +138,8 @@ export default function Problem() {
 
   const heading = (
     <div className="mx-auto max-w-4xl px-5 text-center">
-      <Eyebrow className="justify-center">The problem</Eyebrow>
-      <h2 className="display mt-4 text-[clamp(2.3rem,5.6vw,4.6rem)] text-ink lg:short:text-5xl">
-        <Words text="Hosting today is *fragmented* and stressful." />
+      <h2 className="display text-[clamp(2.3rem,5.6vw,4.6rem)] text-ink lg:short:text-5xl">
+        <Words text="Planning a party means juggling ten apps." />
       </h2>
     </div>
   );
@@ -175,7 +174,6 @@ export default function Problem() {
   return (
     <section id="problem" ref={ref} className="relative h-[230vh] bg-paper">
       <div className="dots sticky top-0 isolate flex h-[100svh] flex-col items-center justify-between overflow-hidden pb-10 pt-28 sm:pt-32">
-        <DepthField seed={3} count={8} progress={p} />
         <Parallax progress={p} speed={0.12}>{heading}</Parallax>
 
         <div className="relative my-6 w-full flex-1 [container-type:size]">

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { subscribe } from "./waitlist";
+import { INVALID_EMAIL_MESSAGE, isEmail, subscribe } from "./waitlist";
 
 const URL = "https://example.test/subscribe";
 
@@ -27,11 +27,11 @@ describe("subscribe", () => {
     });
   });
 
-  it("returns error with server message on 400", async () => {
+  it("returns invalid with a fix-it message on 400", async () => {
     const f = mockFetch(400, { error: "Invalid email format." });
     expect(await subscribe("bad", URL, f)).toEqual({
-      state: "error",
-      message: "Invalid email format.",
+      state: "invalid",
+      message: INVALID_EMAIL_MESSAGE,
     });
   });
 
@@ -60,5 +60,15 @@ describe("subscribe", () => {
         body: JSON.stringify({ email: "hi@x.com" }),
       }),
     );
+  });
+});
+
+describe("isEmail", () => {
+  it("matches the server's rule", () => {
+    expect(isEmail("asha@gmail.com")).toBe(true);
+    expect(isEmail("  Asha@Gmail.com ")).toBe(true);
+    expect(isEmail("asha@x")).toBe(false);
+    expect(isEmail("asha")).toBe(false);
+    expect(isEmail("as ha@x.com")).toBe(false);
   });
 });

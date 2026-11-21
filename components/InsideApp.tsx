@@ -24,9 +24,9 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
-import { Eyebrow, Reveal, Tilt, Words, useCalm } from "@/components/ui/kit";
+import { Reveal, Tilt, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Parallax } from "@/components/ui/depth";
 import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 import {
@@ -246,7 +246,7 @@ const FEATURES: Feature[] = [
     demo: (
       <span className="flex flex-col items-start gap-2">
         <AvStack ids={[1, 5, 9, 12]} s={30} />
-        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-bold text-white shadow-[2px_2px_0_var(--color-ink)]">
+        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-bold text-ink shadow-[2px_2px_0_var(--color-ink)]">
           Add friend
         </span>
       </span>
@@ -312,25 +312,21 @@ export default function InsideApp() {
 
   const header = (
     <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-      <Eyebrow className="justify-center">Inside the app</Eyebrow>
-      <h2 className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
-        <Words text="The whole party, *in your pocket.*" />
+      <h2 className="display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
+        <Words text="The whole party, in your pocket." />
       </h2>
     </div>
   );
 
   return (
     <section id="inside" className="relative isolate bg-paper2">
-      <DepthField seed={47} count={8} className="!top-auto h-[60%] bottom-0" />
       {/* ── desktop: six phones fan out, scroll walks through them ── */}
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[460vh] lg:block"}>
         {desk && (
         <div className="sticky top-0 isolate grid h-screen grid-cols-[minmax(320px,0.8fr)_1.7fr] items-center overflow-hidden pt-20 shorter:pt-0">
-          <DepthField seed={41} count={10} progress={scrollYProgress} />
           <div className="relative z-10 pl-8 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-            <Eyebrow>Inside the app</Eyebrow>
-            <h2 className="display mt-4 text-[clamp(2.2rem,3.6vw,3.8rem)] text-ink">
-              <Words text="The whole party, *in your pocket.*" />
+            <h2 className="display text-[clamp(2.2rem,3.6vw,3.8rem)] text-ink">
+              <Words text="The whole party, in your pocket." />
             </h2>
             <p className="display mt-8 flex items-baseline gap-3 text-ink short:mt-5">
               <span className="text-6xl text-coral tabular-nums">0{active + 1}</span>

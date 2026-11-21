@@ -1,4 +1,14 @@
-export type SubscribeState = "success" | "duplicate" | "error";
+export type SubscribeState = "success" | "duplicate" | "invalid" | "error";
+
+/** Same rule as the subscribe function (supabase/functions/subscribe/handler.ts). */
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const INVALID_EMAIL_MESSAGE =
+  "That email looks incomplete. Check the part after the @, like name@gmail.com.";
+
+export function isEmail(email: string) {
+  return EMAIL_RE.test(email.toLowerCase().trim());
+}
 
 export type SubscribeResult = {
   state: SubscribeState;
@@ -27,6 +37,9 @@ export async function subscribe(
     }
     if (res.status === 409 && data.alreadyExists) {
       return { state: "duplicate", message: data.message };
+    }
+    if (res.status === 400) {
+      return { state: "invalid", message: INVALID_EMAIL_MESSAGE };
     }
     return {
       state: "error",

@@ -182,13 +182,6 @@ export default function RootLayout({
       <head>
         {/* lite mode for slow connections, Data Saver and low-memory phones */}
         <script dangerouslySetInnerHTML={{ __html: LITE_SCRIPT }} />
-        {/* show the loading card once per visit, not on every page view */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(sessionStorage.getItem('invytt-seen')){document.documentElement.dataset.seen='1'}else{sessionStorage.setItem('invytt-seen','1')}}catch(e){}",
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -63,7 +63,7 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
           </p>
           <a
             href={`mailto:${COMPANY.email}`}
-            className="mt-5 inline-block text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-4"
+            className="mt-3 inline-flex min-h-11 items-center text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-4"
           >
             {COMPANY.email}
           </a>
@@ -84,10 +84,10 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
               </span>
               <span className="leading-tight">
                 <span className="block text-xs font-bold uppercase tracking-[0.16em] text-ink/70">
-                  {soon ? "In the app at launch" : "Coming soon"}
+                  {soon ? "In the app at launch" : "After launch"}
                 </span>
                 <span className="display block text-2xl">
-                  {soon ? <>See what&rsquo;s here now</> : <>See what&rsquo;s next</>}
+                  {soon ? <>See what&rsquo;s here now</> : <>See the roadmap</>}
                 </span>
               </span>
               <ArrowRight size={20} strokeWidth={2.6} className="transition-transform group-hover:translate-x-1" />
@@ -113,10 +113,10 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
         {/* navigation */}
         <div>
           <p className="eyebrow text-nightmuted">Navigate</p>
-          <ul className="mt-5 flex flex-col gap-3 text-lg">
+          <ul className="mt-3 flex flex-col text-lg">
             {NAV.map(({ label, href }) => (
               <li key={href}>
-                <a href={base + href} className="font-semibold text-paper transition-colors hover:text-peach">
+                <a href={base + href} className="inline-flex min-h-11 items-center font-semibold text-paper transition-colors hover:text-peach">
                   {label}
                 </a>
               </li>
@@ -126,19 +126,19 @@ export default function Footer({ base = "", soon = false }: { base?: string; soo
         </div>
         <div>
           <p className="eyebrow text-nightmuted">Legal</p>
-          <ul className="mt-5 flex flex-col gap-3 text-lg">
+          <ul className="mt-3 flex flex-col text-lg">
             <li>
-              <a href="/help" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
+              <a href="/help" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-paper transition-colors hover:text-peach">
                 Help &amp; FAQ
               </a>
             </li>
             <li>
-              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-paper transition-colors hover:text-peach">
                 Privacy policy
               </a>
             </li>
             <li>
-              <a href="/terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-paper transition-colors hover:text-peach">
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-paper transition-colors hover:text-peach">
                 Terms of service
               </a>
             </li>

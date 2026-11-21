@@ -15,21 +15,24 @@ import {
   Steps,
   TicketCTA,
 } from "@/components/site/lazy";
-import Loader from "@/components/site/Loader";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import ScrollProgress from "@/components/site/ScrollProgress";
-import Cursor from "@/components/site/Cursor";
+import StickyJoin from "@/components/site/StickyJoin";
 
 export default function Home() {
   return (
     <>
-      <Loader />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-full focus:border-2 focus:border-ink focus:bg-paper focus:px-5 focus:py-3 focus:font-bold focus:text-ink"
+      >
+        Skip to content
+      </a>
       <SmoothScroll />
       <ScrollProgress />
-      <Cursor />
       <Marquee />
       <Nav />
-      <main className="relative">
+      <main id="main" className="relative">
         <Hero />
         <Problem />
         {/* The two anchors of the page: five pillars, then five steps. */}
@@ -45,6 +48,7 @@ export default function Home() {
         <TicketCTA />
       </main>
       <Footer />
+      <StickyJoin />
     </>
   );
 }

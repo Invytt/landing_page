@@ -4,8 +4,8 @@ import { useState } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { Plus } from "lucide-react";
 import { COMPANY, FAQ_GROUPS } from "@/app/data";
-import { Eyebrow, Words } from "@/components/ui/kit";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Words } from "@/components/ui/kit";
+import { Parallax } from "@/components/ui/depth";
 
 /** FAQ, grouped by topic: pick a topic, then open a question. */
 export default function FaqSection() {
@@ -18,14 +18,30 @@ export default function FaqSection() {
     setOpen(0);
   };
 
+  // tabs, as a screen reader expects them: arrow keys move between topics,
+  // and only the selected tab sits in the Tab order
+  const onTabKey = (e: React.KeyboardEvent) => {
+    const i = FAQ_GROUPS.findIndex((g) => g.id === group.id);
+    const last = FAQ_GROUPS.length - 1;
+    const to =
+      e.key === "ArrowRight" || e.key === "ArrowDown" ? (i === last ? 0 : i + 1)
+      : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (i === 0 ? last : i - 1)
+      : e.key === "Home" ? 0
+      : e.key === "End" ? last
+      : -1;
+    if (to < 0) return;
+    e.preventDefault();
+    const next = FAQ_GROUPS[to];
+    pick(next.id);
+    document.getElementById(`faq-tab-${next.id}`)?.focus();
+  };
+
   return (
     <section id="faq" className="relative isolate overflow-x-clip bg-paper py-24 lg:py-32">
-      <DepthField seed={71} count={8} />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div className="lg:sticky lg:top-36 lg:self-start">
-          <Eyebrow>FAQ</Eyebrow>
-          <h2 className="display mt-4 text-[clamp(2.6rem,5.4vw,4.8rem)] text-ink">
-            <Words text="We’ve got *answers*" />
+          <h2 className="display text-[clamp(2.6rem,5.4vw,4.8rem)] text-ink">
+            <Words text="Common questions" />
           </h2>
           <p className="mt-5 max-w-sm text-lg leading-relaxed text-muted">
             Still curious? Write to{" "}
@@ -37,7 +53,7 @@ export default function FaqSection() {
 
           {/* topics: a wrapping row of stickers on every screen size */}
           <LayoutGroup id="faq-topics">
-            <div role="tablist" aria-label="FAQ topics" className="mt-8 flex flex-wrap gap-2.5">
+            <div role="tablist" aria-label="FAQ topics" onKeyDown={onTabKey} className="mt-8 flex flex-wrap gap-2.5">
               {FAQ_GROUPS.map((g) => {
                 const on = g.id === group.id;
                 return (
@@ -48,8 +64,9 @@ export default function FaqSection() {
                     id={`faq-tab-${g.id}`}
                     aria-selected={on}
                     aria-controls="faq-panel"
+                    tabIndex={on ? 0 : -1}
                     onClick={() => pick(g.id)}
-                    className={`relative rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform duration-150 ${
+                    className={`relative min-h-11 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform duration-150 ${
                       on ? "-translate-y-0.5 shadow-[3px_3px_0_var(--color-ink)]" : "bg-white hover:-translate-y-0.5"
                     }`}
                   >

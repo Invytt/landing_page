@@ -12,9 +12,10 @@ import {
 import { GAMES } from "@/app/data";
 import { Confetti, Reveal, Scallop, Spark, Sticker, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Parallax } from "@/components/ui/depth";
 
 import { CompanionScreen, GameScreen, QrScreen, ScanScreen } from "@/components/screens";
+import WaitlistForm from "@/components/WaitlistForm";
 
 const WHEEL = ["#CDBEF7", "#8FD9B6", "#FFD6A5", "#F6C1D0", "#BFDDFB", "#FF9A5C", "#FBF6F4", "#D2402A"];
 
@@ -157,17 +158,13 @@ export default function PartyLive() {
 
   return (
     <section id="live" className="on-night dots-night relative isolate overflow-hidden bg-night pb-24 pt-28 text-paper lg:pb-32 lg:pt-36">
-      <DepthField seed={53} count={18} night />
       <Scallop color="var(--color-paper)" at="top" />
 
       <Parallax speed={0.12}>
       <div ref={head} className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
         {seen && !calm && <Confetti count={34} spread={340} />}
-        <p className="eyebrow inline-flex items-center gap-2 rounded-full border-2 border-ink bg-live px-3.5 py-1 text-ink">
-          <i className="h-2 w-2 animate-pulse rounded-full bg-ink" /> Live
-        </p>
-        <h2 className="display mt-5 text-[clamp(2.6rem,6.4vw,5.6rem)]">
-          <Words text="When the party’s *live,* the app joins in." />
+        <h2 className="display text-[clamp(2.6rem,6.4vw,5.6rem)]">
+          <Words text="When the party’s live, the app joins in." />
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-nightmuted">
           The moment an event starts, its chat gets a companion and a games
@@ -268,6 +265,15 @@ export default function PartyLive() {
             connected, with the party you met at remembered for you.
           </p>
         </Reveal>
+      </div>
+
+      {/* sign up where wanting it peaks, not 9,000px later */}
+      <div id="join" className="relative mx-auto mt-28 max-w-2xl px-5 text-center sm:px-8">
+        <h3 className="display text-[clamp(2rem,4vw,3.4rem)]">Want this at your next party?</h3>
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-nightmuted">
+          Join the waitlist and you&rsquo;ll be among the first hosts in when Invytt launches.
+        </p>
+        <WaitlistForm night className="mx-auto mt-8 max-w-lg text-left" />
       </div>
 
       <Scallop color="var(--color-paper)" at="bottom" />

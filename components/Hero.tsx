@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   AnimatePresence,
   motion,
@@ -15,12 +15,13 @@ import {
 } from "motion/react";
 import { ArrowDown, Check, Disc3, Mail } from "lucide-react";
 import { EVENT } from "@/app/data";
+import { LAUNCH_DATE_LABEL } from "@/lib/launch";
 import { Magnetic, Scallop, Words } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
 import { EventScreen } from "@/components/screens";
 import { Av, AvStack } from "@/components/screens/parts";
 import WaitlistForm from "@/components/WaitlistForm";
-import { cardHoldMs, introDelay, markReady } from "@/lib/intro";
+import { INTRO_DELAY } from "@/lib/intro";
 import { isLite, isTouch } from "@/lib/perf";
 
 const HeroScene = dynamic(() => import("@/components/site/HeroScene"), { ssr: false });
@@ -118,16 +119,10 @@ export default function Hero() {
   const [film, setFilm] = useState(false);
   const [ready, setReady] = useState(false);
   const [go, setGo] = useState(false);
-  const d0 = useMemo(introDelay, []);
+  const d0 = INTRO_DELAY;
 
-  // lift the loading card, then bring the hero in underneath it
-  useEffect(() => {
-    const id = window.setTimeout(() => {
-      markReady();
-      setGo(true);
-    }, cardHoldMs());
-    return () => window.clearTimeout(id);
-  }, []);
+  // bring the hero in as soon as it has hydrated
+  useEffect(() => setGo(true), []);
 
   const mxRaw = useMotionValue(0);
   const myRaw = useMotionValue(0);
@@ -140,7 +135,6 @@ export default function Hero() {
   const archScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const stageY = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const gridY = useTransform(scrollYProgress, [0, 1], [0, 260]);
-  const glowY = useTransform(scrollYProgress, [0, 1], [0, 340]);
 
   useEffect(() => {
     const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -172,31 +166,11 @@ export default function Hero() {
     >
       {/* far layer: the dot grid drifts slower than the page */}
       <motion.div aria-hidden style={{ y: gridY }} className="dots-night pointer-events-none absolute -inset-y-[40%] inset-x-0 -z-10" />
-      {/* soft coral glow behind the stage */}
-      <motion.div
-        aria-hidden
-        style={{
-          y: glowY,
-          background:
-            "radial-gradient(circle, rgb(210 64 42 / 0.9) 0%, rgb(210 64 42 / 0.45) 30%, rgb(210 64 42 / 0.12) 55%, transparent 72%)",
-        }}
-        className="pointer-events-none absolute right-[-10%] top-[10%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40"
-      />
 
       <div className="relative mx-auto grid min-h-[100svh] max-w-7xl items-center gap-x-8 gap-y-14 px-5 pb-24 pt-36 sm:px-8 lg:grid-cols-[1.08fr_1fr] lg:pb-28 lg:pt-36 lg:short:pt-32">
         {/* ── words ── */}
         <motion.div style={{ y: textY }} className="relative z-30">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            className="hero-txt inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-paper/25 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-nightmuted"
-            animate={go ? { opacity: 1, y: 0 } : undefined}
-            transition={{ delay: d0, duration: 0.6 }}
-          >
-            <i className="h-2 w-2 rounded-full bg-live" />
-            {EVENT.dateRange} · {EVENT.city}
-          </motion.p>
-
-          <h1 className="hero-txt display mt-6 text-[clamp(3.1rem,7vw,6rem)] text-paper lg:short:mt-5 lg:short:text-[4.9rem]">
+          <h1 className="hero-txt display text-[clamp(3.1rem,7vw,6rem)] text-paper lg:short:text-[4.9rem]">
             <Words text="Every good plan starts with an *invite*" delay={d0 + 0.05} stagger={0.07} start={go} />
           </h1>
 
@@ -204,7 +178,7 @@ export default function Hero() {
             className="hero-txt"
             initial={{ opacity: 0, y: 18 }}
             animate={go ? { opacity: 1, y: 0 } : undefined}
-            transition={{ delay: d0 + 0.6, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: d0, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 font-display text-[clamp(1.7rem,3.4vw,2.6rem)] leading-tight text-paper lg:short:mt-5 lg:short:text-[2.1rem]">
               Host your <FlipWord />
@@ -215,14 +189,13 @@ export default function Hero() {
               the rest.
             </p>
 
-            <WaitlistForm night className="mt-8 max-w-lg lg:short:mt-6" hint={`${EVENT.price} · one email when we launch.`} />
+            <WaitlistForm night id="hero-form" className="mt-8 max-w-lg lg:short:mt-6" hint={`Launches ${LAUNCH_DATE_LABEL} in ${EVENT.city}. ${EVENT.price}. A welcome email now, one more at launch.`} />
 
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Magnetic>
                 <a
                   href="#how-it-works"
-                  data-cursor="Scroll"
-                  className="inline-flex items-center gap-2 text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-8"
+                  className="inline-flex min-h-11 items-center gap-2 text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-8"
                 >
                   See how it works <ArrowDown size={18} strokeWidth={2.6} />
                 </a>
@@ -304,7 +277,6 @@ export default function Hero() {
             <div
               className="absolute -inset-x-[22%] -inset-y-[8%] z-10 transition-opacity duration-700"
               style={{ opacity: ready ? 1 : 0 }}
-              data-cursor="Tilt"
             >
               <HeroScene
                 texture="/app/hero-screen.png"
@@ -356,7 +328,7 @@ export default function Hero() {
               <Av i={5} s={36} />
               <span className="leading-tight">
                 <span className="block text-xs font-semibold">Asha wants to be friends</span>
-                <span className="mt-1 inline-flex items-center gap-1 rounded-full border-2 border-ink bg-statusgreen px-2.5 py-0.5 text-[11px] font-bold text-white">
+                <span className="mt-1 inline-flex items-center gap-1 rounded-full border-2 border-ink bg-statusgreen px-2.5 py-0.5 text-[11px] font-bold text-ink">
                   <Check size={11} strokeWidth={4} /> Accept
                 </span>
               </span>

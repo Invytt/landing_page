@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { SPEAKERS, type Speaker } from "@/app/data";
-import { Eyebrow, Words, useCalm } from "@/components/ui/kit";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Words, useCalm } from "@/components/ui/kit";
+import { Parallax } from "@/components/ui/depth";
 
 
 // Where each polaroid is pinned on the board (desktop), and how deep it sits.
@@ -50,7 +50,6 @@ function Polaroid({
       dragTransition={{ bounceStiffness: 300, bounceDamping: 18 }}
       whileDrag={{ scale: 1.08, rotate: 0, zIndex: 50, cursor: "grabbing" }}
       whileHover={{ scale: 1.04, rotate: tilt * 0.3 }}
-      data-cursor={desk ? "Drag" : undefined}
       initial={calm ? false : { opacity: 0, scale: 0.6, rotate: pin.r * 3 }}
       whileInView={{ opacity: 1, scale: 1, rotate: tilt }}
       viewport={{ once: true, amount: 0.3 }}
@@ -101,18 +100,16 @@ export default function About() {
 
   return (
     <section id="about" className="dots relative isolate overflow-hidden bg-paper2 py-24 lg:py-32">
-      <DepthField seed={67} count={10} />
       <Parallax speed={0.12} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-        <Eyebrow className="justify-center">Who it&rsquo;s for</Eyebrow>
-        <h2 className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
-          <Words text="Built for the *everyday host.*" />
+        <h2 className="display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
+          <Words text="Built for the everyday host." />
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted">
           A birthday party for fifteen or Diwali for thirty if you love bringing
           people together, Invytt handles the chaos so you can actually enjoy
           your own party.
         </p>
-        <p className="mt-4 hidden text-sm font-bold text-coral lg:block">Pick one up. They&rsquo;re yours to move.</p>
+        <p className="mt-4 hidden text-sm font-bold text-deep lg:block">Pick one up. They&rsquo;re yours to move.</p>
       </Parallax>
 
       <div

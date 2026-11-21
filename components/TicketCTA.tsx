@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import Countdown from "./Countdown";
 import WaitlistForm, { type SubmitState } from "./WaitlistForm";
+import { useJoined } from "@/lib/waitlist-joined";
 import { MARQUEE } from "@/app/data";
 import { LAUNCH_DATE_LABEL } from "@/lib/launch";
 import { Confetti, Scallop, Spark, Tilt, Words } from "@/components/ui/kit";
@@ -16,7 +17,9 @@ const PERK_TINTS = ["#CDBEF7", "#8FD9B6", "#FFD6A5", "#F6C1D0"];
 /** The waitlist, printed as an admission ticket. The stub tears off when you join. */
 export default function TicketCTA() {
   const [state, setState] = useState<SubmitState>("idle");
-  const joined = state === "success";
+  // the stub stays torn for anyone already on the list; confetti only for a
+  // join that just happened here
+  const joined = useJoined() || state === "success";
 
   return (
     <section id="tickets" className="on-night dots-night relative isolate overflow-hidden bg-night pb-24 pt-28 text-paper lg:pb-32 lg:pt-36">
@@ -33,13 +36,8 @@ export default function TicketCTA() {
       </Parallax>
 
       <Parallax speed={0.14} className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <p className="eyebrow inline-flex items-center gap-3 text-coral">
-          <span aria-hidden className="h-[2px] w-8 bg-current" />
-          Early access
-          <span aria-hidden className="h-[2px] w-8 bg-current" />
-        </p>
-        <h2 className="display mt-5 text-[clamp(2.6rem,6.4vw,5.6rem)]">
-          <Words text="Ready to host *without the chaos?*" />
+        <h2 className="display text-[clamp(2.6rem,6.4vw,5.6rem)]">
+          <Words text="Host your next party *on Invytt.*" />
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-nightmuted">
           Join the hosts building their next event on Invytt. Drop your email
@@ -106,7 +104,7 @@ export default function TicketCTA() {
                 <div>
                   <p className="eyebrow">Admit one</p>
                   <p className="display mt-2 text-4xl leading-none">Founding host</p>
-                  <p className="mt-3 text-sm font-semibold text-white/85">
+                  <p className="mt-3 text-sm font-semibold text-white">
                     Doors open {LAUNCH_DATE_LABEL}
                   </p>
                 </div>
@@ -117,7 +115,7 @@ export default function TicketCTA() {
                   {joined ? "Yours. See you there." : "No. 0001"}
                 </p>
               </div>
-              {joined && <Confetti count={40} spread={380} />}
+              {state === "success" && <Confetti count={40} spread={380} />}
             </motion.div>
           </div>
         </Tilt>

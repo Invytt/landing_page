@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { Link2, MessageCircle, Smartphone } from "lucide-react";
-import { Eyebrow, Reveal, Stamp, Words, useCalm } from "@/components/ui/kit";
+import { Reveal, Stamp, Words, useCalm } from "@/components/ui/kit";
 import { Browser, Phone } from "@/components/ui/phone";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Parallax } from "@/components/ui/depth";
 
 import { GuestWebPage } from "@/components/screens";
 
@@ -21,12 +21,10 @@ export default function GuestWeb() {
 
   return (
     <section id="guests" className="relative isolate overflow-hidden bg-paper py-24 lg:py-32">
-      <DepthField seed={61} count={8} />
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr]">
         <Parallax speed={0.1}>
-          <Eyebrow>For your guests</Eyebrow>
-          <h2 className="display mt-4 text-[clamp(2.4rem,5vw,4.4rem)] text-ink">
-            <Words text="Guests *don’t need* the app." />
+          <h2 className="display text-[clamp(2.4rem,5vw,4.4rem)] text-ink">
+            <Words text="Guests don’t need the app." />
           </h2>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">
             Share one link. It opens as a web page with the invite, the details

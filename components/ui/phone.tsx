@@ -52,7 +52,16 @@ const RIM: Strip[] = (() => {
       });
     }
   }
-  return strips;
+  // rounded, so the server's and the browser's inline styles print the same
+  // numbers (unrounded floats caused a hydration mismatch on every phone)
+  const r2 = (v: number) => Math.round(v * 100) / 100;
+  return strips.map((s) => ({
+    x: r2(s.x),
+    y: r2(s.y),
+    len: r2(s.len),
+    tangent: r2(s.tangent),
+    normal: r2(s.normal),
+  }));
 })();
 
 /** Rim colour: lit from the top left, darker as it turns away. */
@@ -278,7 +287,7 @@ export function Phone({
                   top: st.y,
                   width: st.len,
                   height: D,
-                  marginLeft: -st.len / 2,
+                  marginLeft: -Math.round(st.len * 50) / 100,
                   marginTop: -D / 2,
                   transform: `rotateZ(${st.tangent}deg) rotateX(90deg)`,
                   background: rimShade(st.normal),

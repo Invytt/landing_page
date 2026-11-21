@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 import { useInView } from "motion/react";
 import { ArrowDown, DoorOpen, Megaphone, UsersRound } from "lucide-react";
 import { BINGO_SQUARES, ICEBREAKERS, MINGLE_PAINS, type Icebreaker } from "@/app/data";
-import { Eyebrow, Reveal, Scallop, Spark, Stamp, Sticker, Words } from "@/components/ui/kit";
+import { Reveal, Scallop, Spark, Stamp, Sticker, Words } from "@/components/ui/kit";
 import { Av } from "@/components/screens/parts";
 import { cn } from "@/lib/utils";
 import { useMedia } from "@/lib/perf";
@@ -241,7 +241,7 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
               <li
                 key={sq}
                 className={cn(
-                  "flex min-h-[38px] items-center justify-center rounded-lg border-[1.5px] border-ink px-1 text-center text-[10px] font-bold leading-tight",
+                  "flex min-h-[38px] items-center justify-center rounded-lg border-[1.5px] border-ink px-1 text-center text-[11px] font-bold leading-tight",
                   got ? "bg-going text-goingtext" : "bg-white text-ink",
                 )}
               >
@@ -283,11 +283,11 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
             >
               <span>{t}</span>
               {k === 1 ? (
-                <Stamp rotate={-6} className="!px-1.5 !py-0 !text-[10px]">
+                <Stamp rotate={-6} className="!px-1.5 !py-0 !text-[11px]">
                   Lie
                 </Stamp>
               ) : (
-                <span className="text-[10px] font-semibold text-muted">{k === 0 ? "4 votes" : "2 votes"}</span>
+                <span className="text-[11px] font-semibold text-muted">{k === 0 ? "4 votes" : "2 votes"}</span>
               )}
             </li>
           ))}
@@ -317,7 +317,7 @@ function IceCard({ b, i }: { b: Icebreaker; i: number }) {
         className="stk group flex h-full flex-col rounded-[26px] p-5 text-ink transition-transform duration-300 hover:-translate-y-1"
         style={{ background: b.tint } as CSSProperties}
       >
-        <div className="flex h-[150px] items-center justify-center rounded-[18px] border-2 border-ink bg-paper/70 px-3">
+        <div className="flex h-[150px] items-center justify-center rounded-[18px] bg-paper/70 px-3">
           <Demo id={b.id} />
         </div>
         <h3 className="display mt-5 text-[2rem] leading-none">{b.title}</h3>
@@ -355,9 +355,8 @@ export default function Mingle() {
       <Scallop color="var(--color-paper2)" at="top" />
 
       <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
-        <Eyebrow className="justify-center">The other problem</Eyebrow>
-        <h2 className="display mt-4 text-[clamp(2.4rem,5.6vw,4.6rem)] text-ink">
-          <Words text="Everyone came. *Nobody mingled.*" />
+        <h2 className="display text-[clamp(2.4rem,5.6vw,4.6rem)] text-ink">
+          <Words text="Everyone came. Nobody mingled." />
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted">
           You got everyone through the door. Then they stood in the same little
@@ -401,7 +400,7 @@ export default function Mingle() {
               aria-pressed={mixed === o.v}
               onClick={() => pick(o.v)}
               className={cn(
-                "rounded-full border-2 border-ink px-4 py-2 text-sm font-bold transition-colors duration-200",
+                "min-h-11 rounded-full border-2 border-ink px-4 py-2 text-sm font-bold transition-colors duration-200",
                 mixed === o.v ? "bg-ink text-paper shadow-[3px_3px_0_var(--color-coral)]" : "bg-white text-ink hover:bg-tint",
               )}
             >
@@ -441,7 +440,7 @@ export default function Mingle() {
         <div className="mt-12 flex justify-center">
           <a
             href="#live"
-            className="inline-flex items-center gap-2 text-base font-bold text-ink underline decoration-coral decoration-2 underline-offset-8"
+            className="inline-flex min-h-11 items-center gap-2 text-base font-bold text-ink underline decoration-coral decoration-2 underline-offset-8"
           >
             See the party go live <ArrowDown size={18} strokeWidth={2.6} />
           </a>

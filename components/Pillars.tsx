@@ -10,9 +10,9 @@ import {
   type MotionValue,
 } from "motion/react";
 import { PILLARS, type Pillar } from "@/app/data";
-import { Eyebrow, Reveal, Stamp, Words, useCalm } from "@/components/ui/kit";
+import { Reveal, Stamp, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Parallax } from "@/components/ui/depth";
 import { useMedia, WIDE_QUERY } from "@/lib/perf";
 
 import {
@@ -44,16 +44,12 @@ function PillarCard({ p, className }: { p: Pillar; className?: string }) {
       <div className="flex items-start justify-between gap-4">
         <span className="display text-6xl leading-none sm:text-7xl lg:short:text-6xl">{p.n}</span>
         {p.soon ? (
-          <a href="/coming-soon" className="mt-2 transition-transform hover:scale-105" aria-label="Coming soon: see what's on the way">
+          <a href="/coming-soon" className="inline-flex min-h-11 items-center transition-transform hover:scale-105" aria-label="Coming soon: see what's on the way">
             <Stamp className="bg-white/60" rotate={6}>
               Coming soon
             </Stamp>
           </a>
-        ) : (
-          <span className="mt-2 rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em]">
-            Pillar
-          </span>
-        )}
+        ) : null}
       </div>
       <h3 className="display mt-6 text-[clamp(1.9rem,3.2vw,2.9rem)] lg:short:mt-4 lg:short:text-[2.2rem]">{p.title}</h3>
       <p className="mt-4 text-lg leading-relaxed text-ink/80 lg:short:mt-3 lg:short:text-base">{p.body}</p>
@@ -116,14 +112,12 @@ export default function Pillars() {
 
   const header = (
     <>
-      <Eyebrow>The platform</Eyebrow>
-      <h2 className="display mt-4 text-[clamp(2.4rem,5vw,4.4rem)] text-ink lg:short:text-5xl lg:shorter:mt-3 lg:shorter:text-4xl">
-        <Words text="Five pillars. *One platform.*" />
+      <h2 className="display text-[clamp(2.4rem,5vw,4.4rem)] text-ink lg:short:text-5xl lg:shorter:text-4xl">
+        <Words text="Five things every host has to handle." />
       </h2>
       <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted lg:short:mt-3 lg:short:text-base">
-        Every part of the hosting journey from the moment you decide to throw
-        something to the moment the last guest leaves in a single mobile-first
-        experience.
+        Every part of hosting, from deciding to throw something to the last
+        guest leaving, in one app on your phone.
       </p>
     </>
   );
@@ -134,7 +128,6 @@ export default function Pillars() {
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[560vh] lg:block"}>
         {desk && (
         <div className="sticky top-0 isolate flex h-screen items-center overflow-hidden pt-24 shorter:pt-0">
-          <DepthField seed={11} count={10} progress={scrollYProgress} />
           <div className="mx-auto grid w-full max-w-7xl grid-cols-[1.1fr_1fr] items-center gap-10 px-8">
             <div>
               {header}

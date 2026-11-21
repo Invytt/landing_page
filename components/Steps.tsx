@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Mail } from "lucide-react";
 import { STEPS, type Step } from "@/app/data";
-import { Eyebrow, Stamp, Words, useCalm } from "@/components/ui/kit";
+import { Stamp, Words, useCalm } from "@/components/ui/kit";
 import { Phone } from "@/components/ui/phone";
-import { DepthField, Parallax } from "@/components/ui/depth";
+import { Parallax } from "@/components/ui/depth";
 
 import {
   CreateScreen,
@@ -61,11 +61,11 @@ function StepRow({ step, i, calm }: { step: Step; i: number; calm: boolean }) {
         style={calm ? undefined : { y: textY }}
         className={`pl-[76px] lg:pl-0 ${side === 1 ? "lg:order-1 lg:text-right" : "lg:order-2"}`}
       >
-        <p className={`eyebrow flex items-center gap-3 text-coral ${side === 1 ? "lg:justify-end" : ""}`}>
+        <p className={`eyebrow flex items-center gap-3 text-deep ${side === 1 ? "lg:justify-end" : ""}`}>
           Step {step.n}
           {step.soon && (
-            <a href="/coming-soon" className="transition-transform hover:scale-105" aria-label="Coming soon: see what's on the way">
-              <Stamp rotate={-4} className="!tracking-[0.14em]">
+            <a href="/coming-soon" className="inline-flex min-h-11 items-center transition-transform hover:scale-105" aria-label="Coming soon: see what's on the way">
+              <Stamp rotate={-4} color="var(--color-deep)" className="!tracking-[0.14em]">
                 Coming soon
               </Stamp>
             </a>
@@ -136,11 +136,9 @@ export default function Steps() {
 
   return (
     <section id="how-it-works" className="dots relative isolate overflow-hidden bg-paper py-24 lg:py-32">
-      <DepthField seed={23} count={22} />
       <Parallax speed={0.1} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
-        <Eyebrow className="justify-center">How it works</Eyebrow>
-        <h2 className="display mt-4 text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
-          <Words text="From idea to last guest, *in one app.*" />
+        <h2 className="display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
+          <Words text="From idea to last guest, in one app." />
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted">
           Create your event, invite your people, then let Invytt size the

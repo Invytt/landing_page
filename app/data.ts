@@ -180,7 +180,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       },
       {
         q: "Will you email me a lot?",
-        a: "No spam. Just one email when we launch.",
+        a: "No. A welcome email when you join, and one more when we launch. No spam.",
       },
       {
         q: "I still have a question.",
@@ -192,7 +192,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
 
 export const FAQ: FaqItem[] = FAQ_GROUPS.flatMap((g) => g.items);
 
-// ── The five pillars. Copy is fixed: do not reword. ──────────────────────────
+// ── The five pillars. Titles match the app's feature names. ─────────────────
 export type Pillar = {
   n: string;
   title: string;
@@ -206,28 +206,28 @@ export const PILLARS: Pillar[] = [
   {
     n: "01",
     title: "Guest RSVP Management",
-    body: "Invites, guestlists, +1s, WhatsApp RSVPs, reminders, and cost-splitting all in one dashboard.",
+    body: "Invites, guest lists, +1s, WhatsApp RSVPs, reminders, and cost-splitting, all in one dashboard.",
     tint: "#CDBEF7",
     screen: "rsvp",
   },
   {
     n: "02",
     title: "Smart Inventory Management",
-    body: "AI sizes food, drink, and supplies to your guest count with contributions and cost estimates.",
+    body: "AI sizes food, drink, and supplies to your guest count, then tracks who brings what and what it costs.",
     tint: "#8FD9B6",
     screen: "inventory",
   },
   {
     n: "03",
     title: "Invitation Design & Templates",
-    body: "Beautiful, customisable invites that feel personal ready in minutes.",
+    body: "Customisable invites that feel personal, ready in minutes.",
     tint: "#FFD6A5",
     screen: "templates",
   },
   {
     n: "04",
     title: "Vendor Marketplace",
-    body: "Discover and book caterers, decorators, photographers, DJs, and more with verified reviews.",
+    body: "Find and book caterers, decorators, photographers, DJs, and more, with verified reviews.",
     tint: "#BFDDFB",
     screen: "vendors",
     soon: true,
@@ -235,13 +235,13 @@ export const PILLARS: Pillar[] = [
   {
     n: "05",
     title: "Party Planning Management",
-    body: "Tasks, timelines, and budgets in one hub co-plan with co-hosts.",
+    body: "Tasks, timelines, and budgets in one place, shared with your co-hosts.",
     tint: "#F6C1D0",
     screen: "planning",
   },
 ];
 
-// ── The five steps. Copy is fixed: do not reword. ────────────────────────────
+// ── The five steps. ──────────────────────────────────────────────────────────
 export type Step = {
   n: string;
   title: string;
@@ -276,7 +276,7 @@ export const STEPS: Step[] = [
   {
     n: "4",
     title: "Book your vendors",
-    body: "Browse vetted caterers, decorators, photographers, and DJs book and pay in-app.",
+    body: "Browse vetted caterers, decorators, photographers, and DJs, then book and pay in the app.",
     tint: "#BFDDFB",
     screen: "vendors",
     soon: true,
@@ -284,7 +284,7 @@ export const STEPS: Step[] = [
   {
     n: "5",
     title: "Split the bill",
-    body: "Collect contributions and split costs with guests no more midnight UPI requests.",
+    body: "Collect contributions and split costs with guests. No more midnight UPI requests.",
     tint: "#F6C1D0",
     screen: "split",
   },

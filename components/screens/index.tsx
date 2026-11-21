@@ -917,7 +917,7 @@ export function ScanScreen({ met = false }: { met?: boolean }) {
             <AvStack ids={[2, 6]} s={34} />
           </div>
           <p className="mt-[6px] font-display text-[20px] leading-[1.05]">You met Kabir</p>
-          <span className="mt-[8px] inline-flex rounded-full border-2 border-ink bg-statusgreen px-[14px] py-[4px] text-[11px] font-bold text-white">
+          <span className="mt-[8px] inline-flex rounded-full border-2 border-ink bg-statusgreen px-[14px] py-[4px] text-[11px] font-bold text-ink">
             Add friend
           </span>
         </div>

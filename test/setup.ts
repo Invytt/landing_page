@@ -1,8 +1,12 @@
 import "@testing-library/jest-dom/vitest";
 import { afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
+import { resetJoined } from "@/lib/waitlist-joined";
 
-afterEach(() => cleanup());
+afterEach(() => {
+  cleanup();
+  resetJoined();
+});
 
 // jsdom lacks these APIs used by the components under test.
 class IO {

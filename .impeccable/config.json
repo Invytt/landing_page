@@ -1,0 +1,89 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "hard-offset-shadow",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-11-21T15:44:53.277Z",
+        "reason": "sanctioned: Ember sticker system mirrors the Invytt app (.stk/.stk-btn: ink outline + hard offset shadow)"
+      },
+      {
+        "rule": "hard-offset-shadow",
+        "value": "*",
+        "files": [
+          "components/ui/kit.tsx"
+        ],
+        "createdAt": "2026-11-21T15:44:53.310Z",
+        "reason": "sanctioned: Ember sticker system mirrors the Invytt app (.stk/.stk-btn: ink outline + hard offset shadow)"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-11-21T15:44:53.347Z",
+        "reason": "sanctioned: --color-paper #fbf6f4 is the Invytt app's own Ember page colour"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-11-21T15:44:53.378Z",
+        "reason": "literal: ticket tear line, dashed route line, record grooves"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "components/PartyLive.tsx"
+        ],
+        "createdAt": "2026-11-21T15:44:53.406Z",
+        "reason": "literal: ticket tear line, dashed route line, record grooves"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "components/InsideApp.tsx"
+        ],
+        "createdAt": "2026-11-21T15:44:53.433Z",
+        "reason": "literal: ticket tear line, dashed route line, record grooves"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "components/Hero.tsx"
+        ],
+        "createdAt": "2026-11-21T15:44:53.460Z",
+        "reason": "user confirmed: italic coral accent kept only in hero h1 and closing CTA h2 (2026-11-21)"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "components/TicketCTA.tsx"
+        ],
+        "createdAt": "2026-11-21T15:44:53.486Z",
+        "reason": "user confirmed: italic coral accent kept only in hero h1 and closing CTA h2 (2026-11-21)"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "components/site/ScrollProgress.tsx"
+        ],
+        "createdAt": "2026-11-21T16:24:06.556Z",
+        "reason": "literal: dashed progress line (a ticket-tear dash), not decoration"
+      }
+    ]
+  }
+}

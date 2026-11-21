@@ -58,6 +58,16 @@ html.lenis body {
   scroll-margin-top: 6rem;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li {
+  text-wrap: pretty;
+}
+
 body {
   background: var(--color-paper);
   color: var(--color-ink);
@@ -75,6 +85,13 @@ body {
   outline: 3px solid var(--color-coral);
   outline-offset: 3px;
   border-radius: 6px;
+}
+/* a coral ring vanishes against a coral button */
+.bg-coral:focus-visible {
+  outline-color: var(--color-ink);
+}
+.on-night .bg-coral:focus-visible {
+  outline-color: var(--color-paper);
 }
 
 @layer components {
@@ -460,7 +477,7 @@ body {
   }
 }
 .flyin {
-  animation: flyin 5.4s cubic-bezier(0.2, 1.2, 0.4, 1) infinite both;
+  animation: flyin 5.4s cubic-bezier(0.16, 1, 0.3, 1) infinite both;
 }
 
 @keyframes confetti {
@@ -483,52 +500,6 @@ body {
   animation: confetti 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) both;
 }
 
-@keyframes ldslide {
-  from {
-    left: -40%;
-  }
-  to {
-    left: 100%;
-  }
-}
-@keyframes ldtilt {
-  0%,
-  100% {
-    transform: rotate(0);
-  }
-  25% {
-    transform: rotate(2deg);
-  }
-  75% {
-    transform: rotate(-2deg);
-  }
-}
-@keyframes loaderOut {
-  to {
-    clip-path: circle(0% at 50% 42%);
-    visibility: hidden;
-  }
-}
-@keyframes loaderLate {
-  to {
-    clip-path: circle(0% at 50% 42%);
-    visibility: hidden;
-  }
-}
-/* The card lifts when the page says it is ready (data-ready on <html>, set by
-   the hero once it can animate). If scripts never run, it lifts by itself. */
-.loader {
-  clip-path: circle(150% at 50% 42%);
-  animation: loaderLate 0.8s cubic-bezier(0.7, 0, 0.3, 1) 6s forwards;
-}
-html[data-ready="1"] .loader {
-  animation: loaderOut 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-html[data-seen="1"] .loader,
-html[data-gone="1"] .loader {
-  display: none;
-}
-
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -547,9 +518,6 @@ html[data-gone="1"] .loader {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-  .loader {
-    display: none;
   }
 }
 
@@ -582,7 +550,7 @@ html[data-gone="1"] .loader {
   display: inline-block;
 }
 .silver.landed {
-  animation: silverLand 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: silverLand 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .silver-shine {
   position: absolute;
@@ -682,7 +650,6 @@ html[data-lite="1"] *::after {
   animation-iteration-count: 1 !important;
   transition-duration: 0.001ms !important;
 }
-html[data-lite="1"] .loader,
 html[data-lite="1"] .silver-shine {
   display: none;
 }

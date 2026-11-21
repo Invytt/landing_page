@@ -25,7 +25,7 @@ function expectResponsive(cls: string, base: RegExp, variant: RegExp) {
 describe("the two anchors of the page keep their words", () => {
   it("shows all five pillars, word for word", () => {
     const { container } = render(<Pillars />);
-    expect(text(container.querySelector("h2"))).toBe("Five pillars. One platform.");
+    expect(text(container.querySelector("h2"))).toBe("Five things every host has to handle.");
     expect(PILLARS).toHaveLength(5);
     expect(PILLARS.map((p) => p.title)).toEqual([
       "Guest RSVP Management",
