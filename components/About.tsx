@@ -60,7 +60,7 @@ function Polaroid({
       <motion.div style={calm ? undefined : { y }} className="stk-lg relative rounded-md bg-white p-3 pb-4">
         <span
           aria-hidden
-          className="absolute -top-3 left-1/2 h-6 w-24 -translate-x-1/2 border-x-2 border-dashed border-ink/20 opacity-90"
+          className="lit absolute -top-3 left-1/2 h-6 w-24 -translate-x-1/2 border-x-2 border-dashed border-ink/20 opacity-90"
           style={{ background: TAPE[i], rotate: `${i % 2 ? 4 : -5}deg` }}
         />
         <div
@@ -75,7 +75,7 @@ function Polaroid({
             className="pointer-events-none object-cover"
           />
         </div>
-        <figcaption className="mt-3 text-center font-display text-2xl italic leading-tight text-ink">
+        <figcaption className="mt-3 text-center font-display text-2xl font-normal italic leading-tight tracking-[-0.02em] text-ink">
           {s.role}
         </figcaption>
       </motion.div>
@@ -99,7 +99,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="dots relative isolate overflow-hidden bg-paper2 py-24 lg:py-32">
+    <section id="about" className="lit dots relative isolate overflow-hidden bg-paper2 py-24 lg:py-32">
       <Parallax speed={0.12} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
         <h2 className="display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
           <Words text="Built for the everyday host." />
@@ -109,7 +109,7 @@ export default function About() {
           people together, Invytt handles the chaos so you can actually enjoy
           your own party.
         </p>
-        <p className="mt-4 hidden text-sm font-bold text-deep lg:block">Pick one up. They&rsquo;re yours to move.</p>
+        <p className="mt-4 hidden text-sm font-medium text-deep lg:block">Pick one up. They&rsquo;re yours to move.</p>
       </Parallax>
 
       <div

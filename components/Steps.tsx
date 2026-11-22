@@ -135,7 +135,7 @@ export default function Steps() {
   const barH = useTransform(p, (v) => `${v * 100}%`);
 
   return (
-    <section id="how-it-works" className="dots relative isolate overflow-hidden bg-paper py-24 lg:py-32">
+    <section id="how-it-works" className="lit dots relative isolate overflow-hidden bg-paper py-24 lg:py-32">
       <Parallax speed={0.1} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
         <h2 className="display text-[clamp(2.4rem,5.4vw,4.6rem)] text-ink">
           <Words text="From idea to last guest, in one app." />

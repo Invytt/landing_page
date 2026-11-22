@@ -65,7 +65,7 @@ export default function LegalToc({ tint }: { tint: string }) {
             <a
               href={`#${it.id}`}
               aria-current={on ? "location" : undefined}
-              className={`block rounded-xl border-2 px-3 py-2 text-[15px] font-semibold leading-snug transition-colors ${
+              className={`block rounded-xl border-2 px-3 py-2 text-[15px] font-medium leading-snug transition-colors ${
                 on ? "border-ink text-ink " : "border-transparent text-muted hover:text-ink"
               }`}
               style={on ? { background: tint } : undefined}
@@ -82,7 +82,7 @@ export default function LegalToc({ tint }: { tint: string }) {
     <>
       {/* phones and tablets */}
       <details className="stk group rounded-[22px] bg-white p-4 lg:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between text-base font-bold text-ink">
+        <summary className="flex cursor-pointer list-none items-center justify-between text-base font-medium text-ink">
           On this page
           <ChevronDown size={20} strokeWidth={2.6} className="transition-transform group-open:rotate-180" />
         </summary>

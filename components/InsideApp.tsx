@@ -102,7 +102,7 @@ const FEATURES: Feature[] = [
         {["#CDBEF7", "#8FD9B6", "#FFD6A5"].map((c, i) => (
           <i
             key={c}
-            className="bob block h-12 w-9 rounded-lg border-2 border-ink"
+            className="lit bob block h-12 w-9 rounded-lg border-2 border-ink"
             style={{ background: c, ["--bob" as string]: `${2.2 + i * 0.5}s`, ["--r" as string]: `${(i - 1) * 8}deg` }}
           />
         ))}
@@ -128,7 +128,7 @@ const FEATURES: Feature[] = [
     line: "Stuck on the wording? Get a sharper title and description.",
     tint: "#FFD6A5",
     demo: (
-      <span className="flex flex-col gap-1 text-xs font-bold">
+      <span className="flex flex-col gap-1 text-xs font-medium">
         <span className="rounded-full border-2 border-ink bg-white px-2.5 py-1 line-through decoration-coral decoration-2">Dinner at mine</span>
         <span className="wiggle rounded-full border-2 border-ink bg-coral px-2.5 py-1 text-white">Rooftop dinner</span>
       </span>
@@ -140,7 +140,7 @@ const FEATURES: Feature[] = [
     line: "Food, drink and supplies sized to your guest count.",
     tint: "#BFDDFB",
     demo: (
-      <span className="flex flex-col gap-1 text-xs font-bold">
+      <span className="flex flex-col gap-1 text-xs font-medium">
         {["Samosas · 40", "Soft drinks · 9 L", "Plates · 24"].map((t, i) => (
           <span key={t} className="flyin rounded-full border-2 border-ink bg-white px-2.5 py-1" style={{ ["--fx" as string]: "40px", ["--fy" as string]: "0px", ["--fr" as string]: "6deg", ["--tr" as string]: "0deg", animationDelay: `${i * 0.25}s` }}>
             {t}
@@ -160,7 +160,7 @@ const FEATURES: Feature[] = [
         <span className="mt-2 block h-3 overflow-hidden rounded-full border-2 border-ink bg-white">
           <i className="block h-full w-[72%] bg-statusgreen" />
         </span>
-        <span className="mt-1 block text-[11px] font-bold">72% collected</span>
+        <span className="mt-1 block text-[11px] font-medium">72% collected</span>
       </span>
     ),
   },
@@ -189,7 +189,7 @@ const FEATURES: Feature[] = [
           { c: "#F6C1D0", r: 12, l: 68 },
         ].map((p) => (
           <i key={p.l} className="absolute top-1 block h-[84px] w-[68px] rounded-md border-2 border-ink bg-white p-1.5 pb-4 " style={{ left: p.l, rotate: `${p.r}deg` }}>
-            <b className="block h-full w-full rounded-sm border-[1.5px] border-ink" style={{ background: p.c }} />
+            <b className="lit block h-full w-full rounded-sm border-[1.5px] border-ink" style={{ background: p.c }} />
           </i>
         ))}
       </span>
@@ -202,7 +202,7 @@ const FEATURES: Feature[] = [
     tint: "#FFD6A5",
     wide: true,
     demo: (
-      <span className="flex max-w-[190px] flex-wrap gap-1 text-[11px] font-bold">
+      <span className="flex max-w-[190px] flex-wrap gap-1 text-[11px] font-medium">
         {["Poster", "Ticket", "Zine", "Receipt", "Record"].map((t, i) => (
           <span key={t} className={`rounded-full border-2 border-ink px-2 py-0.5 ${i === 1 ? "bg-coral text-white" : "bg-white"}`}>
             {t}
@@ -218,8 +218,8 @@ const FEATURES: Feature[] = [
     tint: "#CDBEF7",
     demo: (
       <span className="block w-28 overflow-hidden rounded-xl border-2 border-ink bg-white ">
-        <span className="block bg-coral px-2 py-1 text-[8px] font-bold tracking-[0.14em] text-white">MEMBER PASS</span>
-        <span className="flex items-center gap-1.5 p-2 text-xs font-bold">
+        <span className="block bg-coral px-2 py-1 text-[8px] font-medium tracking-[0.14em] text-white">MEMBER PASS</span>
+        <span className="flex items-center gap-1.5 p-2 text-xs font-medium">
           <Av i={2} s={26} /> Asha
         </span>
       </span>
@@ -231,7 +231,7 @@ const FEATURES: Feature[] = [
     line: "Find what’s on near you this weekend.",
     tint: "#BFDDFB",
     demo: (
-      <span className="flex flex-col gap-1 text-xs font-bold">
+      <span className="flex flex-col gap-1 text-xs font-medium">
         <span className="rounded-full border-2 border-ink bg-ink px-2.5 py-1 text-paper">Tonight</span>
         <span className="rounded-full border-2 border-ink bg-white px-2.5 py-1">Game nights</span>
       </span>
@@ -246,7 +246,7 @@ const FEATURES: Feature[] = [
     demo: (
       <span className="flex flex-col items-start gap-2">
         <AvStack ids={[1, 5, 9, 12]} s={30} />
-        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-bold text-ink ">
+        <span className="rounded-full border-2 border-ink bg-statusgreen px-3 py-1 text-xs font-medium text-ink ">
           Add friend
         </span>
       </span>
@@ -269,7 +269,7 @@ function FeatureTile({ f, i }: { f: Feature; i: number }) {
       <Parallax speed={[0.03, 0.09, 0.05, 0.11][i % 4]} className="h-full">
       <Tilt max={9} className="h-full rounded-[26px]">
         <article
-          className={`stk flex h-full min-h-[230px] flex-col justify-between gap-5 rounded-[26px] p-5 ${dark ? "text-paper" : "text-ink"}`}
+          className={`lit stk flex h-full min-h-[230px] flex-col justify-between gap-5 rounded-[26px] p-5 ${dark ? "text-paper" : "text-ink"}`}
           style={{ background: f.tint }}
         >
           <div className="flex items-start justify-between gap-3">
@@ -281,7 +281,7 @@ function FeatureTile({ f, i }: { f: Feature; i: number }) {
             </div>
           </div>
           <div>
-            <h3 className="display text-3xl">{f.title}</h3>
+            <h3 className="display text-2xl xl:text-3xl">{f.title}</h3>
             <p className={`mt-2 text-[15px] leading-snug ${dark ? "text-nightmuted" : "text-ink/75"}`}>{f.line}</p>
           </div>
         </article>
@@ -319,13 +319,13 @@ export default function InsideApp() {
   );
 
   return (
-    <section id="inside" className="relative isolate bg-paper2">
+    <section id="inside" className="lit relative isolate overflow-x-clip bg-paper2">
       {/* ── desktop: six phones fan out, scroll walks through them ── */}
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[460vh] lg:block"}>
         {desk && (
         <div className="sticky top-0 isolate grid h-screen grid-cols-[minmax(320px,0.8fr)_1.7fr] items-center overflow-hidden pt-20 shorter:pt-0">
           <div className="relative z-10 pl-8 xl:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-            <h2 className="display text-[clamp(2.2rem,3.6vw,3.8rem)] text-ink">
+            <h2 className="display text-[clamp(2.2rem,3.2vw,3.3rem)] text-ink">
               <Words text="The whole party, in your pocket." />
             </h2>
             <p className="display mt-8 flex items-baseline gap-3 text-ink short:mt-5">
@@ -334,7 +334,7 @@ export default function InsideApp() {
             </p>
             <p className="mt-3">
               <span
-                className="stk-sm inline-block rounded-full px-4 py-1.5 text-base font-bold transition-colors duration-300"
+                className="lit stk-sm inline-block rounded-full px-4 py-1.5 text-base font-medium transition-colors duration-300"
                 style={{ background: TOUR[active].tint }}
               >
                 {TOUR[active].name}
@@ -377,7 +377,7 @@ export default function InsideApp() {
                 {t.screen}
               </Phone>
               <figcaption className="mt-5 text-center">
-                <span className="stk-sm inline-block rounded-full px-3.5 py-1 text-sm font-bold" style={{ background: t.tint }}>
+                <span className="lit stk-sm inline-block rounded-full px-3.5 py-1 text-sm font-medium" style={{ background: t.tint }}>
                   {t.name}
                 </span>
                 <span className="mt-2 block text-[15px] leading-snug text-muted">{t.line}</span>

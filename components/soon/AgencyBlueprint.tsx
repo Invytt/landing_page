@@ -56,7 +56,7 @@ function MoodBoard() {
       <p className="eyebrow !text-[10px] text-muted">Concept · mood board</p>
       <div className="mt-2 grid grid-cols-3 gap-2">
         {["#FF9A5C", "#F6C1D0", "#FFD6A5", "#D2402A", "#CDBEF7", "#8FD9B6"].map((c, k) => (
-          <span key={c} className="h-9 rounded-lg border-2 border-ink" style={{ background: c, rotate: `${(k % 3) - 1}deg` }} />
+          <span key={c} className="lit h-9 rounded-lg border-2 border-ink" style={{ background: c, rotate: `${(k % 3) - 1}deg` }} />
         ))}
       </div>
       <p className="display mt-2 text-xl leading-none">Marigold &amp; moonlight</p>
@@ -75,7 +75,7 @@ function VendorStack() {
       {v.map(({ I, t, c }, k) => (
         <div
           key={t}
-          className="stk-sm absolute inset-x-0 flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-bold text-ink"
+          className="lit stk-sm absolute inset-x-0 flex items-center gap-2 rounded-2xl px-3 py-2 text-sm font-medium text-ink"
           style={{ background: c, top: k * 40, rotate: `${(k - 1) * 3}deg` }}
         >
           <I size={16} strokeWidth={2.4} /> {t}
@@ -133,7 +133,7 @@ function RunOfDay() {
       <p className="eyebrow !text-[10px] text-ink/70">Coordination · the day</p>
       <div className="mt-2 space-y-1.5">
         {rows.map(([t, w]) => (
-          <div key={t} className="flex items-center gap-2 rounded-xl border-2 border-ink bg-white px-2 py-1 text-xs font-bold">
+          <div key={t} className="flex items-center gap-2 rounded-xl border-2 border-ink bg-white px-2 py-1 text-xs font-medium">
             <span className="w-14 text-muted">{t}</span> {w}
           </div>
         ))}
@@ -174,7 +174,7 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
           className="pointer-events-none absolute right-[10%] top-[15%] -z-10 h-[70vh] w-[70vh] rounded-full opacity-40"
         >
           <span
-            className="block h-full w-full rounded-full"
+            className="lit block h-full w-full rounded-full"
             style={{ background: "radial-gradient(circle, rgb(255 154 92 / 0.95) 0%, rgb(255 154 92 / 0.45) 30%, rgb(255 154 92 / 0.12) 55%, transparent 72%)" }}
           />
         </motion.span>
@@ -220,7 +220,7 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
             {PARTS.map((t, i) => (
               <li
                 key={t}
-                className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold transition-all duration-300 ${
+                className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ${
                   i < step ? "bg-peach text-ink " : i === step ? "bg-paper text-ink " : "bg-night2 text-nightmuted"
                 }`}
               >
@@ -250,7 +250,7 @@ export default function AgencyBlueprint({ calm }: { calm: boolean }) {
                 backgroundSize: "28px 28px",
               }}
             >
-              <span className="absolute left-5 top-4 text-[11px] font-bold uppercase tracking-[0.2em] text-nightmuted">
+              <span className="absolute left-5 top-4 text-[11px] font-medium uppercase tracking-[0.2em] text-nightmuted">
                 Event plan · example
               </span>
               {/* empty slots */}

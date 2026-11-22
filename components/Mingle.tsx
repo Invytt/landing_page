@@ -184,7 +184,7 @@ function Tag({
   return (
     <span
       className={cn(
-        "absolute w-max rounded-full border-2 border-ink px-2.5 py-1 text-center text-[11px] font-bold leading-tight sm:max-w-none sm:whitespace-nowrap sm:text-xs",
+        "absolute w-max rounded-full border-2 border-ink px-2.5 py-1 text-center text-[11px] font-medium leading-tight sm:max-w-none sm:whitespace-nowrap sm:text-xs",
         wide ? "max-w-[88%]" : "max-w-[44%]",
         light ? "text-white" : "text-ink",
       )}
@@ -208,7 +208,7 @@ function Bubble({ children, me = false }: { children: ReactNode; me?: boolean })
   return (
     <span
       className={cn(
-        "max-w-[85%] rounded-2xl border-2 border-ink px-3 py-1.5 text-xs font-semibold leading-snug",
+        "max-w-[85%] rounded-2xl border-2 border-ink px-3 py-1.5 text-xs font-medium leading-snug",
         me ? "self-end rounded-br-md bg-coral text-white" : "self-start rounded-bl-md bg-white text-ink",
       )}
     >
@@ -224,10 +224,10 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center">
             <span className="h-14 w-7 rounded-l-full border-2 border-r-0 border-ink bg-lilac transition-transform duration-500 group-hover:translate-x-1.5" />
-            <span className="mx-2 text-lg font-bold text-ink/40 transition-opacity duration-300 group-hover:opacity-0">+</span>
+            <span className="mx-2 text-lg font-medium text-ink/40 transition-opacity duration-300 group-hover:opacity-0">+</span>
             <span className="h-14 w-7 rounded-r-full border-2 border-l-0 border-ink bg-lilac transition-transform duration-500 group-hover:-translate-x-1.5" />
           </div>
-          <span className="rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold">
+          <span className="rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-medium">
             &ldquo;How do you know the host?&rdquo;
           </span>
         </div>
@@ -241,7 +241,7 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
               <li
                 key={sq}
                 className={cn(
-                  "flex min-h-[38px] items-center justify-center rounded-lg border-[1.5px] border-ink px-1 text-center text-[11px] font-bold leading-tight",
+                  "flex min-h-[38px] items-center justify-center rounded-lg border-[1.5px] border-ink px-1 text-center text-[11px] font-medium leading-tight",
                   got ? "bg-going text-goingtext" : "bg-white text-ink",
                 )}
               >
@@ -255,7 +255,7 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
       return (
         <div className="flex items-center gap-4">
           <span
-            className="spin-slow block h-16 w-16 rounded-full border-2 border-ink"
+            className="lit spin-slow block h-16 w-16 rounded-full border-2 border-ink"
             style={{
               background:
                 "conic-gradient(#CDBEF7 0 60deg,#8FD9B6 60deg 120deg,#FFD6A5 120deg 180deg,#F6C1D0 180deg 240deg,#BFDDFB 240deg 300deg,#FF9A5C 300deg 360deg)",
@@ -263,11 +263,11 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
             }}
           />
           <div className="flex flex-col items-start gap-2">
-            <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white py-0.5 pl-0.5 pr-3 text-xs font-bold">
+            <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white py-0.5 pl-0.5 pr-3 text-xs font-medium">
               <Av i={3} s={24} />
               <Av i={7} s={24} style={{ marginLeft: -10 }} /> You + Kabir
             </span>
-            <span className="rounded-full border-2 border-ink bg-ink px-2.5 py-0.5 text-xs font-bold tabular-nums text-paper">
+            <span className="rounded-full border-2 border-ink bg-ink px-2.5 py-0.5 text-xs font-medium tabular-nums text-paper">
               4:00 to chat
             </span>
           </div>
@@ -279,7 +279,7 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
           {["Has been on TV", "Can cook biryani", "Knows a magic trick"].map((t, k) => (
             <li
               key={t}
-              className="flex items-center justify-between gap-2 rounded-xl border-2 border-ink bg-white px-3 py-1.5 text-xs font-bold"
+              className="flex items-center justify-between gap-2 rounded-xl border-2 border-ink bg-white px-3 py-1.5 text-xs font-medium"
             >
               <span>{t}</span>
               {k === 1 ? (
@@ -287,7 +287,7 @@ function Demo({ id }: { id: Icebreaker["id"] }) {
                   Lie
                 </Stamp>
               ) : (
-                <span className="text-[11px] font-semibold text-muted">{k === 0 ? "4 votes" : "2 votes"}</span>
+                <span className="text-[11px] font-medium text-muted">{k === 0 ? "4 votes" : "2 votes"}</span>
               )}
             </li>
           ))}
@@ -314,7 +314,7 @@ function IceCard({ b, i }: { b: Icebreaker; i: number }) {
   return (
     <Reveal delay={(i % 3) * 0.08} className="h-full">
       <article
-        className="stk group flex h-full flex-col rounded-[26px] p-5 text-ink transition-transform duration-300 hover:-translate-y-1"
+        className="lit stk group flex h-full flex-col rounded-[26px] p-5 text-ink transition-transform duration-300 hover:-translate-y-1"
         style={{ background: b.tint } as CSSProperties}
       >
         <div className="flex h-[150px] items-center justify-center rounded-[18px] bg-paper/70 px-3">
@@ -322,7 +322,7 @@ function IceCard({ b, i }: { b: Icebreaker; i: number }) {
         </div>
         <h3 className="display mt-5 text-[2rem] leading-none">{b.title}</h3>
         <p className="mt-2 flex-1 text-[15px] leading-snug text-ink/80">{b.body}</p>
-        <span className="mt-4 self-start rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold">{b.meta}</span>
+        <span className="mt-4 self-start rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-medium">{b.meta}</span>
       </article>
     </Reveal>
   );
@@ -351,7 +351,7 @@ export default function Mingle() {
   };
 
   return (
-    <section id="mingle" className="dots relative isolate bg-paper pb-24 pt-28 lg:pb-32">
+    <section id="mingle" className="lit dots relative isolate bg-paper pb-24 pt-28 lg:pb-32">
       <Scallop color="var(--color-paper2)" at="top" />
 
       <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
@@ -377,7 +377,7 @@ export default function Mingle() {
                     <Icon size={18} strokeWidth={2.4} />
                   </span>
                   <span>
-                    <span className="block text-base font-bold text-ink">{p.title}</span>
+                    <span className="block text-base font-medium text-ink">{p.title}</span>
                     <span className="mt-1 block text-[15px] leading-snug text-muted">{p.body}</span>
                   </span>
                 </div>
@@ -400,7 +400,7 @@ export default function Mingle() {
               aria-pressed={mixed === o.v}
               onClick={() => pick(o.v)}
               className={cn(
-                "min-h-11 rounded-full border-2 border-ink px-4 py-2 text-sm font-bold transition-colors duration-200",
+                "min-h-11 rounded-full border-2 border-ink px-4 py-2 text-sm font-medium transition-colors duration-200",
                 mixed === o.v ? "bg-ink text-paper " : "bg-white text-ink hover:bg-tint",
               )}
             >
@@ -409,7 +409,7 @@ export default function Mingle() {
           ))}
         </div>
         <Floor mixed={mixed} narrow={narrow} />
-        <p aria-live="polite" className="mx-auto mt-5 max-w-2xl text-center text-base font-semibold text-ink">
+        <p aria-live="polite" className="mx-auto mt-5 max-w-2xl text-center text-base font-medium text-ink">
           {mixed
             ? "Same guests, same room. A few rounds in, everyone has talked to someone new, and the host is a guest again."
             : "Three circles, two people on the edges, and a host doing every introduction."}
@@ -440,7 +440,7 @@ export default function Mingle() {
         <div className="mt-12 flex justify-center">
           <a
             href="#live"
-            className="inline-flex min-h-11 items-center gap-2 text-base font-bold text-ink underline decoration-coral decoration-2 underline-offset-8"
+            className="inline-flex min-h-11 items-center gap-2 text-base font-medium text-ink underline decoration-coral decoration-2 underline-offset-8"
           >
             See the party go live <ArrowDown size={18} strokeWidth={2.6} />
           </a>

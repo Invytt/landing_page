@@ -33,12 +33,12 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
       <ScrollProgress />
       <Marquee />
       <Nav base="/" />
-      <main className="relative overflow-x-clip bg-paper text-ink">
+      <main className="lit relative overflow-x-clip bg-paper text-ink">
         {/* ── header ── */}
         <header className="on-night dots-night relative isolate bg-night pb-24 pt-36 text-paper sm:pt-40">
           <span
             aria-hidden
-            className="pointer-events-none absolute right-[-10%] top-0 -z-10 h-[60vh] w-[60vh] rounded-full opacity-35"
+            className="lit pointer-events-none absolute right-[-10%] top-0 -z-10 h-[60vh] w-[60vh] rounded-full opacity-35"
             style={{ background: `radial-gradient(circle, ${page.tint} 0%, color-mix(in srgb, ${page.tint} 45%, transparent) 30%, color-mix(in srgb, ${page.tint} 12%, transparent) 55%, transparent 72%)` }}
           />
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -52,7 +52,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
                 <p className="mt-5 max-w-2xl text-lg leading-relaxed text-nightmuted">{summary}</p>
                 <ul className="mt-6 flex flex-wrap gap-2">
                   {updated.split(" · ").map((u) => (
-                    <li key={u} className="rounded-full border-2 border-paper/25 px-3.5 py-1 text-sm font-semibold text-paper">
+                    <li key={u} className="rounded-full border-2 border-paper/25 px-3.5 py-1 text-sm font-medium text-paper">
                       {u}
                     </li>
                   ))}
@@ -60,7 +60,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
               </div>
               <span
                 aria-hidden
-                className="flex h-28 w-28 shrink-0 rotate-[-8deg] items-center justify-center rounded-[30px] border-2 border-ink text-ink sm:h-32 sm:w-32"
+                className="lit flex h-28 w-28 shrink-0 rotate-[-8deg] items-center justify-center rounded-[30px] border-2 border-ink text-ink sm:h-32 sm:w-32"
                 style={{ background: page.tint }}
               >
                 <page.Icon size={52} strokeWidth={2} />
@@ -76,7 +76,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
                     key={p.kind}
                     href={p.href}
                     aria-current={on ? "page" : undefined}
-                    className={`inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform hover:-translate-y-0.5 ${
+                    className={`inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-medium transition-transform hover:-translate-y-0.5 ${
                       on ? "text-ink " : "bg-night2 text-paper"
                     }`}
                     style={on ? { background: p.tint } : undefined}
@@ -106,7 +106,7 @@ export default function LegalPage({ title, summary, updated, kind, children }: L
 
         <div className="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
           <div className="stk flex flex-col gap-2 rounded-[24px] bg-white p-6 text-sm leading-6 text-muted sm:p-7 lg:ml-[calc(240px+4rem)] lg:max-w-[72ch]">
-            <p className="font-bold text-ink">INVYTT PRIVATE LIMITED · support@invytt.com</p>
+            <p className="font-medium text-ink">INVYTT PRIVATE LIMITED · support@invytt.com</p>
             <p>PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</p>
           </div>
         </div>

@@ -77,11 +77,11 @@ export default function TermsPage() {
       <p>We may update these Terms. The current version is published at <strong>https://invytt.com/terms</strong> and linked from the App. We update the “Last updated” date and provide additional notice for material changes.</p>
       <h2>17. Contact</h2>
       <dl className="my-7 grid gap-4 sm:grid-cols-[max-content_1fr] sm:gap-x-6 sm:gap-y-3">
-        <dt className="font-semibold text-black">Company</dt>
+        <dt className="font-medium text-black">Company</dt>
         <dd>INVYTT PRIVATE LIMITED</dd>
-        <dt className="font-semibold text-black">Email</dt>
+        <dt className="font-medium text-black">Email</dt>
         <dd><a href="mailto:support@invytt.com">support@invytt.com</a></dd>
-        <dt className="font-semibold text-black">Address</dt>
+        <dt className="font-medium text-black">Address</dt>
         <dd>PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</dd>
       </dl>
     </LegalPage>

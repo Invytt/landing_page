@@ -121,7 +121,7 @@ export default function WaitlistForm({
         id={statusId}
         role="status"
         className={cn(
-          "mt-3 text-sm font-semibold",
+          "mt-3 text-sm font-medium",
           state === "error" || state === "invalid"
             ? night
               ? "text-peach"

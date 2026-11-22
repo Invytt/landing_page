@@ -41,14 +41,14 @@ export default function SoonCTA() {
           {state === "success" && <Confetti count={36} spread={320} />}
           <ul className="mt-6 flex flex-wrap justify-center gap-2">
             {MARQUEE.map((perk, i) => (
-              <li key={perk} className="stk-sm rounded-full px-3.5 py-1 text-sm font-bold" style={{ background: TINTS[i % TINTS.length], rotate: `${i % 2 ? 1.5 : -1.5}deg` }}>
+              <li key={perk} className="lit stk-sm rounded-full px-3.5 py-1 text-sm font-medium" style={{ background: TINTS[i % TINTS.length], rotate: `${i % 2 ? 1.5 : -1.5}deg` }}>
                 {perk}
               </li>
             ))}
           </ul>
         </motion.div>
         <p className="mt-8 text-center">
-          <Link href="/" className="inline-flex items-center gap-2 text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-8">
+          <Link href="/" className="inline-flex items-center gap-2 text-base font-medium text-paper underline decoration-coral decoration-2 underline-offset-8">
             <ArrowLeft size={18} strokeWidth={2.6} /> See what launches first
           </Link>
         </p>

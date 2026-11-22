@@ -4,18 +4,26 @@
 @custom-variant short (@media (max-height: 840px));
 @custom-variant shorter (@media (max-height: 720px));
 
-/* ── Ember: the Invytt app's colours, type and shapes ───────────────────── */
+/* ── Paper-cut: the site's colours and type ─────────────────────────────
+   After the "Ritaglio" hero: a black field, cream paper, Invytt coral and a
+   butter-yellow spark. One typeface, Archivo, loud at width 125.
+
+   The site's colour names keep their jobs: `paper` is the ground (now black)
+   and `ink` is what's written on it (now cream). Anything that carries its
+   own colour (cream cards, pastel cards, the dark ".on-night" sections) and
+   the app screens inside the phones switch back to dark ink on light paper,
+   below, so text never goes unreadable. */
 @theme {
-  --color-paper: #fbf6f4;
-  --color-paper2: #f7edea;
-  --color-ink: #2b1719;
-  --color-muted: #6e5859;
+  --color-paper: #0e0d0c;
+  --color-paper2: #161513;
+  --color-ink: #f3ecdc;
+  --color-muted: #a8a194;
   --color-coral: #d2402a;
-  --color-deep: #a3301d;
-  --color-tint: #ffeae5;
-  --color-night: #1f0b0c;
-  --color-night2: #2e1416;
-  --color-nightmuted: #cfafaa;
+  --color-deep: #ff8b6b;
+  --color-tint: #2a1714;
+  --color-night: #0e0d0c;
+  --color-night2: #161513;
+  --color-nightmuted: #a8a194;
   --color-lilac: #cdbef7;
   --color-mint: #8fd9b6;
   --color-sky: #bfddfb;
@@ -25,19 +33,219 @@
   --color-going: #d8f5ec;
   --color-goingtext: #0b6b50;
   --color-live: #3ccfbf;
-  --color-line: #f3e9e6;
-  --color-chip: #f3e6e2;
+  --color-line: #2b2926;
+  --color-chip: #1d1b19;
   --color-statusgreen: #4caf50;
+  --color-cream: #f3ecdc;
+  --color-butter: #f5c63c;
 }
 
 @theme inline {
-  --font-display: var(--f-serif), Georgia, "Times New Roman", serif;
-  --font-body: var(--f-sans), system-ui, -apple-system, sans-serif;
-  --font-sans: var(--f-sans), system-ui, -apple-system, sans-serif;
+  --font-display: var(--f-display), "Helvetica Neue", Arial, sans-serif;
+  --font-body: var(--f-text), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--f-text), system-ui, -apple-system, sans-serif;
 }
 
 :root {
-  color-scheme: light;
+  --f-display: var(--f-archivo), var(--f-sans);
+  --f-text: var(--f-archivo), var(--f-sans);
+}
+
+/* Cream paper and coloured paper: dark ink on them, as on a cut-out. */
+.lit,
+.on-night,
+.bg-white,
+.bg-cream,
+.bg-butter,
+.bg-lilac,
+.bg-mint,
+.bg-sky,
+.bg-peach,
+.bg-sand,
+.bg-pink,
+.bg-going,
+.bg-live,
+.bg-tint,
+/* pastel paper set inline (tints from data, animated tints) */
+[style*="background:#8FD9B6;" i],
+[style*="background: #8FD9B6;" i],
+[style$="background:#8FD9B6" i],
+[style*="background:#BFDDFB;" i],
+[style*="background: #BFDDFB;" i],
+[style$="background:#BFDDFB" i],
+[style*="background:#CDBEF7;" i],
+[style*="background: #CDBEF7;" i],
+[style$="background:#CDBEF7" i],
+[style*="background:#F6C1D0;" i],
+[style*="background: #F6C1D0;" i],
+[style$="background:#F6C1D0" i],
+[style*="background:#FF9A5C;" i],
+[style*="background: #FF9A5C;" i],
+[style$="background:#FF9A5C" i],
+[style*="background:#FFD6A5;" i],
+[style*="background: #FFD6A5;" i],
+[style$="background:#FFD6A5" i],
+[style*="background:#FFEAE5;" i],
+[style*="background: #FFEAE5;" i],
+[style$="background:#FFEAE5" i],
+[style*="background:#D8F5EC;" i],
+[style*="background: #D8F5EC;" i],
+[style$="background:#D8F5EC" i],
+[style*="background:#fff;" i],
+[style*="background: #fff;" i],
+[style$="background:#fff" i],
+[style*="background:#ffffff;" i],
+[style*="background: #ffffff;" i],
+[style$="background:#ffffff" i],
+[style*="background-color: rgb(143, 217, 182)"],
+[style*="background: rgb(143, 217, 182)"],
+[style*="background-color: rgb(191, 221, 251)"],
+[style*="background: rgb(191, 221, 251)"],
+[style*="background-color: rgb(205, 190, 247)"],
+[style*="background: rgb(205, 190, 247)"],
+[style*="background-color: rgb(216, 245, 236)"],
+[style*="background: rgb(216, 245, 236)"],
+[style*="background-color: rgb(246, 193, 208)"],
+[style*="background: rgb(246, 193, 208)"],
+[style*="background-color: rgb(255, 154, 92)"],
+[style*="background: rgb(255, 154, 92)"],
+[style*="background-color: rgb(255, 214, 165)"],
+[style*="background: rgb(255, 214, 165)"],
+[style*="background-color: rgb(255, 234, 229)"],
+[style*="background: rgb(255, 234, 229)"],
+[style*="background-color: rgb(255, 255, 255)"],
+[style*="background: rgb(255, 255, 255)"] {
+  --color-paper: #f3ecdc;
+  --color-paper2: #ebe3d1;
+  --color-ink: #0e0d0c;
+  --color-muted: #5c564c;
+  --color-deep: #a3301d;
+  --color-tint: #ffeae5;
+  --color-line: #ddd3bf;
+  --color-chip: #e7dfcc;
+  --color-nightmuted: #a8a194;
+}
+/* …and write in it: text on a cut-out is dark unless it says otherwise. In
+   the base layer, so any text colour a component sets still wins. */
+@layer base {
+  .lit,
+  .bg-white,
+  .bg-cream,
+  .bg-butter,
+  .bg-lilac,
+  .bg-mint,
+  .bg-sky,
+  .bg-peach,
+  .bg-sand,
+  .bg-pink,
+  .bg-going,
+  .bg-live,
+  .bg-tint,
+  [style*="background:#8FD9B6;" i],
+  [style*="background: #8FD9B6;" i],
+  [style$="background:#8FD9B6" i],
+  [style*="background:#BFDDFB;" i],
+  [style*="background: #BFDDFB;" i],
+  [style$="background:#BFDDFB" i],
+  [style*="background:#CDBEF7;" i],
+  [style*="background: #CDBEF7;" i],
+  [style$="background:#CDBEF7" i],
+  [style*="background:#F6C1D0;" i],
+  [style*="background: #F6C1D0;" i],
+  [style$="background:#F6C1D0" i],
+  [style*="background:#FF9A5C;" i],
+  [style*="background: #FF9A5C;" i],
+  [style$="background:#FF9A5C" i],
+  [style*="background:#FFD6A5;" i],
+  [style*="background: #FFD6A5;" i],
+  [style$="background:#FFD6A5" i],
+  [style*="background:#FFEAE5;" i],
+  [style*="background: #FFEAE5;" i],
+  [style$="background:#FFEAE5" i],
+  [style*="background:#D8F5EC;" i],
+  [style*="background: #D8F5EC;" i],
+  [style$="background:#D8F5EC" i],
+  [style*="background:#fff;" i],
+  [style*="background: #fff;" i],
+  [style$="background:#fff" i],
+  [style*="background:#ffffff;" i],
+  [style*="background: #ffffff;" i],
+  [style$="background:#ffffff" i],
+  [style*="background-color: rgb(143, 217, 182)"],
+  [style*="background: rgb(143, 217, 182)"],
+  [style*="background-color: rgb(191, 221, 251)"],
+  [style*="background: rgb(191, 221, 251)"],
+  [style*="background-color: rgb(205, 190, 247)"],
+  [style*="background: rgb(205, 190, 247)"],
+  [style*="background-color: rgb(216, 245, 236)"],
+  [style*="background: rgb(216, 245, 236)"],
+  [style*="background-color: rgb(246, 193, 208)"],
+  [style*="background: rgb(246, 193, 208)"],
+  [style*="background-color: rgb(255, 154, 92)"],
+  [style*="background: rgb(255, 154, 92)"],
+  [style*="background-color: rgb(255, 214, 165)"],
+  [style*="background: rgb(255, 214, 165)"],
+  [style*="background-color: rgb(255, 234, 229)"],
+  [style*="background: rgb(255, 234, 229)"],
+  [style*="background-color: rgb(255, 255, 255)"],
+  [style*="background: rgb(255, 255, 255)"],
+  .bg-night,
+  .bg-night2 {
+    color: var(--color-ink);
+  }
+}
+/* The legal pages' sticker cards (written in CSS, not classes) are paper too. */
+.legal-content dl,
+.legal-faq section > div {
+  --color-paper: #f3ecdc;
+  --color-ink: #0e0d0c;
+  --color-muted: #5c564c;
+  --color-deep: #a3301d;
+  --color-line: #ddd3bf;
+  color: var(--color-ink);
+  background: var(--color-cream) !important;
+}
+/* White cards become cream paper. */
+.bg-white {
+  background-color: var(--color-cream);
+}
+/* The dark sections keep a black ground with cream writing; the cards in
+   them are cream paper. */
+.on-night {
+  --color-night: #0e0d0c;
+  --color-night2: #161513;
+}
+/* A black chip on the black page writes in cream. */
+.bg-night,
+.bg-night2 {
+  --color-paper: #f3ecdc;
+  --color-ink: #f3ecdc;
+  --color-nightmuted: #a8a194;
+}
+
+/* The app, inside the phone frames: exactly the app's own light colours and
+   type, untouched by the site around it. */
+.app-screen {
+  --color-paper: #fbf6f4;
+  --color-paper2: #f7edea;
+  --color-ink: #2b1719;
+  --color-muted: #6e5859;
+  --color-deep: #a3301d;
+  --color-tint: #ffeae5;
+  --color-night: #1f0b0c;
+  --color-night2: #2e1416;
+  --color-nightmuted: #cfafaa;
+  --color-line: #f3e9e6;
+  --color-chip: #f3e6e2;
+  --f-display: var(--f-serif);
+  --f-text: var(--f-sans);
+}
+.app-screen .bg-white {
+  background-color: #fff;
+}
+
+:root {
+  color-scheme: dark;
 }
 
 html {
@@ -112,7 +320,7 @@ body {
     padding: 0.7rem 1.5rem;
     border-radius: 999px;
     border: 2px solid var(--color-ink);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1rem;
     line-height: 1.15;
     text-align: center;
@@ -138,16 +346,46 @@ body {
 
   .eyebrow {
     font-size: 0.8rem;
-    font-weight: 800;
+    font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
+  }
+
+  /* Headlines: Archivo, wide and heavy, as in the hero. In the phone
+     frames the app's own serif comes back. */
+  /* Bold is kept for the main section headings (h1, h2) only; every other
+     headline in the display face is regular. */
+  .font-display {
+    font-weight: 400;
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+  }
+  .app-screen .font-display {
+    font-weight: 400;
+    font-stretch: 100%;
+    letter-spacing: normal;
   }
 
   .display {
     font-family: var(--font-display);
     font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
+    font-stretch: 125%;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+  }
+  h1.display,
+  h2.display,
+  h1.font-display,
+  h2.font-display {
+    font-weight: 600;
+  }
+  .app-screen h1.font-display,
+  .app-screen h2.font-display {
+    font-weight: 400;
+  }
+  /* emphasis in running text: medium weight, not bold */
+  :where(strong, b):not(:where(.app-screen *)) {
+    font-weight: 500;
   }
   .display em {
     font-style: italic;
@@ -158,7 +396,7 @@ body {
   .dots {
     background-image: radial-gradient(
       circle,
-      rgb(43 23 25 / 0.09) 1.2px,
+      color-mix(in srgb, var(--color-ink) 9%, transparent) 1.2px,
       transparent 1.4px
     );
     background-size: 22px 22px;
@@ -166,7 +404,7 @@ body {
   .dots-night {
     background-image: radial-gradient(
       circle,
-      rgb(255 234 229 / 0.09) 1.2px,
+      rgb(243 236 220 / 0.07) 1.2px,
       transparent 1.4px
     );
     background-size: 22px 22px;
@@ -177,7 +415,7 @@ body {
     height: 2px;
     background: repeating-linear-gradient(
       90deg,
-      rgb(43 23 25 / 0.35) 0 6px,
+      color-mix(in srgb, var(--color-ink) 35%, transparent) 0 6px,
       transparent 6px 11px
     );
   }
@@ -185,7 +423,7 @@ body {
     width: 2px;
     background: repeating-linear-gradient(
       180deg,
-      rgb(43 23 25 / 0.35) 0 6px,
+      color-mix(in srgb, var(--color-ink) 35%, transparent) 0 6px,
       transparent 6px 11px
     );
   }
@@ -221,12 +459,12 @@ body {
     position: absolute;
     inset: 0 0 auto 0;
     height: 2px;
-    background: repeating-linear-gradient(90deg, rgb(43 23 25 / 0.3) 0 7px, transparent 7px 13px);
+    background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-ink) 30%, transparent) 0 7px, transparent 7px 13px);
   }
   .legal-content h3 {
     margin-top: 2rem;
     font-size: 1.15rem;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-ink);
   }
   .legal-content p {
@@ -259,10 +497,10 @@ body {
   }
   .legal-content strong {
     color: var(--color-ink);
-    font-weight: 700;
+    font-weight: 500;
   }
   .legal-content a {
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-ink);
     text-decoration: underline;
     text-decoration-color: var(--color-coral);
@@ -289,7 +527,7 @@ body {
     }
   }
   .legal-content dt {
-    font-weight: 700;
+    font-weight: 500;
     color: var(--color-ink);
   }
   .legal-content dd {

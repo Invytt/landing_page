@@ -83,6 +83,15 @@
         ],
         "createdAt": "2026-11-21T16:24:06.556Z",
         "reason": "literal: dashed progress line (a ticket-tear dash), not decoration"
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "components/screens/index.tsx"
+        ],
+        "createdAt": "2026-11-21T18:14:00.407Z",
+        "reason": "Claude judged: L776 is the Invytt app's bottom-sheet mock, a 2px ink top outline (the sticker system's outline) on a rounded-top sheet, not an accent border; line predates this session (03a2218)"
       }
     ]
   }

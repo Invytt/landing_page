@@ -18,8 +18,18 @@ const LINKS = [
  * `soon` marks the coming-soon page: its button then leads back to what's in
  * the app now, instead of to the page you're already on.
  */
-export default function Nav({ base = "", soon = false }: { base?: string; soon?: boolean }) {
+export default function Nav({
+  base = "",
+  soon = false,
+  afterHero = false,
+}: {
+  base?: string;
+  soon?: boolean;
+  /** The first screen carries its own nav: this one waits until it's passed. */
+  afterHero?: boolean;
+}) {
   const [hidden, setHidden] = useState(false);
+  const [overHero, setOverHero] = useState(afterHero);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const lastY = useRef(0);
@@ -31,6 +41,7 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
 
     const update = () => {
       const y = window.scrollY;
+      if (afterHero) setOverHero(y < window.innerHeight - 90);
       const goingDown = y > lastY.current;
       if (Math.abs(y - lastY.current) > 6) {
         setHidden(goingDown && y > 80);
@@ -47,8 +58,9 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    if (afterHero) setOverHero(window.scrollY < window.innerHeight - 90);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [afterHero]);
 
   // scroll-spy: highlight the section currently in view
   useEffect(() => {
@@ -97,11 +109,16 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
         className={`fixed inset-x-0 top-[46px] z-50 px-3 transition-transform duration-300 motion-reduce:transition-none sm:px-5 ${
           // phones hide it on the way down (the sticky join bar takes over);
           // on desktop it stays, so "Get early access" is always one click away
-          hidden && !open ? "max-lg:translate-y-[-150%]" : "translate-y-0"
+          overHero && !open
+            ? "pointer-events-none translate-y-[-260%]"
+            : hidden && !open
+              ? "max-lg:translate-y-[-150%]"
+              : "translate-y-0"
         }`}
+        inert={overHero && !open}
       >
         <div
-          className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border-2 border-ink bg-paper py-2 pl-5 pr-2 text-ink"
+          className="lit mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border-2 border-ink bg-paper py-2 pl-5 pr-2 text-ink"
         >
           <a href={base || "#"} aria-label="Invytt home" className="flex h-11 shrink-0 items-center">
             <Image
@@ -115,7 +132,7 @@ export default function Nav({ base = "", soon = false }: { base?: string; soon?:
           </a>
 
           {/* desktop links */}
-          <nav aria-label="Primary" className="hidden items-center gap-1 text-[15px] font-bold lg:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-1 text-[15px] font-medium lg:flex">
             {LINKS.map((l) => {
               const isActive = activeId === l.href.slice(1);
               return (

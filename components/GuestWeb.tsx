@@ -20,7 +20,7 @@ export default function GuestWeb() {
   const inView = useInView(ref, { once: true, amount: 0.55 });
 
   return (
-    <section id="guests" className="relative isolate overflow-hidden bg-paper py-24 lg:py-32">
+    <section id="guests" className="lit relative isolate overflow-hidden bg-paper py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[0.85fr_1.15fr]">
         <Parallax speed={0.1}>
           <h2 className="display text-[clamp(2.4rem,5vw,4.4rem)] text-ink">
@@ -37,7 +37,7 @@ export default function GuestWeb() {
               { I: Smartphone, t: "They confirm with a one-time code, no account needed" },
             ].map(({ I, t }, i) => (
               <Reveal key={t} delay={i * 0.08}>
-                <li className="flex items-center gap-3 text-lg font-semibold text-ink">
+                <li className="flex items-center gap-3 text-lg font-medium text-ink">
                   <span className="stk-sm flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-tint">
                     <I size={18} strokeWidth={2.4} />
                   </span>

@@ -122,7 +122,7 @@ export function Screen({
   return (
     <div
       className={cn(
-        "relative h-[600px] w-[278px] select-none overflow-hidden bg-paper font-body text-ink",
+        "app-screen relative h-[600px] w-[278px] select-none overflow-hidden bg-paper font-body text-ink",
         className,
       )}
     >

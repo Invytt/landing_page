@@ -6,8 +6,9 @@ import { LAUNCH_DATE_LABEL } from "@/lib/launch";
 import { LITE_SCRIPT } from "@/lib/lite";
 import PerfRoot from "@/components/site/PerfRoot";
 
-// The app's own typefaces, self-hosted: Instrument Sans for reading,
-// Instrument Serif for headlines.
+// The app's own typefaces, self-hosted: Instrument Sans and Instrument Serif.
+// The site now uses them only inside the phone frames, where the app's
+// screens are shown exactly as they look in the app.
 // Both are trimmed to the characters the site uses (Latin, punctuation, ₹).
 // The site never sets sans text in italic, so that file is not shipped.
 const sans = localFont({
@@ -22,6 +23,19 @@ const serif = localFont({
   ],
   variable: "--f-serif",
   display: "swap",
+});
+
+// The site's own face since the paper-cut redesign: Archivo, with its width
+// axis (62–125%) — small text at normal width, everything loud at 125.
+// Self-hosted (SIL Open Font License, see fonts/OFL-Archivo.txt).
+const archivo = localFont({
+  src: [
+    { path: "./fonts/Archivo.woff2", style: "normal", weight: "100 900" },
+    { path: "./fonts/Archivo-Italic.woff2", style: "italic", weight: "100 900" },
+  ],
+  variable: "--f-archivo",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
 });
 
 const SITE_URL = "https://invytt.com";
@@ -178,7 +192,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${archivo.variable} ${sans.variable} ${serif.variable}`} suppressHydrationWarning>
       <head>
         {/* lite mode for slow connections, Data Saver and low-memory phones */}
         <script dangerouslySetInnerHTML={{ __html: LITE_SCRIPT }} />

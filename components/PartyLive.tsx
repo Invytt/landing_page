@@ -38,7 +38,7 @@ function Drum() {
           {GAMES.map((g, i) => (
             <div
               key={g.title}
-              className="backface-hidden absolute left-1/2 top-1/2 flex flex-col justify-between rounded-[22px] border-2 border-ink p-3 text-ink sm:p-4"
+              className="lit backface-hidden absolute left-1/2 top-1/2 flex flex-col justify-between rounded-[22px] border-2 border-ink p-3 text-ink sm:p-4"
               style={{
                 width: "var(--cw)",
                 height: "calc(var(--cw) * 1.32)",
@@ -54,7 +54,7 @@ function Drum() {
               <span>
                 <span className="display block text-xl leading-[1.02] sm:text-3xl">{g.title}</span>
                 <span className="mt-1.5 hidden text-sm leading-snug text-ink/75 sm:block">{g.blurb}</span>
-                <span className="mt-2 inline-block rounded-full border-2 border-ink bg-white px-2 py-0.5 text-[10px] font-bold sm:text-xs">
+                <span className="mt-2 inline-block rounded-full border-2 border-ink bg-white px-2 py-0.5 text-[10px] font-medium sm:text-xs">
                   {g.meta}
                 </span>
               </span>
@@ -194,7 +194,7 @@ export default function PartyLive() {
                 whileInView={{ opacity: 1, x: 0, rotate: i % 2 ? 2 : -2 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.09, type: "spring", stiffness: 260, damping: 18 }}
-                className="rounded-full border-2 border-ink bg-tint px-4 py-2 text-sm font-bold text-ink"
+                className="rounded-full border-2 border-ink bg-tint px-4 py-2 text-sm font-medium text-ink"
               >
                 {t}
               </motion.li>
@@ -244,7 +244,7 @@ export default function PartyLive() {
         {/* the same eight, as plain text */}
         <ul className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2">
           {GAMES.map((g) => (
-            <li key={g.title} className="rounded-full border-2 border-paper/25 px-3.5 py-1.5 text-sm font-semibold text-paper">
+            <li key={g.title} className="rounded-full border-2 border-paper/25 px-3.5 py-1.5 text-sm font-medium text-paper">
               {g.title}
             </li>
           ))}

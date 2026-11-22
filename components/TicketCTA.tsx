@@ -49,7 +49,7 @@ export default function TicketCTA() {
         <Tilt max={4} glare={false}>
           <div className="relative flex flex-col lg:flex-row">
             {/* ── main part of the ticket ── */}
-            <div className="relative flex-1 rounded-[30px] border-2 border-ink bg-paper p-6 text-ink sm:p-10 lg:rounded-r-none lg:border-r-0">
+            <div className="lit relative flex-1 rounded-[30px] border-2 border-ink bg-paper p-6 text-ink sm:p-10 lg:rounded-r-none lg:border-r-0">
               <p className="eyebrow text-center text-muted">Launching in</p>
               <div className="mt-4">
                 <Countdown />
@@ -69,7 +69,7 @@ export default function TicketCTA() {
                     whileHover={{ y: -3, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.07, type: "spring", stiffness: 260, damping: 18 }}
-                    className="stk-sm rounded-full px-4 py-1.5 text-sm font-bold"
+                    className="lit stk-sm rounded-full px-4 py-1.5 text-sm font-medium"
                     style={{ background: PERK_TINTS[i % PERK_TINTS.length] }}
                   >
                     {perk}
@@ -80,7 +80,7 @@ export default function TicketCTA() {
               <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <AvStack ids={[1, 3, 6, 8, 11]} s={34} />
                 <p className="text-base text-muted">
-                  Join the <span className="font-bold text-ink">everyday hosts</span> already in line
+                  Join the <span className="font-medium text-ink">everyday hosts</span> already in line
                 </p>
               </div>
             </div>
@@ -104,14 +104,14 @@ export default function TicketCTA() {
                 <div>
                   <p className="eyebrow">Admit one</p>
                   <p className="display mt-2 text-4xl leading-none">Founding host</p>
-                  <p className="mt-3 text-sm font-semibold text-white">
+                  <p className="mt-3 text-sm font-medium text-white">
                     Doors open {LAUNCH_DATE_LABEL}
                   </p>
                 </div>
                 <div className="shrink-0 rounded-2xl border-2 border-ink bg-paper p-2.5">
                   <FauxQr size={96} seed={23} />
                 </div>
-                <p className="hidden text-xs font-bold uppercase tracking-[0.2em] lg:block">
+                <p className="hidden text-xs font-medium uppercase tracking-[0.2em] lg:block">
                   {joined ? "Yours. See you there." : "No. 0001"}
                 </p>
               </div>

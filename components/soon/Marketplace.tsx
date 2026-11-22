@@ -77,12 +77,12 @@ function FlipCard({ a, i }: { a: Aisle; i: number }) {
             >
               {/* front */}
               <span
-                className="backface-hidden stk-lg absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[30px] p-7 text-ink"
+                className="lit backface-hidden stk-lg absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[30px] p-7 text-ink"
                 style={{ background: a.tint }}
               >
                 <span className="flex items-start justify-between">
                   <Stamp rotate={-6} className="bg-white/60">Coming soon</Stamp>
-                  <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1.5 text-xs font-bold">
+                  <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1.5 text-xs font-medium">
                     <RotateCw size={14} strokeWidth={2.8} className="transition-transform duration-300 group-hover/flip:rotate-180" />
                     See inside
                   </span>
@@ -114,7 +114,7 @@ function FlipCard({ a, i }: { a: Aisle; i: number }) {
                 </span>
                 <span className="flex flex-wrap gap-2">
                   {a.kinds.map((k) => (
-                    <span key={k} className="rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold text-ink " style={{ background: a.tint }}>
+                    <span key={k} className="lit rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-medium text-ink " style={{ background: a.tint }}>
                       {k}
                     </span>
                   ))}
@@ -134,7 +134,7 @@ function FlipCard({ a, i }: { a: Aisle; i: number }) {
 
 export default function Marketplace() {
   return (
-    <section id="marketplace" className="dots relative isolate overflow-hidden bg-paper py-24 lg:py-32">
+    <section id="marketplace" className="lit dots relative isolate overflow-hidden bg-paper py-24 lg:py-32">
       <DepthField seed={113} count={10} />
       <Parallax speed={0.1} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
         <Eyebrow className="justify-center">The marketplace</Eyebrow>
@@ -152,7 +152,7 @@ export default function Marketplace() {
         ))}
       </div>
       <Reveal className="mt-10 text-center">
-        <p className="text-sm font-bold text-muted">Landing city by city after launch.</p>
+        <p className="text-sm font-medium text-muted">Landing city by city after launch.</p>
       </Reveal>
     </section>
   );

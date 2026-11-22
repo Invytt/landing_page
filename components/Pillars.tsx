@@ -38,7 +38,7 @@ const TURN = 0.2;
 function PillarCard({ p, className }: { p: Pillar; className?: string }) {
   return (
     <article
-      className={`stk-lg relative flex flex-col rounded-[30px] p-7 text-ink sm:p-9 lg:short:p-7 ${className ?? ""}`}
+      className={`lit stk-lg relative flex flex-col rounded-[30px] p-7 text-ink sm:p-9 lg:short:p-7 ${className ?? ""}`}
       style={{ background: p.tint }}
     >
       <div className="flex items-start justify-between gap-4">
@@ -51,7 +51,7 @@ function PillarCard({ p, className }: { p: Pillar; className?: string }) {
           </a>
         ) : null}
       </div>
-      <h3 className="display mt-6 text-[clamp(1.9rem,3.2vw,2.9rem)] lg:short:mt-4 lg:short:text-[2.2rem]">{p.title}</h3>
+      <h3 className="display mt-6 text-[clamp(1.6rem,2.2vw,2.25rem)] lg:short:mt-4 lg:short:text-[1.9rem]">{p.title}</h3>
       <p className="mt-4 text-lg leading-relaxed text-ink/80 lg:short:mt-3 lg:short:text-base">{p.body}</p>
     </article>
   );
@@ -123,7 +123,7 @@ export default function Pillars() {
   );
 
   return (
-    <section id="features" className="relative bg-paper2">
+    <section id="features" className="lit relative bg-paper2">
       {/* ── desktop: pinned deck + turning phone ── */}
       <div ref={ref} className={calm ? "hidden" : "relative hidden h-[560vh] lg:block"}>
         {desk && (
@@ -141,7 +141,7 @@ export default function Pillars() {
                 {PILLARS.map((p, i) => (
                   <span
                     key={p.n}
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-ink text-sm font-bold transition-all duration-300 ${
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-ink text-sm font-medium transition-all duration-300 ${
                       i === active
                         ? "scale-110 bg-coral text-white"
                         : i < active
@@ -206,7 +206,7 @@ export default function Pillars() {
             </Reveal>
           ))}
         </div>
-        <p className="px-5 text-center text-sm font-bold text-muted sm:px-8">Swipe to see all five</p>
+        <p className="px-5 text-center text-sm font-medium text-muted sm:px-8">Swipe to see all five</p>
       </div>
       )}
     </section>

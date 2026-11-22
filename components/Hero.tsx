@@ -195,12 +195,12 @@ export default function Hero() {
               <Magnetic>
                 <a
                   href="#how-it-works"
-                  className="inline-flex min-h-11 items-center gap-2 text-base font-bold text-paper underline decoration-coral decoration-2 underline-offset-8"
+                  className="inline-flex min-h-11 items-center gap-2 text-base font-medium text-paper underline decoration-coral decoration-2 underline-offset-8"
                 >
                   See how it works <ArrowDown size={18} strokeWidth={2.6} />
                 </a>
               </Magnetic>
-              <span className="flex items-center gap-3 text-sm font-semibold text-nightmuted">
+              <span className="flex items-center gap-3 text-sm font-medium text-nightmuted">
                 <AvStack ids={[1, 4, 7, 10]} s={28} />
                 Everyday hosts already in line
               </span>
@@ -289,7 +289,7 @@ export default function Hero() {
 
           {/* floating stickers */}
           <Floaty go={go} mx={mx} my={my} depth={-34} rotate={-7} className="left-0 top-[9%] sm:left-[-2%]" delay={d0 + 0.3 + 0}>
-            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-night2 px-3.5 py-2 text-sm font-bold text-paper ">
+            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-night2 px-3.5 py-2 text-sm font-medium text-paper ">
               <span className="flex items-center gap-1.5 rounded-full bg-live px-2 py-0.5 text-[11px] text-ink">
                 <i className="h-1.5 w-1.5 rounded-full bg-ink" /> LIVE
               </span>
@@ -298,18 +298,18 @@ export default function Hero() {
           </Floaty>
 
           <Floaty go={go} mx={mx} my={my} depth={46} rotate={6} bob={5} className="right-0 top-[20%] sm:right-[-3%]" delay={d0 + 0.3 + 0.12}>
-            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-going px-3 py-1.5 text-sm font-bold text-goingtext ">
+            <span className="flex items-center gap-2 rounded-full border-2 border-ink bg-going px-3 py-1.5 text-sm font-medium text-goingtext ">
               <AvStack ids={[3, 6, 9]} s={24} /> 12 going
             </span>
           </Floaty>
 
           <Floaty go={go} mx={mx} my={my} depth={-58} rotate={-4} bob={4.6} className="left-0 top-[42%] hidden sm:block lg:left-[-9%]" delay={d0 + 0.3 + 0.24}>
             <span className="block w-[190px] rounded-2xl border-2 border-ink bg-peach p-3 text-ink ">
-              <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em]">
+              <span className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em]">
                 <Mail size={13} strokeWidth={2.6} /> You&rsquo;re invited
               </span>
               <span className="mt-1.5 block font-display text-2xl leading-none">Rooftop dinner</span>
-              <span className="mt-1 block text-xs font-semibold">Fri, 8 PM</span>
+              <span className="mt-1 block text-xs font-medium">Fri, 8 PM</span>
             </span>
           </Floaty>
 
@@ -317,8 +317,8 @@ export default function Hero() {
             <span className="flex items-center gap-2.5 rounded-2xl border-2 border-ink bg-sky px-3 py-2.5 text-ink ">
               <Disc3 size={30} strokeWidth={2} className="spin-slow" />
               <span className="leading-tight">
-                <span className="block text-[11px] font-bold uppercase tracking-[0.14em]">Event track</span>
-                <span className="block text-sm font-bold">Party mix</span>
+                <span className="block text-[11px] font-medium uppercase tracking-[0.14em]">Event track</span>
+                <span className="block text-sm font-medium">Party mix</span>
               </span>
             </span>
           </Floaty>
@@ -327,8 +327,8 @@ export default function Hero() {
             <span className="flex items-center gap-2.5 rounded-2xl border-2 border-ink bg-white p-2.5 pr-3 text-ink ">
               <Av i={5} s={36} />
               <span className="leading-tight">
-                <span className="block text-xs font-semibold">Asha wants to be friends</span>
-                <span className="mt-1 inline-flex items-center gap-1 rounded-full border-2 border-ink bg-statusgreen px-2.5 py-0.5 text-[11px] font-bold text-ink">
+                <span className="block text-xs font-medium">Asha wants to be friends</span>
+                <span className="mt-1 inline-flex items-center gap-1 rounded-full border-2 border-ink bg-statusgreen px-2.5 py-0.5 text-[11px] font-medium text-ink">
                   <Check size={11} strokeWidth={4} /> Accept
                 </span>
               </span>
@@ -337,8 +337,8 @@ export default function Hero() {
 
           <Floaty go={go} mx={mx} my={my} depth={28} rotate={-5} bob={5.8} className="right-[4%] top-[1%] hidden lg:block" delay={d0 + 0.3 + 0.6}>
             <span className="flex flex-col rounded-2xl border-2 border-ink bg-sand px-3 py-2 text-ink ">
-              <span className="text-sm font-bold">Birthday bash</span>
-              <span className="text-xs font-semibold">3 days to go</span>
+              <span className="text-sm font-medium">Birthday bash</span>
+              <span className="text-xs font-medium">3 days to go</span>
             </span>
           </Floaty>
 
