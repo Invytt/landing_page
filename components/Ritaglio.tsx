@@ -780,7 +780,7 @@ export default function Ritaglio({
           </h1>
           <div className="rtg-under">
             <p className="rtg-lede">{lede}</p>
-            <a className="rtg-cta" href={ctaHref}>
+            <a id="hero-cta" className="rtg-cta" href={ctaHref}>
               <svg viewBox="0 0 12 12" aria-hidden>
                 <path d="M2 5.1h5.6L5.1 2.6l1.1-1.1L10.6 6l-4.4 4.5-1.1-1.1 2.5-2.5H2z" />
               </svg>

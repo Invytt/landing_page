@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useJoined } from "@/lib/waitlist-joined";
 
 /**
- * Phones only: once the hero's form has scrolled away, a "Get early access"
+ * Phones only: once the hero's button has scrolled away, a "Get early access"
  * bar sits in thumb reach at the bottom of the screen. It steps aside while
  * another form is on screen, and for anyone already on the list.
  */
@@ -13,7 +13,7 @@ export default function StickyJoin() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const ids = ["hero-form", "join", "tickets"];
+    const ids = ["hero-cta", "join", "tickets"];
     const targets = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -23,7 +23,7 @@ export default function StickyJoin() {
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) {
         visible.set(e.target.id, e.isIntersecting);
-        if (e.target.id === "hero-form" && !e.isIntersecting) {
+        if (e.target.id === "hero-cta" && !e.isIntersecting) {
           heroPassed = e.boundingClientRect.top < 0;
         }
       }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 
-import Hero from "@/components/Hero";
+import Ritaglio from "@/components/Ritaglio";
 import Pillars from "@/components/Pillars";
 import Steps from "@/components/Steps";
 import InsideApp from "@/components/InsideApp";
@@ -64,12 +64,13 @@ describe("the two anchors of the page keep their words", () => {
 });
 
 describe("responsive layout", () => {
-  it("Hero has one headline and stacks to two columns on lg+", () => {
-    const { container } = render(<Hero />);
+  it("the first screen has one headline, a waitlist button and a keyboard button per paper piece", () => {
+    const { container } = render(<Ritaglio />);
     expect(container.querySelectorAll("h1")).toHaveLength(1);
-    expect(text(container.querySelector("h1"))).toBe("Every good plan starts with an invite");
-    const grid = container.querySelector(".grid")!;
-    expect(grid.className).toMatch(/lg:grid-cols-/);
+    expect(screen.getByRole("heading", { level: 1, name: "plans Made" })).toBeInTheDocument();
+    // the phone's sticky join bar waits for this button to scroll away
+    expect(container.querySelector("#hero-cta")).toHaveAttribute("href", "#tickets");
+    expect(screen.getAllByRole("button", { name: /^Move / })).toHaveLength(6);
   });
 
   it("Pillars are a swipe carousel on mobile/tablet and a pinned scene on lg+", () => {
