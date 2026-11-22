@@ -88,7 +88,7 @@ export function Sticker({
   return (
     <span
       className={cn(
-        "stk-sm inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-bold text-ink",
+        "lit stk-sm inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-ink",
         className,
       )}
       style={{ background: tint, rotate: `${rotate}deg`, ...style }}
@@ -102,7 +102,8 @@ export function Sticker({
 export function Stamp({
   children,
   className,
-  color = "var(--color-coral)",
+  // deep coral: dark enough on paper and pastels, light enough on black
+  color = "var(--color-deep)",
   rotate = -8,
 }: {
   children: ReactNode;
@@ -113,7 +114,7 @@ export function Stamp({
   return (
     <span
       className={cn(
-        "inline-block rounded-lg border-[3px] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]",
+        "inline-block rounded-lg border-[3px] px-3 py-1 text-xs font-medium uppercase tracking-[0.18em]",
         className,
       )}
       style={{ color, borderColor: color, rotate: `${rotate}deg` }}
@@ -289,7 +290,7 @@ export function Tilt({
       {glare && (
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100"
+          className="lit pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100"
           style={{ background: glareBg }}
         />
       )}

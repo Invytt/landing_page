@@ -25,7 +25,7 @@ function TicketDemo() {
             type="button"
             onClick={() => setPick(i)}
             aria-pressed={pick === i}
-            className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-bold transition-transform ${pick === i ? "-translate-y-0.5 " : "bg-white"}`}
+            className={`rounded-full border-2 border-ink px-3.5 py-1.5 text-sm font-medium transition-transform ${pick === i ? "-translate-y-0.5 " : "bg-white"}`}
             style={pick === i ? { background: t.c } : undefined}
           >
             {t.t} · {t.p}
@@ -36,7 +36,7 @@ function TicketDemo() {
         <div className="flex-1 rounded-l-[20px] border-2 border-r-0 border-ink bg-white p-4">
           <p className="eyebrow text-muted">Admit one</p>
           <p className="display mt-1 text-3xl leading-none">Rooftop open air night</p>
-          <p className="mt-2 text-sm font-semibold">{pick === null ? "Pick a tier" : `${TIERS[pick].t} · ${TIERS[pick].p}`}</p>
+          <p className="mt-2 text-sm font-medium">{pick === null ? "Pick a tier" : `${TIERS[pick].t} · ${TIERS[pick].p}`}</p>
         </div>
         <motion.div
           animate={pick === null ? { x: 0, y: 0, rotate: 0 } : { x: 14, y: 16, rotate: 8 }}
@@ -72,17 +72,17 @@ function BookingsDemo() {
           className="flex items-center gap-3 rounded-2xl border-2 border-ink bg-white px-3 py-2"
         >
           <I size={18} strokeWidth={2.3} />
-          <span className="flex-1 text-sm font-bold">{t}</span>
-          <span className="rounded-full border-2 border-ink px-2.5 py-0.5 text-xs font-bold" style={{ background: c }}>
+          <span className="flex-1 text-sm font-medium">{t}</span>
+          <span className="lit rounded-full border-2 border-ink px-2.5 py-0.5 text-xs font-medium" style={{ background: c }}>
             {s}
           </span>
         </motion.div>
       ))}
       <div className="flex gap-2 pt-1">
-        <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-ink px-3 py-1 text-xs font-bold text-paper">
+        <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-ink px-3 py-1 text-xs font-medium text-paper">
           <CreditCard size={12} strokeWidth={2.6} /> Saved cards
         </span>
-        <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold">
+        <span className="flex items-center gap-1.5 rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-medium">
           <MapPin size={12} strokeWidth={2.6} /> Saved addresses
         </span>
       </div>
@@ -110,7 +110,7 @@ function Tile({
   return (
     <Parallax speed={speed} className={className}>
       <Tilt max={5} className="h-full rounded-[30px]">
-        <article className="stk-lg flex h-full flex-col gap-6 rounded-[30px] p-6 text-ink sm:p-7" style={{ background: tint }}>
+        <article className="lit stk-lg flex h-full flex-col gap-6 rounded-[30px] p-6 text-ink sm:p-7" style={{ background: tint }}>
           <div className="flex items-start justify-between gap-3">
             <span className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink bg-white">
               <Icon size={22} strokeWidth={2.3} />
@@ -130,7 +130,7 @@ function Tile({
 
 export default function ForHosts() {
   return (
-    <section id="for-hosts" className="relative isolate overflow-hidden bg-paper2 py-24 lg:py-32">
+    <section id="for-hosts" className="lit relative isolate overflow-hidden bg-paper2 py-24 lg:py-32">
       <DepthField seed={131} count={10} />
       <Parallax speed={0.1} className="mx-auto max-w-3xl px-5 text-center sm:px-8">
         <Eyebrow className="justify-center">For hosts</Eyebrow>

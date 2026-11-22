@@ -939,7 +939,7 @@ export function GuestWebPage({
   stamp?: React.ReactNode;
 }) {
   return (
-    <div className={`bg-paper text-ink ${compact ? "p-[14px] pt-[46px]" : "p-5 sm:p-7"}`}>
+    <div className={`app-screen bg-paper text-ink ${compact ? "p-[14px] pt-[46px]" : "p-5 sm:p-7"}`}>
       <div
         className="rounded-[18px] border-2 border-ink p-4"
         style={{ background: "#FF9A5C" }}

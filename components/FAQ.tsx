@@ -37,15 +37,15 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="relative isolate overflow-x-clip bg-paper py-24 lg:py-32">
+    <section id="faq" className="lit relative isolate overflow-x-clip bg-paper py-24 lg:py-32">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div className="lg:sticky lg:top-36 lg:self-start">
-          <h2 className="display text-[clamp(2.6rem,5.4vw,4.8rem)] text-ink">
+          <h2 className="display text-[clamp(2.4rem,4.6vw,4.2rem)] text-ink">
             <Words text="Common questions" />
           </h2>
           <p className="mt-5 max-w-sm text-lg leading-relaxed text-muted">
             Still curious? Write to{" "}
-            <a href={`mailto:${COMPANY.email}`} className="font-bold text-ink underline decoration-coral decoration-2 underline-offset-4">
+            <a href={`mailto:${COMPANY.email}`} className="font-medium text-ink underline decoration-coral decoration-2 underline-offset-4">
               {COMPANY.email}
             </a>
             .
@@ -66,14 +66,14 @@ export default function FaqSection() {
                     aria-controls="faq-panel"
                     tabIndex={on ? 0 : -1}
                     onClick={() => pick(g.id)}
-                    className={`relative min-h-11 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-bold transition-transform duration-150 ${
+                    className={`lit relative min-h-11 rounded-full border-2 border-ink px-4 py-2 text-[15px] font-medium transition-transform duration-150 ${
                       on ? "-translate-y-0.5 " : "bg-white hover:-translate-y-0.5"
                     }`}
                   >
                     {on && (
                       <motion.span
                         layoutId="faq-topic"
-                        className="absolute inset-0 rounded-full"
+                        className="lit absolute inset-0 rounded-full"
                         style={{ background: g.tint }}
                         transition={{ type: "spring", stiffness: 420, damping: 32 }}
                       />
@@ -112,7 +112,7 @@ export default function FaqSection() {
                 return (
                   <li
                     key={item.q}
-                    className="stk rounded-[24px] transition-[background-color,transform] duration-200 hover:-translate-y-0.5"
+                    className="lit stk rounded-[24px] transition-[background-color,transform] duration-200 hover:-translate-y-0.5"
                     style={{ background: isOpen ? group.tint : "#fff" }}
                   >
                     <h3>
@@ -123,7 +123,7 @@ export default function FaqSection() {
                         onClick={() => setOpen(isOpen ? null : i)}
                         className="flex w-full items-center justify-between gap-5 rounded-[22px] p-5 text-left sm:p-6"
                       >
-                        <span className="display text-2xl text-ink sm:text-[1.9rem]">{item.q}</span>
+                        <span className="display text-2xl font-normal tracking-[-0.02em] text-ink sm:text-[1.9rem]">{item.q}</span>
                         <motion.span
                           animate={{ rotate: isOpen ? 135 : 0 }}
                           transition={{ type: "spring", stiffness: 300, damping: 18 }}

@@ -54,7 +54,7 @@ export default function Countdown() {
               </AnimatePresence>
               <span aria-hidden className="absolute inset-x-0 top-1/2 h-[2px] -translate-y-1/2 bg-black/60" />
             </div>
-            <span className="mt-2 text-[11px] font-bold uppercase tracking-[0.18em] text-muted">
+            <span className="mt-2 text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
               {LABELS[i]}
             </span>
           </div>

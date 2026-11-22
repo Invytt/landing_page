@@ -78,7 +78,7 @@ function ToolChip({ i, p, s }: { i: number; p: MotionValue<number>; s: Spot }) {
       style={{ x, y, rotate, scale, opacity }}
     >
       <span
-        className="bob stk-sm flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-bold text-ink sm:px-4 sm:py-2 sm:text-base"
+        className="lit bob stk-sm flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-ink sm:px-4 sm:py-2 sm:text-base"
         style={{ background: TINTS[i], ["--bob" as string]: `${3.6 + (i % 4) * 0.5}s` }}
       >
         <Icon size={17} strokeWidth={2.4} />
@@ -96,7 +96,7 @@ function InviteCard() {
         One app for the <em>whole party</em>
       </p>
       <div className="tear-x my-4" />
-      <p className="flex flex-wrap justify-center gap-1.5 text-xs font-bold">
+      <p className="flex flex-wrap justify-center gap-1.5 text-xs font-medium">
         {["Invites", "RSVPs", "Supplies", "Vendors", "Splits"].map((t) => (
           <span key={t} className="rounded-full border-2 border-ink bg-tint px-2.5 py-1">
             {t}
@@ -147,18 +147,18 @@ export default function Problem() {
     <p className="mx-auto max-w-2xl px-5 text-center text-lg leading-relaxed text-muted">
       Planning an event means juggling ten different tools that don&rsquo;t talk
       to each other and the host ends up doing the most work and enjoying it the
-      least. <strong className="font-bold text-ink">Invytt replaces all of it.</strong>
+      least. <strong className="font-medium text-ink">Invytt replaces all of it.</strong>
     </p>
   );
 
   // Calm version: no pinning, nothing flies.
   if (reduce) {
     return (
-      <section id="problem" ref={ref} className="dots relative bg-paper py-24">
+      <section id="problem" ref={ref} className="lit dots relative bg-paper py-24">
         {heading}
         <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2.5 px-5">
           {TOOLS.map((t, i) => (
-            <li key={t} className="stk-sm rounded-full px-4 py-2 text-sm font-bold" style={{ background: TINTS[i] }}>
+            <li key={t} className="lit stk-sm rounded-full px-4 py-2 text-sm font-medium" style={{ background: TINTS[i] }}>
               {t}
             </li>
           ))}
@@ -172,7 +172,7 @@ export default function Problem() {
   }
 
   return (
-    <section id="problem" ref={ref} className="relative h-[230vh] bg-paper">
+    <section id="problem" ref={ref} className="lit relative h-[230vh] bg-paper">
       <div className="dots sticky top-0 isolate flex h-[100svh] flex-col items-center justify-between overflow-hidden pb-10 pt-28 sm:pt-32">
         <Parallax progress={p} speed={0.12}>{heading}</Parallax>
 

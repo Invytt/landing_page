@@ -22,11 +22,11 @@ export default function PrivacyPage() {
 
       <h2>1. Who we are</h2>
       <dl className="my-7 grid gap-4 sm:grid-cols-[max-content_1fr] sm:gap-x-6 sm:gap-y-3">
-        <dt className="font-semibold text-black">Data Controller / Fiduciary</dt>
+        <dt className="font-medium text-black">Data Controller / Fiduciary</dt>
         <dd>INVYTT PRIVATE LIMITED</dd>
-        <dt className="font-semibold text-black">Registered address</dt>
+        <dt className="font-medium text-black">Registered address</dt>
         <dd>PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</dd>
-        <dt className="font-semibold text-black">Contact / Grievance Officer</dt>
+        <dt className="font-medium text-black">Contact / Grievance Officer</dt>
         <dd><a href="mailto:support@invytt.com">support@invytt.com</a></dd>
       </dl>
 
@@ -127,11 +127,11 @@ export default function PrivacyPage() {
 
       <h2>13. Contact us</h2>
       <dl className="my-7 grid gap-4 sm:grid-cols-[max-content_1fr] sm:gap-x-6 sm:gap-y-3">
-        <dt className="font-semibold text-black">Company</dt>
+        <dt className="font-medium text-black">Company</dt>
         <dd>INVYTT PRIVATE LIMITED</dd>
-        <dt className="font-semibold text-black">Email</dt>
+        <dt className="font-medium text-black">Email</dt>
         <dd><a href="mailto:support@invytt.com">support@invytt.com</a></dd>
-        <dt className="font-semibold text-black">Address</dt>
+        <dt className="font-medium text-black">Address</dt>
         <dd>PLOT NO-M-118, BARAMUNDA H.B COLONY, Baramunda Colony, Bhubaneswar, Khorda- 751003, Orissa</dd>
       </dl>
       <p>Under the India DPDP Act, you may also lodge a complaint with the Data Protection Board of India if unsatisfied with our response.</p>

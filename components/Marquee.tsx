@@ -47,7 +47,7 @@ export default function Marquee() {
           <span
             key={i}
             data-cd={t === countdown ? "" : undefined}
-            className={`flex items-center whitespace-nowrap px-4 text-xs font-bold tracking-wide ${
+            className={`flex items-center whitespace-nowrap px-4 text-xs font-medium tracking-wide ${
               t === countdown ? "tabular-nums text-white" : "text-white"
             }`}
           >

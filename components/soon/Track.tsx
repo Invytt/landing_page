@@ -18,7 +18,7 @@ function FeatureText({ f, i }: { f: SoonFeature; i: number }) {
     <div>
       <div className="flex flex-wrap items-center gap-3">
         <span className="display text-6xl leading-none text-coral">{String(i + 1).padStart(2, "0")}</span>
-        <span className="rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em]">
+        <span className="rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.14em]">
           {f.group}
         </span>
       </div>
@@ -26,8 +26,8 @@ function FeatureText({ f, i }: { f: SoonFeature; i: number }) {
       <p className="mt-3 text-lg leading-relaxed text-muted">{f.line}</p>
       <ul className="mt-5 space-y-2">
         {f.points.map((p) => (
-          <li key={p} className="flex items-start gap-2.5 text-base font-semibold text-ink">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-ink" style={{ background: f.tint }}>
+          <li key={p} className="flex items-start gap-2.5 text-base font-medium text-ink">
+            <span className="lit mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-ink" style={{ background: f.tint }}>
               <Check size={11} strokeWidth={3.6} />
             </span>
             {p}
@@ -109,7 +109,7 @@ export default function Track() {
   );
 
   return (
-    <section id="on-the-way" className="relative isolate bg-paper2">
+    <section id="on-the-way" className="lit relative isolate bg-paper2">
       {/* desktop: the cards ride sideways as you scroll down */}
       <div ref={wrap} className={calm ? "hidden" : "relative hidden lg:block"} style={{ height: `${SOON.length * 70 + 80}vh` }}>
         {desk && (
@@ -125,11 +125,11 @@ export default function Track() {
             ))}
           </motion.div>
           <div className="mx-auto mt-6 flex w-full max-w-7xl items-center gap-4 px-8 short:mt-2">
-            <span className="text-sm font-bold text-muted">01</span>
+            <span className="text-sm font-medium text-muted">01</span>
             <span className="relative h-[8px] flex-1 overflow-hidden rounded-full border-2 border-ink bg-white">
               <motion.i className="absolute inset-y-0 left-0 bg-coral" style={{ width: bar }} />
             </span>
-            <span className="text-sm font-bold text-muted">{String(SOON.length).padStart(2, "0")}</span>
+            <span className="text-sm font-medium text-muted">{String(SOON.length).padStart(2, "0")}</span>
           </div>
         </div>
         )}

@@ -129,7 +129,7 @@ function Face({ children, label }: { children: ReactNode; label?: string }) {
     <>
       <div
         aria-hidden={label ? true : undefined}
-        className="relative h-full w-full overflow-hidden rounded-[38px] bg-paper text-ink"
+        className="app-screen relative h-full w-full overflow-hidden rounded-[38px] bg-paper text-ink"
       >
         {children}
         <span

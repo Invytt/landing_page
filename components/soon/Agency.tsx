@@ -58,15 +58,16 @@ function StackCard({
     <div className="sticky" style={{ top: `calc(7.5rem + ${i * 96}px)` }}>
       <motion.article
         style={calm ? undefined : { scale, rotate }}
-        className="stk-lg relative mb-8 min-h-[250px] origin-top rounded-[30px] p-6 text-ink sm:p-7"
+        className="lit stk-lg relative mb-8 min-h-[250px] origin-top rounded-[30px] p-6 text-ink sm:p-7"
       >
-        <span aria-hidden className="absolute inset-0 -z-10 rounded-[28px]" style={{ background: s.tint }} />
-        <div className="flex items-center gap-4">
+        <span aria-hidden className="lit absolute inset-0 -z-10 rounded-[28px]" style={{ background: s.tint }} />
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-white ">
             <s.Icon size={22} strokeWidth={2.2} />
           </span>
-          <h3 className="display flex-1 text-4xl sm:text-5xl">{s.title}</h3>
-          <span className="display text-5xl leading-none text-ink/30">0{i + 1}</span>
+          {/* on phones the title takes its own line under the icon and number */}
+          <h3 className="display order-last min-w-0 basis-full text-[clamp(1.75rem,8vw,2.25rem)] sm:order-none sm:flex-1 sm:basis-auto sm:text-5xl">{s.title}</h3>
+          <span className="display ml-auto text-5xl leading-none text-ink/30 sm:ml-0">0{i + 1}</span>
         </div>
         <p className="mt-8 max-w-md text-lg leading-snug text-ink/80">{s.line}</p>
       </motion.article>
@@ -106,7 +107,7 @@ function Clock({ hours }: { hours: MotionValue<number> }) {
           className="absolute left-1/2 top-1/2 block h-[38%] w-0 origin-bottom"
           style={{ transform: `translate(-50%, -100%) rotate(${(d.h % 12) * 30}deg)` }}
         >
-          <i className="absolute -left-2.5 top-0 block h-5 w-5 rounded-full border-2 border-ink" style={{ background: d.c }} />
+          <i className="lit absolute -left-2.5 top-0 block h-5 w-5 rounded-full border-2 border-ink" style={{ background: d.c }} />
         </span>
       ))}
       <motion.span
@@ -133,7 +134,7 @@ function TheDay({ calm }: { calm: boolean }) {
   const reached = (h: number) => calm || now >= h - 0.15;
 
   return (
-    <div ref={ref} className="mx-auto mt-28 grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
+    <div ref={ref} className="mx-auto mt-28 grid max-w-6xl grid-cols-1 items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
       <div className="lg:sticky lg:top-32">
         <Reveal>
           <p className="eyebrow text-peach">An example day</p>
@@ -165,7 +166,7 @@ function TheDay({ calm }: { calm: boolean }) {
               <motion.div
                 animate={{ x: on ? 0 : 12, opacity: on ? 1 : 0.45 }}
                 transition={{ type: "spring", stiffness: 240, damping: 22 }}
-                className="rounded-[22px] border-2 border-ink bg-paper p-5 text-ink"
+                className="lit rounded-[22px] border-2 border-ink bg-paper p-5 text-ink"
               >
                 <p className="eyebrow text-muted">{d.t}</p>
                 <p className="display mt-1 text-3xl">{d.w}</p>
@@ -225,7 +226,7 @@ function Compare() {
             {DIY.map((d, k) => (
               <span
                 key={d.t}
-                className="wiggle stk-sm absolute left-[var(--ld)] top-[var(--td)] max-w-[21%] rounded-xl px-3.5 py-2.5 text-base font-bold leading-snug"
+                className="wiggle stk-sm absolute left-[var(--ld)] top-[var(--td)] max-w-[21%] rounded-xl px-3.5 py-2.5 text-base font-medium leading-snug"
                 style={
                   {
                     "--ld": `${k % 2 ? 24 : 1}%`,
@@ -250,7 +251,7 @@ function Compare() {
             <p className="eyebrow text-goingtext">With Invytt Agency</p>
             <ul className="mt-5 space-y-2.5">
               {STAGES.map((s) => (
-                <li key={s.title} className="flex items-center justify-end gap-3 text-lg font-bold">
+                <li key={s.title} className="flex items-center justify-end gap-3 text-lg font-medium">
                   {s.title}
                   <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-white">
                     <Check size={14} strokeWidth={3.6} />
@@ -291,7 +292,7 @@ function Compare() {
             {DIY.map((d, k) => (
               <li
                 key={d.t}
-                className="wiggle stk-sm rounded-xl px-3 py-2 text-sm font-bold"
+                className="lit wiggle stk-sm rounded-xl px-3 py-2 text-sm font-medium"
                 style={{ background: ["#FFD6A5", "#F6C1D0", "#fff", "#BFDDFB"][k % 4], rotate: `${d.r / 2}deg`, animationDuration: `${2 + k * 0.3}s` }}
               >
                 {d.t}
@@ -303,7 +304,7 @@ function Compare() {
           <p className="eyebrow text-goingtext">With Invytt Agency</p>
           <ul className="mt-4 space-y-2">
             {STAGES.map((st) => (
-              <li key={st.title} className="flex items-center gap-3 text-lg font-bold">
+              <li key={st.title} className="flex items-center gap-3 text-lg font-medium">
                 <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-white">
                   <Check size={14} strokeWidth={3.6} />
                 </span>
@@ -348,7 +349,7 @@ export default function Agency() {
       </div>
 
       {/* the four stages */}
-      <div className="relative mx-auto mt-16 grid max-w-7xl gap-14 px-5 sm:px-8 lg:mt-0 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div className="relative mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-14 px-5 sm:px-8 lg:mt-0 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <DepthField seed={127} count={14} night />
         <div className="lg:sticky lg:top-32 lg:self-start">
           <Parallax speed={0.08}>
